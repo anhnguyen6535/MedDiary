@@ -1,7 +1,10 @@
-﻿namespace Learning.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Learning.Models
 {
     public class PersonDTO
     {
+        [Required]
         public int Id { get; set; }
         public string FName { get; set; }
         public string LName { get; set; }

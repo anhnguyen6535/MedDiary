@@ -1,4 +1,6 @@
-﻿namespace Learning.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Learning.Models
 {
     public class Person
     {
@@ -9,6 +11,6 @@
         public string Address { get; set; }
         public long Phone { get; set; }
         public int Sex { get; set; }
-
+        public bool IsActive { get; set; }
     }
 }
