@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+:root{
+    --green: #77B800;
+}
+
+.logo{
+    font-family: 'Pacifico', cursive;
+    color: var(--green);
+    font-size: xx-large;
+}
