@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Learning.Migrations
+namespace Backend.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -19,10 +18,11 @@ namespace Learning.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     FName = table.Column<string>(type: "TEXT", nullable: false),
                     LName = table.Column<string>(type: "TEXT", nullable: false),
-                    Birthdate = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    Birthdate = table.Column<long>(type: "INTEGER", nullable: false),
                     Address = table.Column<string>(type: "TEXT", nullable: false),
                     Phone = table.Column<long>(type: "INTEGER", nullable: false),
-                    Sex = table.Column<int>(type: "INTEGER", nullable: false)
+                    Sex = table.Column<int>(type: "INTEGER", nullable: false),
+                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
