@@ -7,8 +7,8 @@ import Profile from './components/Profile';
 import MedicalHistory from './components/MedicalHistory';
 import Authenticate from './components/Authenticate';
 import LandingPage from './components/LandingPage';
-import PatientLogin from './components/PatientLogin';
-import DoctorLogin from './components/DoctorLogin';
+import PatientLogin from './components/patients/PatientLogin';
+import DoctorLogin from './components/doctors/DoctorLogin';
 
 function App() {
   return (
