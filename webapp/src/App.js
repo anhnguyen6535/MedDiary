@@ -7,14 +7,16 @@ import Profile from './components/Profile';
 import MedicalHistory from './components/MedicalHistory';
 import Authenticate from './components/Authenticate';
 import LandingPage from './components/LandingPage';
+import PatientLogin from './components/PatientLogin';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Routes path="/" element={<LandingPage />} >
-          <Route></Route>
-        </Routes>
+        <Route path="/" element={<LandingPage />}>
+          <Route path="/patient-login" element={<PatientLogin/>}></Route>
+          <Route path="/doctor-login" element={<Login/>}></Route>
+        </Route>
         <Route element={<Authenticate />}>
           <Route path="/" element={<Layout />}>
             <Route path="/quiz" element={<Profile />} />

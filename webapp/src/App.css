@@ -11,6 +11,11 @@
   font-size: xx-large;
 }
 
+a{
+  text-decoration: none;
+  color: var(--black)
+}
+
 .App {
   text-align: center;
 }
@@ -24,10 +29,6 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 @keyframes App-logo-spin {
