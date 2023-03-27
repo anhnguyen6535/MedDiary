@@ -2,10 +2,19 @@
 
 :root{
     --green: #77B800;
+    --black: #36424A;
 }
 
 .logo{
     font-family: 'Pacifico', cursive;
     color: var(--green);
     font-size: xx-large;
+}
+
+.custom_form{
+    position: absolute;
+    background-color: var(--black);
+    height: 30%;
+    width: 30%;
+    mix-blend-mode: normal;
 }
