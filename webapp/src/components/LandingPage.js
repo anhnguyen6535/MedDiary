@@ -1,23 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Card, Col, Container, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import Logo from './Logo'
 import CardComponent from './CardComponent'
-import Center from './Center'
+import useStateContext from '../hooks/useStateContext'
 
 export default function LandingPage() {
+  const { context, setContext, resetContext } = useStateContext();
   const navigate = useNavigate()
 
-  const headStyle = {
-    marginTop: '100px',
-    marginBottom: '50px'
-  }
+  useEffect(() => {
+    resetContext()
+  }, [])
 
   return (
     <div>
-      <div className='text-center' style={headStyle} >
-        <Logo size='60px'/>
-      </div>
       <Container >
         <Row className="justify-content-md-center">
           <Col md="auto">
@@ -28,7 +25,6 @@ export default function LandingPage() {
           </Col>
         </Row>
       </Container>
-
     </div>
   )
 }
