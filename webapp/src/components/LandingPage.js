@@ -9,8 +9,8 @@ export default function LandingPage() {
     <>
       <Logo/>
       <div>
-        <Button>Patient</Button>
-        <Button>Doctor</Button>
+        <Button onClick={() => navigate('/patient-login')}>Patient</Button>
+        <Button onClick={() => navigate('/doctor-login')}>Doctor</Button>
       </div>
     </>
   )
