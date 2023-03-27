@@ -7,20 +7,26 @@ import Profile from './components/Profile';
 import MedicalHistory from './components/MedicalHistory';
 import Authenticate from './components/Authenticate';
 import LandingPage from './components/LandingPage';
-import PatientLogin from './components/PatientLogin';
-import DoctorLogin from './components/DoctorLogin';
+import PatientLogin from './components/patients/PatientLogin';
+import PatientProfile from './components/patients/PatientProfile';
+import DoctorLogin from './components/doctors/DoctorLogin';
+import DoctorProfile from './components/doctors/DoctorProfile';
+import LogoHeader from './components/LogoHeader';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LandingPage />}/>
-        <Route path="/patient-login" element={<PatientLogin/>}></Route>
-        <Route path="/doctor-login" element={<DoctorLogin/>}></Route>
+        <Route path="/" element={<LogoHeader />}>
+          <Route path="/" element={<LandingPage />}/>
+          <Route path="/patient-login" element={<PatientLogin/>}></Route>
+          <Route path="/doctor-login" element={<DoctorLogin/>}></Route>
+        </Route>
         <Route element={<Authenticate />}>
           <Route path="/" element={<Layout />}>
-            <Route path="/quiz" element={<Profile />} />
-            <Route path="/result" element={<MedicalHistory />} />
+            <Route path="/patient-profile" element={<PatientProfile />} />
+            <Route path="/doctor-profile" element={<DoctorProfile />} />
+            <Route path="/medical-history" element={<MedicalHistory />} />
           </Route>
         </Route>
       </Routes>
