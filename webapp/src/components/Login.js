@@ -73,9 +73,12 @@ export default function Login(prop) {
           <p style={{color: "red"}}>{errorP}</p>
         </Form.Group>
         
-        <Button variant="primary" type="submit">
-          Log in
-        </Button>
+        <div>
+          <Button variant="primary" type="submit">
+            Log in
+          </Button>
+          <Button variant='link'>Register</Button>
+        </div>
       </Form>
     </>
 
