@@ -6,14 +6,14 @@ import { useNavigate } from 'react-router-dom'
 import useForm from '../hooks/useForm'
 import { createAPIEndpoint, ENDPOINTS } from '../api'
 
-export default function Login(prop) {
-  const { context, setContext, resetContext } = useStateContext();
+export default function Login() {
+  const { context, setContext, resetContext, partiallyResetContext } = useStateContext();
   const navigate = useNavigate();
 
   const state = {
     email: '',
     password:'',
-    isDoctor: prop.isDoctor
+    isDoctor: context.isDoctor
   }
 
   const [email, setEmail] = useState('');
@@ -22,7 +22,7 @@ export default function Login(prop) {
   const [errorP, setErrorP] = useState('');
 
   useEffect(() => {
-    resetContext()
+    partiallyResetContext()
   }, [])
   
   const login = e => {
@@ -33,7 +33,7 @@ export default function Login(prop) {
       state.password = password
 
       // FIXME: FAKE LOGIN
-      setContext({ userId: 1 })
+      setContext({ userId: 1})
       state.isDoctor ?navigate('/doctor-profile') :navigate('/patient-profile')
       console.log(state);
 

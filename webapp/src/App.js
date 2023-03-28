@@ -7,9 +7,7 @@ import Profile from './components/Profile';
 import MedicalHistory from './components/MedicalHistory';
 import Authenticate from './components/Authenticate';
 import LandingPage from './components/LandingPage';
-import PatientLogin from './components/patients/PatientLogin';
 import PatientProfile from './components/patients/PatientProfile';
-import DoctorLogin from './components/doctors/DoctorLogin';
 import DoctorProfile from './components/doctors/DoctorProfile';
 import LogoHeader from './components/LogoHeader';
 
@@ -19,8 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LogoHeader />}>
           <Route path="/" element={<LandingPage />}/>
-          <Route path="/patient-login" element={<PatientLogin/>}></Route>
-          <Route path="/doctor-login" element={<DoctorLogin/>}></Route>
+          <Route path="/login" element={<Login/>}></Route>
         </Route>
         <Route element={<Authenticate />}>
           <Route path="/" element={<Layout />}>
