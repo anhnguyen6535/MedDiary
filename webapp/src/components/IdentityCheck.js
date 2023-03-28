@@ -6,7 +6,7 @@ export default function IdentityCheck() {
     const { context } = useStateContext()
 
     return (
-        !context.isDoctor 
+        context.isDoctor == undefined
             ? <Navigate to="/" />
             : <Outlet />
     )
