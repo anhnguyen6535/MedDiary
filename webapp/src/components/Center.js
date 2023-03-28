@@ -1,12 +1,18 @@
 import React from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import useWindowDimensions from '../hooks/useWindowDimensions';
 
 export default function Center(prop) {
+  const {width, height} = useWindowDimensions()
+
+  const divStyle = {
+    maxWidth: width,
+    minHeight: height,
+    // backgroundColor: "red"
+  }
+
   return (
-    <Container>
-        <Row className="justify-content-md-center">
-            {/* <Col md="auto">{prop.children}</Col> */} 
-        </Row>
-    </Container>
-  )
+    <div className='container d-flex align-items-center justify-content-center' style={divStyle}>
+      {prop.children}
+    </div>
+  );
 }
