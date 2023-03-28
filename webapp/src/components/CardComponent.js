@@ -12,6 +12,11 @@ function CardComponent(prop) {
     navigate('/login')
   }
 
+  const clickRegister = () => {
+    setContext({isDoctor: prop.isDoctor})
+    navigate('/register')
+  }
+
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Img variant="top" src={prop.pic} />
@@ -23,7 +28,7 @@ function CardComponent(prop) {
         </Card.Text> */}
         <Button variant="primary" onClick={clickHandler}>Log in</Button>
         
-      <Button variant='link'>Register</Button>
+      <Button variant='link' onClick={clickRegister}>Register</Button>
       </Card.Body>
     </Card>
   );

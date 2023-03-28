@@ -23,6 +23,7 @@ export default function Login() {
 
   useEffect(() => {
     partiallyResetContext()
+    console.log(context)
   }, [])
   
   const login = e => {

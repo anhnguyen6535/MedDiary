@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<LandingPage />}/>
           <Route element={<IdentityCheck />}>
               <Route path="/login" element={<Login/>}></Route>
-              <Route path="/login" element={<Register/>}></Route>
+              <Route path="/register" element={<Register/>}></Route>
           </Route>
         </Route>
         <Route element={<Authenticate />}>
