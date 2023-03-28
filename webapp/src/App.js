@@ -11,6 +11,7 @@ import PatientProfile from './components/patients/PatientProfile';
 import DoctorProfile from './components/doctors/DoctorProfile';
 import LogoHeader from './components/LogoHeader';
 import IdentityCheck from './components/IdentityCheck';
+import Register from './components/Register';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<LandingPage />}/>
           <Route element={<IdentityCheck />}>
               <Route path="/login" element={<Login/>}></Route>
+              <Route path="/login" element={<Register/>}></Route>
           </Route>
         </Route>
         <Route element={<Authenticate />}>
