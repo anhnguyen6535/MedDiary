@@ -1,8 +1,18 @@
 import React from 'react'
 import { Button, Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
+import useStateContext from '../hooks/useStateContext';
 import Logo from './Logo';
 
 export default function NavBarComponent() {
+  const { context, setContext, resetContext } = useStateContext();
+  const navigate = useNavigate()
+
+  const logout = () => {
+    resetContext()
+    navigate('/')
+  }
+
   return (
     <Navbar style={{backgroundColor: '#36424A'}} variant="dark">
       <Container fluid>
@@ -22,7 +32,7 @@ export default function NavBarComponent() {
             </NavDropdown>
           </Nav>
 
-          <Button variant="outline-success">Log out</Button>
+          <Button variant="outline-success" onClick={logout}>Log out</Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>

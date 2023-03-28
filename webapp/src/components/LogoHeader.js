@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
 import { Outlet } from 'react-router-dom'
+import Center from './Center'
 import Logo from './Logo'
 
 export default function LogoHeader() {
@@ -11,13 +12,16 @@ export default function LogoHeader() {
 
       
   return (
-    <>
-        <div className='text-center' style={headStyle} >
-            <Logo size='60px'/>
-        </div>
+    <Center>
         <Container>
-            <Outlet/>
+            <div className='text-center' style={headStyle} >
+                <Logo size='60px'/>
+            </div>
+            <Container>
+                <Outlet/>
+            </Container>
         </Container>
-    </>
+        
+    </Center>
   )
 }
