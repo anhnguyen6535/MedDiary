@@ -31,7 +31,7 @@ function App() {
             <Route path="/medical-history" element={<MedicalHistory />} />
           </Route>
         </Route>
-      </Routes>
+      </Routes> 
     </BrowserRouter >
   );
 }

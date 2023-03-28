@@ -13,11 +13,11 @@ export default function LogoHeader() {
       
   return (
     <Center>
-        <Container style={{border: '2px solid red'}}>
+        <Container>
             <div className='text-center' style={headStyle} >
                 <Logo size='60px'/>
             </div>
-            <Container style={{border: '2px solid red'}}>
+            <Container>
                 <Outlet/>
             </Container>
         </Container>

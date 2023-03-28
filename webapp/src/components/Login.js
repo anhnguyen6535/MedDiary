@@ -58,6 +58,10 @@ export default function Login() {
       return Object.values(temp).every(x => x == "")
   }
 
+  const clickRegister = () => {
+    navigate('/register')
+  }
+
 
   return (
     <>
@@ -78,7 +82,7 @@ export default function Login() {
           <Button variant="primary" type="submit">
             Log in
           </Button>
-          <Button variant='link'>Register</Button>
+          <Button variant='link' onClick={clickRegister}>Register</Button>
         </div>
       </Form>
     </>
