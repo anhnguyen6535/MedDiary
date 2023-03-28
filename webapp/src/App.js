@@ -10,6 +10,7 @@ import LandingPage from './components/LandingPage';
 import PatientProfile from './components/patients/PatientProfile';
 import DoctorProfile from './components/doctors/DoctorProfile';
 import LogoHeader from './components/LogoHeader';
+import IdentityCheck from './components/IdentityCheck';
 
 function App() {
   return (
@@ -17,7 +18,9 @@ function App() {
       <Routes>
         <Route path="/" element={<LogoHeader />}>
           <Route path="/" element={<LandingPage />}/>
-          <Route path="/login" element={<Login/>}></Route>
+          <Route element={<IdentityCheck />}>
+              <Route path="/login" element={<Login/>}></Route>
+          </Route>
         </Route>
         <Route element={<Authenticate />}>
           <Route path="/" element={<Layout />}>

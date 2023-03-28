@@ -7,7 +7,7 @@ const getFreshContext = () => {
     if (localStorage.getItem('context') === null)
         localStorage.setItem('context', JSON.stringify({
             userId: 0,
-            isDoctor: false,
+            isDoctor: undefined,
         }))
     return JSON.parse(localStorage.getItem('context'))
 }
