@@ -6,10 +6,10 @@ import Forms from './Forms';
 
 export default function Register() {
 
-  useEffect(() => {
-    // change background color with a random color
-    document.body.style.background = '#36424A';
-  });
+  // useEffect(() => {
+  //   // change background color with a random color
+  //   document.body.style.background = '#36424A';
+  // });
 
   const list = patientRegLists()
 
