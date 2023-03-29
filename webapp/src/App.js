@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Login from './components/Login';
 import Layout from './components/Layout';
 import Profile from './components/Profile';
 import MedicalHistory from './components/MedicalHistory';
@@ -12,6 +11,7 @@ import DoctorProfile from './components/doctors/DoctorProfile';
 import LogoHeader from './components/LogoHeader';
 import IdentityCheck from './components/IdentityCheck';
 import Register from './components/Register';
+import LoginPage from './components/LoginPage';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         <Route path="/" element={<LogoHeader />}>
           <Route path="/" element={<LandingPage />}/>
           <Route element={<IdentityCheck />}>
-              <Route path="/login" element={<Login/>}></Route>
+              <Route path="/login" element={<LoginPage/>}></Route>
               <Route path="/register" element={<Register/>}></Route>
           </Route>
         </Route>
