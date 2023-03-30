@@ -11,6 +11,7 @@ import IdentityCheck from './components/IdentityCheck';
 import Register from './components/Register';
 import LoginPage from './components/LoginPage';
 import Medication from './components/Medication';
+import LabResults from './components/LabResults';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/medication" element={<Medication />}/>
+            <Route path="/lab-results" element={<LabResults />}/>
             <Route path="/medical-history" element={<MedicalHistory />} />
           </Route>
         </Route>
