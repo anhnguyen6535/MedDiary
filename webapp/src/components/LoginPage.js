@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
-import Logo from './Logo'
 import useStateContext from '../hooks/useStateContext'
 import { useNavigate } from 'react-router-dom'
 import useForm from '../hooks/useForm'
 import { createAPIEndpoint, ENDPOINTS } from '../api'
 
-export default function Login() {
+const getFreshModel = () => ({
+    email: '',
+    password: ''
+})
+
+export default function LoginPage() {
   const { context, setContext, resetContext, partiallyResetContext } = useStateContext();
   const navigate = useNavigate();
 
-  const state = {
-    email: '',
-    password:'',
-    isDoctor: context.isDoctor
-  }
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorE, setErrorE] = useState('');
-  const [errorP, setErrorP] = useState('');
+  const {
+    values,
+    setValues,
+    errors,
+    setErrors,
+    handleInputChange
+  }= useForm(getFreshModel)
 
   useEffect(() => {
     partiallyResetContext()
@@ -28,15 +29,14 @@ export default function Login() {
   
   const login = e => {
     e.preventDefault();
-    // console.log(email, password);
     if (validate()){
-      state.email = email
-      state.password = password
+      values.isDoctor = context.isDoctor
+      console.log(values);
+    }
 
       // FIXME: FAKE LOGIN
       setContext({ userId: 1})
-      state.isDoctor ?navigate('/doctor-profile') :navigate('/patient-profile')
-      console.log(state);
+      navigate('/profile')
 
       // createAPIEndpoint(ENDPOINTS.participant)
       //       .log(state)
@@ -47,15 +47,14 @@ export default function Login() {
       //       .catch(err => console.log(err))
     }
         
-  }
+  
 
   const validate = () => {
-      let temp = {}
-      temp.email = (/\S+@\S+\.\S+/).test(email) ? "" : "Email is not valid."
-      temp.password = password != "" ? "" : "This field is required."
-      setErrorE(temp.email)
-      setErrorP(temp.password)
-      return Object.values(temp).every(x => x == "")
+    let temp = {}
+    temp.email = (/\S+@\S+\.\S+/).test(values.email) ? "" : "Email is not valid."
+    temp.password = values.password != "" ? "" : "This field is required."
+    setErrors(temp)
+    return Object.values(temp).every(x => x == "")
   }
 
   const clickRegister = () => {
@@ -68,14 +67,14 @@ export default function Login() {
       <Form onSubmit={login} style={{width: "50%"}} className="mx-auto">
         <Form.Group className="mb-3" controlId="formBasicEmail" >
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-          <p style={{color: "red"}}>{errorE}</p>
+          <Form.Control type="email" placeholder="Enter email" value={values.email} name='email' onChange={handleInputChange}/>
+          <p style={{color: "red"}}>{errors.email}</p>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-          <p style={{color: "red"}}>{errorP}</p>
+          <Form.Control type="password" placeholder="Password" value={values.password} name='password' onChange={handleInputChange}/>
+          <p style={{color: "red"}}>{errors.password}</p>
         </Form.Group>
         
         <div>

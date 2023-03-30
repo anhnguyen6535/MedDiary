@@ -20,16 +20,25 @@ export default function NavBarComponent() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <NavDropdown title="Profile" id="basic-nav-dropdown" style={{fontSize: '25px'}}>
-              <NavDropdown.Item href="#action/3.1">Information</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Todo List</NavDropdown.Item>
-            </NavDropdown>
-
-            <NavDropdown title="Clinic Log" id="basic-nav-dropdown" style={{fontSize: '25px'}}>
-              <NavDropdown.Item href="#action/3.1">Clinic Visits</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Medication</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Lab Results</NavDropdown.Item>
-            </NavDropdown>
+            {
+              context.isDoctor ?
+              <>
+                <Nav.Link style={{fontSize: '25px'}}>Profile</Nav.Link>
+                <Nav.Link style={{fontSize: '25px'}}>Clinic log</Nav.Link>
+              </>
+              : 
+              <>
+                <NavDropdown title="Profile" id="basic-nav-dropdown" style={{fontSize: '25px'}}>
+                  <NavDropdown.Item href="#action/3.1">Information</NavDropdown.Item>
+                  {context.isDoctor ?'' :<NavDropdown.Item href="#action/3.2">Todo List</NavDropdown.Item>}
+                </NavDropdown>
+                <NavDropdown title="Clinic Log" id="basic-nav-dropdown" style={{fontSize: '25px'}}>
+                  <NavDropdown.Item href="#action/3.1">Clinic Visits</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.2">Medication</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.2">Lab Results</NavDropdown.Item>
+                </NavDropdown>
+              </>
+            }
           </Nav>
 
           <Button variant="outline-success" onClick={logout}>Log out</Button>

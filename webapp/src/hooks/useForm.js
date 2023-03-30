@@ -1,39 +1,23 @@
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import { useState } from 'react';
 
+export default function useForm(getFreshModelObject) {
 
-export const stateContext = createContext();
+    const [values, setValues] = useState(getFreshModelObject());
+    const [errors, setErrors] = useState({});
 
-const getFreshContext = () => {
-    if (localStorage.getItem('context') === null)
-        localStorage.setItem('context', JSON.stringify({
-            userId: 0,
-        }))
-    return JSON.parse(localStorage.getItem('context'))
-}
+    const handleInputChange = e => {
+        const { name, value } = e.target
+        setValues({
+            ...values,
+            [name]: value
+        })
+    }
 
-export default function useStateContext() {
-    const { context, setContext } = useContext(stateContext)
     return {
-        context,
-        setContext: obj => { 
-            setContext({ ...context, ...obj }) },
-        resetContext: ()=>{
-            localStorage.removeItem('context')
-            setContext(getFreshContext())
-        }
-    };
-}
-
-export function ContextProvider({ children }) {
-    const [context, setContext] = useState(getFreshContext())
-
-    useEffect(() => {
-        localStorage.setItem('context', JSON.stringify(context))
-    }, [context])
-
-    return (
-        <stateContext.Provider value={{ context, setContext }}>
-            {children}
-        </stateContext.Provider>
-    )
+        values,
+        setValues,
+        errors,
+        setErrors,
+        handleInputChange
+    }
 }
