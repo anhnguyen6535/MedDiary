@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend.Models;
 using Learning.Models;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace Backend.Controllers
 {
@@ -20,14 +21,16 @@ namespace Backend.Controllers
         {
             _context = context;
         }
-
+        // Gets all Users in Database
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+
         {
             return await _context.Users.ToListAsync();
         }
 
+        // Gets Selected User 
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
@@ -42,6 +45,7 @@ namespace Backend.Controllers
             return user;
         }
 
+        // Check If User is in Database
         // Post: api/Users
         [HttpPost("Login")]
         public IActionResult CheckUser(UserLogInDTO user)
@@ -57,7 +61,7 @@ namespace Backend.Controllers
 
             return Ok(temp);
         }
-
+        // Saves Changes to User's Information
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -88,18 +92,30 @@ namespace Backend.Controllers
 
             return NoContent();
         }
-
-        // POST: api/Users
+        // Creates New User
+        // POST: api/Users 
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
             _context.Users.Add(user);
+            if (user.IsDoctor == false) {
+                Patient patient = new Patient();
+                patient.UserId = user.UserId;
+                _context.Patients.Add(patient);
+            }
+            else{
+                Doctor doctor = new Doctor();
+                doctor.UserId = user.UserId;
+                _context.Doctors.Add(doctor);
+            }
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
+        // Deletes User 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
@@ -115,7 +131,7 @@ namespace Backend.Controllers
 
             return NoContent();
         }
-
+        // Check if User Exists
         private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.UserId == id);
