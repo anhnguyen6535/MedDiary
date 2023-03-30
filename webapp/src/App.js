@@ -6,8 +6,6 @@ import Profile from './components/Profile';
 import MedicalHistory from './components/MedicalHistory';
 import Authenticate from './components/Authenticate';
 import LandingPage from './components/LandingPage';
-import PatientProfile from './components/patients/PatientProfile';
-import DoctorProfile from './components/doctors/DoctorProfile';
 import LogoHeader from './components/LogoHeader';
 import IdentityCheck from './components/IdentityCheck';
 import Register from './components/Register';
@@ -26,8 +24,7 @@ function App() {
         </Route>
         <Route element={<Authenticate />}>
           <Route path="/" element={<Layout />}>
-            <Route path="/patient-profile" element={<PatientProfile />} />
-            <Route path="/doctor-profile" element={<DoctorProfile />} />
+            <Route path="profile" element={<Profile />} />
             <Route path="/medical-history" element={<MedicalHistory />} />
           </Route>
         </Route>

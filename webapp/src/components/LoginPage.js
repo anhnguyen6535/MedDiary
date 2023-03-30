@@ -36,7 +36,7 @@ export default function LoginPage() {
 
       // FIXME: FAKE LOGIN
       setContext({ userId: 1})
-      values.isDoctor ?navigate('/doctor-profile') :navigate('/patient-profile')
+      navigate('/profile')
 
       // createAPIEndpoint(ENDPOINTS.participant)
       //       .log(state)
