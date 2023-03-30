@@ -34,8 +34,8 @@ export default function NavBarComponent() {
                 </NavDropdown>
                 <NavDropdown title="Clinic Log" id="basic-nav-dropdown" style={{fontSize: '25px'}}>
                   <NavDropdown.Item href="#action/3.1">Clinic Visits</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2" onClick={() => navigate('/medication')}>Medication</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">Lab Results</NavDropdown.Item>
+                  <NavDropdown.Item onClick={() => navigate('/medication')}>Medication</NavDropdown.Item>
+                  <NavDropdown.Item onClick={() => navigate('/lab-results')}>Lab Results</NavDropdown.Item>
                 </NavDropdown>
               </>
             }
