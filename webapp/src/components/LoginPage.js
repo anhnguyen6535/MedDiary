@@ -5,14 +5,17 @@ import { useNavigate } from 'react-router-dom'
 import useForm from '../hooks/useForm'
 import { createAPIEndpoint, ENDPOINTS } from '../api'
 
-const getFreshModel = () => ({
-    email: '',
-    password: ''
-})
 
 export default function LoginPage() {
   const { context, setContext, resetContext, partiallyResetContext } = useStateContext();
   const navigate = useNavigate();
+  const [submitted, setSub]  = useState(false);
+  
+  const getFreshModel = () => ({
+      email: '',
+      password: '',
+      isDoctor: context.isDoctor
+  })
 
   const {
     values,
@@ -30,21 +33,18 @@ export default function LoginPage() {
   const login = e => {
     e.preventDefault();
     if (validate()){
-      values.isDoctor = context.isDoctor
       console.log(values);
+      createAPIEndpoint(ENDPOINTS.user)
+                .log(values)
+                .then(res => {
+                    setContext({ userId: res.data.participantId })
+                    navigate('/profile')
+                })
+                .catch(err => {
+                  setSub(true)
+                  setValues({email: '', password: '', isDoctor: context.isDoctor})
+                })
     }
-
-      // FIXME: FAKE LOGIN
-      setContext({ userId: 1})
-      navigate('/profile')
-
-      // createAPIEndpoint(ENDPOINTS.participant)
-      //       .log(state)
-      //       .then(res => {
-      //           // setContext({ userId: res.data.userId })
-      //           navigate('/profile')
-      //       })
-      //       .catch(err => console.log(err))
     }
         
   
@@ -74,7 +74,9 @@ export default function LoginPage() {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" value={values.password} name='password' onChange={handleInputChange}/>
-          <p style={{color: "red"}}>{errors.password}</p>
+          <p style={{color: "red"}}>{submitted? "Invalid email or password" :errors.password}</p>
+          
+
         </Form.Group>
         
         <div>
