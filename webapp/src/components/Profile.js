@@ -2,7 +2,7 @@ import React from 'react'
 import { Container } from 'react-bootstrap';
 import useStateContext from '../hooks/useStateContext';
 import { profile } from './patients/PatientDTO';
-import TableComponent from './TableComponent';
+import { HorizontalTable } from './TableComponent';
 
 export default function Profile() {
   const { context} = useStateContext();
@@ -25,6 +25,6 @@ export default function Profile() {
   // Processing
   const values = Object.values(context.isDoctor ?profileD :profileP)
   return (
-    <Container><TableComponent val ={values} header={context.isDoctor ?profile :profile} /></Container>
+    <Container><HorizontalTable val ={values} header={context.isDoctor ?profile :profile} /></Container>
   )
 }
