@@ -1,7 +1,7 @@
 
 
 export const patientRegLists = () => {
-    return [patientInfoReg, patientGuardianReg, PatientEmerReg, PatientInsuranceReg]
+    return [patientInfoReg, PatientEmerReg, PatientInsuranceReg]
 }
 
 const patientInfoReg =  {
@@ -24,15 +24,15 @@ const patientInfoReg =  {
             placeholder: 'Last name'
           }
         ],
-        [
-          {
-            sort: 'control',
-            controlId: 'Email',
-            label: 'Email address',
-            type: 'email',
-            placeholder: 'Email'
-          }
-        ],
+        // [
+        //   {
+        //     sort: 'control',
+        //     controlId: 'Email',
+        //     label: 'Email address',
+        //     type: 'email',
+        //     placeholder: 'Email'
+        //   }
+        // ],
         [
           {
             sort: 'control',
@@ -87,35 +87,29 @@ const patientInfoReg =  {
             placeholder: 'AHS Number'
           }
         ],
-        [
-            {
-                sort: 'control',
-                controlId: 'Pw',
-                label: 'Password',
-                type: 'password',
-                placeholder: 'Password'
-            },
-            {
-                sort: 'control',
-                controlId: 'Pw2',
-                label: 'Confirm password',
-                type: 'password',
-                placeholder: 'Confirm Password'
-            },
-        ]   
+        // [
+        //     {
+        //         sort: 'control',
+        //         controlId: 'Pw',
+        //         label: 'Password',
+        //         type: 'password',
+        //         placeholder: 'Password'
+        //     },
+        //     {
+        //         sort: 'control',
+        //         controlId: 'Pw2',
+        //         label: 'Confirm password',
+        //         type: 'password',
+        //         placeholder: 'Confirm Password'
+        //     },
+        // ]   
     ]
 }
 
-const patientGuardianReg = {
+export const patientGuardianReg = {
     header: 'Guardian',
     value:[
         [
-            {
-                sort: 'check',
-                controlId: 'Minor',
-                placeholder:'I am a minor',
-                label: '',
-            },
             {
                 sort: 'control',
                 controlId: 'GSIN',
