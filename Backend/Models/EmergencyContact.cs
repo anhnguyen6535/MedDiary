@@ -6,7 +6,8 @@ namespace Backend.Models
     {
         [Key]
         public int UserId { get; set; }
+        [Key]
         public string Name { get; set; }
-        public Int64 Phone { get; set; }
+        public int Phone { get; set; }
     }
 }

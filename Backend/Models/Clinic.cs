@@ -5,7 +5,8 @@ namespace Backend.Models
     public class Clinic
     {
         [Key]
-        public Int64 Phone { get; set; }
+        public int Phone { get; set; }
+        [Key]
         public string Location { get; set; }
         public string Name { get; set; }
     }
