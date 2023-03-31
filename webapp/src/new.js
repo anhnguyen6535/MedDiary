@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function new() {
+export default function hgfhfhj() {
   return (
-    <div>new</div>
+    <div>hgjhghjgj</div>
   )
 }
