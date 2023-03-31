@@ -8,12 +8,16 @@ import Authenticate from './components/Authenticate';
 import LandingPage from './components/LandingPage';
 import LogoHeader from './components/LogoHeader';
 import IdentityCheck from './components/IdentityCheck';
-import Register from './components/Register';
+import PatientRegister from './components/patients/PatientRegister';
 import LoginPage from './components/LoginPage';
 import Medication from './components/Medication';
 import LabResults from './components/LabResults';
+import PreRegister from './components/PreRegister';
+import useStateContext from './hooks/useStateContext';
+import DoctorRegister from './components/doctors/DoctorRegister';
 
 function App() {
+  const { context} = useStateContext();
   return (
     <BrowserRouter>
       <Routes>
@@ -21,7 +25,8 @@ function App() {
           <Route path="/" element={<LandingPage />}/>
           <Route element={<IdentityCheck />}>
               <Route path="/login" element={<LoginPage/>}></Route>
-              <Route path="/register" element={<Register/>}></Route>
+              <Route path="/pre-register" element={<PreRegister/>}></Route>
+              <Route path="/register" element={context.isDoctor ?<DoctorRegister/> :<PatientRegister/>}></Route>
           </Route>
         </Route>
         <Route element={<Authenticate />}>
