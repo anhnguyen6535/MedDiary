@@ -91,14 +91,14 @@ const patientInfoReg =  {
             {
                 sort: 'control',
                 controlId: 'Pw',
-                label: '',
+                label: 'Password',
                 type: 'password',
                 placeholder: 'Password'
             },
             {
                 sort: 'control',
                 controlId: 'Pw2',
-                label: '',
+                label: 'Confirm password',
                 type: 'password',
                 placeholder: 'Confirm Password'
             },
@@ -135,14 +135,14 @@ const PatientEmerReg = {
             {
                 sort: 'control',
                 controlId: 'EName',
-                label: '',
+                label: 'Name',
                 type: 'text',
                 placeholder: 'Name'
             },
             {
                 sort: 'control',
                 controlId: 'EPhone',
-                label: '',
+                label: 'Phone',
                 type: 'text',
                 placeholder: 'Phone'
             },
@@ -158,14 +158,14 @@ const PatientInsuranceReg = {
             {
                 sort: 'control',
                 controlId: 'ICompany',
-                label: '',
+                label: 'Name',
                 type: 'text',
                 placeholder: 'Company'
             },
             {
                 sort: 'control',
                 controlId: 'INum',
-                label: '',
+                label: 'Number',
                 type: 'text',
                 placeholder: 'Number'
             },
