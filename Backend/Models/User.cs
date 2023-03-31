@@ -11,7 +11,7 @@ namespace Backend.Models
         public string Fname { get; set; }
         public string Lname { get; set; }
         public bool IsDoctor { get; set; }
-        public string Phone { get; set; }
+        public Int64 Phone { get; set; }
         public string Address { get; set; }
         public string Sex { get; set; }
     }

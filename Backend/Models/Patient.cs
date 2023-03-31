@@ -6,7 +6,7 @@ namespace Backend.Models
     {
         [Key]
         public int UserId { get; set; }
-        public int HealthId { get; set; }
+        public Int64 HealthId { get; set; }
         public bool IsMinor { get; set; }
     }
 }
