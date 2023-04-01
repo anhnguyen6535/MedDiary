@@ -4,13 +4,17 @@ import useForm from '../../hooks/useForm';
 import { patientGuardianReg, patientRegLists } from '../data/RegisterLists';
 import Forms from '../Forms';
 import { useLocation } from 'react-router-dom'
+import useStateContext from '../../hooks/useStateContext';
 
 export default function PatientRegister() {
-  const location = useLocation();
+  const { context} = useStateContext();
+  const preValue = useLocation().state.value;
   const list = patientRegLists()
   const guardian = patientGuardianReg
   let temp = []
-  let tempObj = {...location.state.value}
+  let tempObj = {...preValue}
+  tempObj.isDoctor = context.isDoctor
+  if(preValue.isMinor) tempObj.GSIN = ''
 
   list.map( l => 
     {l.value.map(obj => {
@@ -36,7 +40,7 @@ export default function PatientRegister() {
             <Forms fields = {list.value} header ={list.header} key ={index} values={values} handler={handleInputChange}/>
         )}
 
-        {values.isMinor ?<Forms fields={guardian.value} header={guardian.header} values={values} handler={handleInputChange}/> :''}
+        {values.isMinor ?<Forms key={"guardian"} fields={guardian.value} header={guardian.header} values={values} handler={handleInputChange}/> :''}
         
         <Button variant="outline-success" style={{marginLeft: '80%'}} onClick={clickHandler}>Create New Account</Button>
         

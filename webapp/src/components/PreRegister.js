@@ -9,6 +9,7 @@ export default function PreRegister() {
     const navigate = useNavigate();
     const [pwdCheck, setPwCheck] = useState('')
     const [checkUpdate, setUpdate] = useState()
+    const [isMinor, setIsMinor] = useState(false)
     const getFreshModel = () => ({
         email: '',
         password: '',
@@ -32,7 +33,10 @@ export default function PreRegister() {
         if (validate()){
             if(context.isDoctor){ 
             navigate('/register',{state: {value: {email: values.email, password: values.password}}})
-            }else navigate('/register',{state: {value: values}})
+            }else{
+              values.isMinor = isMinor
+              navigate('/register',{state: {value: values}})
+            } 
         }
     }
 
@@ -67,7 +71,7 @@ export default function PreRegister() {
 
         {context.isDoctor ?'' :
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="I am a minor" value={values.isMinor} name='isMinor' onChange={handleInputChange}/>
+                <Form.Check type="checkbox" label="I am a minor" value={isMinor} name='isMinor' onChange={() => setIsMinor(true)}/>
             </Form.Group>
         }
         
