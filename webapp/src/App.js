@@ -12,6 +12,9 @@ import Register from './components/Register';
 import LoginPage from './components/LoginPage';
 import Medication from './components/Medication';
 import LabResults from './components/LabResults';
+import ClinicVisitExpanded from './components/ClinicVisitExpanded';
+import ClinicVisit from './components/ClinicVisit';
+import ClinicVisitForm from './components/ClinicVisitForm';
 
 function App() {
   return (
@@ -30,10 +33,14 @@ function App() {
             <Route path="/medication" element={<Medication />}/>
             <Route path="/lab-results" element={<LabResults />}/>
             <Route path="/medical-history" element={<MedicalHistory />} />
+            <Route path="/Clinic-Visit-Form" element={<ClinicVisitForm />} />
+            <Route path="/Clinic-Visit" element={<ClinicVisit/>} />
+            <Route path="/Clinic-Visit-Expanded" element={<ClinicVisitExpanded />} />
           </Route>
         </Route>
       </Routes>  
     </BrowserRouter >
+
   );
 }
 
