@@ -5,7 +5,7 @@ namespace Backend.Models
     public class User
     {
         [Key]
-        public int UserId { get; set; }
+        public int Sin { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string Fname { get; set; }

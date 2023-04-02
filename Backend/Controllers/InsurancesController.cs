@@ -29,7 +29,7 @@ namespace Backend.Controllers
         [HttpGet("{id}")]
             public async Task<ActionResult<IEnumerable<Insurance>>> GetInsurance(int id)
             {
-                var insurances = await _context.Insurances.Where(x => x.UserId == id).ToListAsync();
+                var insurances = await _context.Insurances.Where(x => x.Sin == id).ToListAsync();
 
                 if (insurances == null)
                 {
@@ -47,7 +47,7 @@ namespace Backend.Controllers
             public async Task<ActionResult<Insurance>> PostInsurance(Insurance insurance)
 
             {
-                var temp = _context.Users.Where(x => x.UserId == insurance.UserId).FirstOrDefault();
+                var temp = _context.Users.Where(x => x.Sin == insurance.Sin).FirstOrDefault();
                 if (temp == null)
                 {
                     return BadRequest();
@@ -56,14 +56,14 @@ namespace Backend.Controllers
                 _context.Insurances.Add(insurance);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction("GetEmergancyContacts", new { id = insurance.UserId }, insurance);
+                return CreatedAtAction("GetEmergencyContacts", new { id = insurance.Sin }, insurance);
             }
 
         // DELETE: api/Insurances/id
         [HttpDelete("{id}")]
             public async Task<IActionResult> DeleteInsurance(int id)
             {
-                var insurance = await _context.Insurances.Where(x => x.UserId == id).ToListAsync();
+                var insurance = await _context.Insurances.Where(x => x.Sin == id).ToListAsync();
                 if (insurance == null)
                 {
                     return NotFound();
@@ -77,7 +77,7 @@ namespace Backend.Controllers
 
             private bool InsuranceExists(int id)
             {
-                return _context.EmergancyContacts.Any(e => e.UserId == id);
+                return _context.EmergencyContacts.Any(e => e.Sin == id);
             }
         }
 

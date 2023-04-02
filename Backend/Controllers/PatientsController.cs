@@ -49,7 +49,7 @@ namespace Backend.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPatient(int id, Patient patient)
         {
-            if (id != patient.UserId)
+            if (id != patient.Sin)
             {
                 return BadRequest();
             }
@@ -84,7 +84,7 @@ namespace Backend.Controllers
             _context.Patients.Add(patient);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPatient", new { id = patient.UserId }, patient);
+            return CreatedAtAction("GetPatient", new { id = patient.Sin }, patient);
         }
 
         // Delete Patient
@@ -106,7 +106,7 @@ namespace Backend.Controllers
 
         private bool PatientExists(int id)
         {
-            return _context.Patients.Any(e => e.UserId == id);
+            return _context.Patients.Any(e => e.Sin == id);
         }
     }
 }

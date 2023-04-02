@@ -44,7 +44,7 @@ namespace Backend.Controllers
         public async Task<ActionResult<Medication>> PostMedication(Medication medication)
 
         {
-            var temp = _context.Users.Where(x => x.UserId == medication.PatientId).FirstOrDefault();
+            var temp = _context.Users.Where(x => x.Sin == medication.PatientId).FirstOrDefault();
             if (temp == null){
                 return BadRequest();
             }

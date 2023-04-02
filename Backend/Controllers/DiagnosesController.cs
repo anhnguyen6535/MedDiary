@@ -44,7 +44,7 @@ namespace Backend.Controllers
         public async Task<ActionResult<Diagnosis>> PostDiagnoses(Diagnosis diagnosis)
 
         {
-            var temp = _context.Users.Where(x => x.UserId == diagnosis.Patient_Id).FirstOrDefault();
+            var temp = _context.Users.Where(x => x.Sin == diagnosis.Patient_Id).FirstOrDefault();
             if (temp == null)
             {
                 return BadRequest();
