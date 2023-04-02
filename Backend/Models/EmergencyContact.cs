@@ -11,6 +11,6 @@ namespace Backend.Models
         public string Name { get; set; }
         [Required]
         [Column(TypeName = "varchar(15)")]
-        public Int64 Phone { get; set; }
+        public string Phone { get; set; }
     }
 }
