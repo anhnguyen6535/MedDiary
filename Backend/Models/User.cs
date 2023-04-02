@@ -23,6 +23,10 @@ namespace Backend.Models
         public string Lname { get; set; }
 
         [Required]
+        [Column(TypeName = "varchar(10)")] //DD/MM/YYYY
+        public string Dob { get; set; }
+
+        [Required]
         public bool IsDoctor { get; set; }
         [Column(TypeName = "varchar(15)")]
         public string Phone { get; set; }
