@@ -26,7 +26,7 @@ namespace Backend.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<TodoList>>> GetPatientTodoLists(int id)
         {
-            var todoLists = await _context.TodoLists.Where(x => x.UserId == id).ToListAsync();
+            var todoLists = await _context.TodoLists.Where(x => x.Sin == id).ToListAsync();
 
             if (todoLists == null)
             {
@@ -44,7 +44,7 @@ namespace Backend.Controllers
         public async Task<ActionResult<TodoList>> PostTodoList(TodoList todoList)
 
         {
-            var temp = _context.Users.Where(x => x.UserId == todoList.UserId).FirstOrDefault();
+            var temp = _context.Users.Where(x => x.Sin == todoList.Sin).FirstOrDefault();
             if (temp == null)
             {
                 return BadRequest();
@@ -53,14 +53,14 @@ namespace Backend.Controllers
             _context.TodoLists.Add(todoList);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDiagnoses", new { id = todoList.UserId }, todoList);
+            return CreatedAtAction("GetDiagnoses", new { id = todoList.Sin }, todoList);
         }
 
         // DELETE: api/TodoLists/id
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTodoList(int id, string name)
         {
-            var diagnosis = await _context.TodoLists.Where(x => x.UserId == id && x.Name == name).ToListAsync();
+            var diagnosis = await _context.TodoLists.Where(x => x.Sin == id && x.Name == name).ToListAsync();
             if (diagnosis == null)
             {
                 return NotFound();
@@ -74,7 +74,7 @@ namespace Backend.Controllers
 
         private bool DiagnosisExists(int id, string name)
         {
-            return _context.TodoLists.Any(e => e.UserId == id) && _context.TodoLists.Any(e => e.Name == name);
+            return _context.TodoLists.Any(e => e.Sin == id) && _context.TodoLists.Any(e => e.Name == name);
         }
     }
 

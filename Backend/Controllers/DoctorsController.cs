@@ -48,7 +48,7 @@ namespace Backend.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPatient(int id, Doctor doctor)
         {
-            if (id != doctor.UserId)
+            if (id != doctor.Sin)
             {
                 return BadRequest();
             }
@@ -82,7 +82,7 @@ namespace Backend.Controllers
             _context.Doctors.Add(doctor);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = doctor.UserId }, doctor);
+            return CreatedAtAction("GetUser", new { id = doctor.Sin }, doctor);
         }
 
         // DELETE: api/Doctors/id
@@ -103,7 +103,7 @@ namespace Backend.Controllers
 
         private bool DoctorExists(int id)
         {
-            return _context.Doctors.Any(e => e.UserId == id);
+            return _context.Doctors.Any(e => e.Sin == id);
         }
     }
 }

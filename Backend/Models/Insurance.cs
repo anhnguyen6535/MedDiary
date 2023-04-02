@@ -5,7 +5,7 @@ namespace Backend.Models
     public class Insurance
     {
         [Key]
-        public int UserId { get; set; }
+        public int Sin { get; set; }
        
         public string Iname { get; set; }
         

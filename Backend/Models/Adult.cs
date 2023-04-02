@@ -5,7 +5,7 @@ namespace Backend.Models
     public class Adult
     {
         [Key]
-        public int UserId { get; set; }
+        public int Sin { get; set; }
         public string MaritalStatus { get; set; }
     }
 }
