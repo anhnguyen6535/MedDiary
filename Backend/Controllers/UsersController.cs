@@ -93,8 +93,12 @@ namespace Backend.Controllers
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("Doctor")]
-        public async Task<ActionResult<User>> PostUser(DoctorRegisterDTO register)
+        public async Task<ActionResult<User>> PostDoctorUser(DoctorRegisterDTO register)
         {
+            if(UserExists(register.User.Sin) || DoctorExists(register.Doctor.PracId)){
+                return BadRequest("User exists");
+            }
+ 
             _context.Users.Add(register.User);
             await _context.SaveChangesAsync();
 
@@ -123,6 +127,11 @@ namespace Backend.Controllers
         private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.Sin == id);
+        }
+
+        private bool DoctorExists(int id)
+        {
+            return _context.Doctors.Any(e => e.PracId == id);
         }
     }
 }
