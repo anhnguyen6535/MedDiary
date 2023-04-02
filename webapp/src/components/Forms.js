@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { Col, InputGroup, Button, Row, Container } from 'react-bootstrap'
 import Form from 'react-bootstrap/Form'
 
-const sortType = (ele) => {
+const sortType = (ele,values, handler) => {
     if(ele.sort == 'control'){
-        return <Form.Control type={ele.type} placeholder={ele.placeholder}/>
+        return <Form.Control type={ele.type} placeholder={ele.placeholder} value={values[ele.controlId]} name={ele.controlId} onChange={handler}/>
     }
     else if(ele.sort == 'select'){
         return(
-            <Form.Select>
+            <Form.Select value={values[ele.controlId]} name={ele.controlId} onChange={handler}>
                 {ele.options.map((op, index) =>
                     <option key={index}>{op}</option>
                 )}
@@ -19,20 +19,20 @@ const sortType = (ele) => {
     }
 }
 
-export default function Forms(prop) {
+export default function Forms({header, fields, values, handler}) {
 
   return (
     <Container>
         <div>
-            <h4>{prop.header}</h4>
+            <h4>{header}</h4>
         </div>
         <Form.Group>
-            {prop.fields.map((field, index) => 
+            {fields.map((field, index) => 
                 <Row key={index}>
                     {field.map((ele) =>
                         <Form.Group as={Col} className="mb-3" controlId={ele.controlId} key={ele.controlId}>
-                            {/* {ele.label != '' ? <Form.Label>{ele.label}</Form.Label> : ''} */}
-                            {sortType(ele)}
+                            {ele.label != '' ? <Form.Label>{ele.label}</Form.Label> : ''}
+                            {sortType(ele, values, handler)}
                         </Form.Group>
                     )}
                 </Row>

@@ -58,7 +58,7 @@ export default function LoginPage() {
   }
 
   const clickRegister = () => {
-    navigate('/register')
+    navigate('/pre-register')
   }
 
 

@@ -14,7 +14,7 @@ function CardComponent(prop) {
 
   const clickRegister = () => {
     setContext({isDoctor: prop.isDoctor})
-    navigate('/register')
+    navigate('/pre-register')
   }
 
   return (

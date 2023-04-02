@@ -1,7 +1,7 @@
 
 
 export const patientRegLists = () => {
-    return [patientInfoReg, patientGuardianReg, PatientEmerReg, PatientInsuranceReg]
+    return [patientInfoReg, PatientEmerReg, PatientInsuranceReg]
 }
 
 const patientInfoReg =  {
@@ -24,15 +24,15 @@ const patientInfoReg =  {
             placeholder: 'Last name'
           }
         ],
-        [
-          {
-            sort: 'control',
-            controlId: 'Email',
-            label: 'Email address',
-            type: 'email',
-            placeholder: 'Email'
-          }
-        ],
+        // [
+        //   {
+        //     sort: 'control',
+        //     controlId: 'Email',
+        //     label: 'Email address',
+        //     type: 'email',
+        //     placeholder: 'Email'
+        //   }
+        // ],
         [
           {
             sort: 'control',
@@ -87,35 +87,12 @@ const patientInfoReg =  {
             placeholder: 'AHS Number'
           }
         ],
-        [
-            {
-                sort: 'control',
-                controlId: 'Pw',
-                label: '',
-                type: 'password',
-                placeholder: 'Password'
-            },
-            {
-                sort: 'control',
-                controlId: 'Pw2',
-                label: '',
-                type: 'password',
-                placeholder: 'Confirm Password'
-            },
-        ]   
-    ]
-}
+]}
 
-const patientGuardianReg = {
+export const patientGuardianReg = {
     header: 'Guardian',
     value:[
         [
-            {
-                sort: 'check',
-                controlId: 'Minor',
-                placeholder:'I am a minor',
-                label: '',
-            },
             {
                 sort: 'control',
                 controlId: 'GSIN',
@@ -135,14 +112,14 @@ const PatientEmerReg = {
             {
                 sort: 'control',
                 controlId: 'EName',
-                label: '',
+                label: 'Name',
                 type: 'text',
                 placeholder: 'Name'
             },
             {
                 sort: 'control',
                 controlId: 'EPhone',
-                label: '',
+                label: 'Phone',
                 type: 'text',
                 placeholder: 'Phone'
             },
@@ -158,14 +135,14 @@ const PatientInsuranceReg = {
             {
                 sort: 'control',
                 controlId: 'ICompany',
-                label: '',
+                label: 'Name',
                 type: 'text',
                 placeholder: 'Company'
             },
             {
                 sort: 'control',
                 controlId: 'INum',
-                label: '',
+                label: 'Number',
                 type: 'text',
                 placeholder: 'Number'
             },
@@ -173,3 +150,78 @@ const PatientInsuranceReg = {
     ]
 }
     
+export const doctorInfoReg =  {
+  header: 'Personal Info',
+  value: 
+  [
+      [
+        {
+          sort: 'control',
+          controlId: 'Fname',
+          label: 'First name',
+          type: 'text',
+          placeholder: ''
+        },
+        {
+          sort: 'control',
+          controlId: 'Lname',
+          label: 'Last name',
+          type: 'text',
+          placeholder: ''
+        }
+      ],
+      [
+        {
+          sort: 'control',
+          controlId: 'Address',
+          label: 'Address',
+          type: 'text',
+          placeholder: ''
+        }
+      ],
+      [
+        {
+          sort: 'control',
+          controlId: 'DOB',
+          label: 'Date of Birth',
+          type: 'text',
+          placeholder: ''
+        },
+        {
+          sort: 'select',
+          controlId: 'Sex',
+          label: 'Sex',
+          placeholder: "Sex",
+          options: [
+            "Sex",
+            "Female",
+            "Male",
+          ]
+        },
+      ],
+      [
+        {
+          sort: 'control',
+          controlId: 'Phone',
+          label: 'Phone',
+          type: 'text',
+          placeholder: ''
+        },
+        {
+          sort: 'control',
+          controlId: 'SIN',
+          label: 'SIN',
+          type: 'text',
+          placeholder: "",
+        },
+      ],
+      // [
+      //   {
+      //     sort: 'control',
+      //     controlId: 'PracId',
+      //     label: 'PracId',
+      //     type: 'text',
+      //     placeholder: 'PracId'
+      //   }
+      // ],
+]}
