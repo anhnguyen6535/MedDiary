@@ -2,7 +2,7 @@ import { createAPIEndpoint, ENDPOINTS } from "../../api";
 
 export const register = (user, doctor) =>{
     createAPIEndpoint(ENDPOINTS.user)
-                .post({User: user, Doctor: doctor})
+                .docReg({User: user, Doctor: doctor})
                 .then(res => {
                         console.log("success");
                         // setContext({ userId: res.data.participantId })
