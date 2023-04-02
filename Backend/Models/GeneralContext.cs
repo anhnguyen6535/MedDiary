@@ -18,7 +18,7 @@ namespace Learning.Models
         public DbSet<Medication> Medications { get; set; } = null!;
         public DbSet<Clinic> Clinics { get; set; } = null!;
         public DbSet<Diagnosis> Diagnoses{ get; set; } = null!; 
-        public DbSet<EmergencyContact> EmergancyContacts { get; set; } = null!;
+        public DbSet<EmergencyContact> EmergencyContacts { get; set; } = null!;
         public DbSet<Insurance> Insurances { get; set; } = null!;
         public DbSet<TodoList> TodoLists { get; set; } = null!;
         // // THESE MODELS FOR TESTING WILL BE REMOVED
