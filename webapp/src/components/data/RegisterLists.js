@@ -1,60 +1,62 @@
 
-
-export const patientRegLists = () => {
-    return [patientInfoReg, PatientEmerReg, PatientInsuranceReg]
-}
-
-const patientInfoReg =  {
+//------------------------------------------- USER ---------------------------------//
+export const userRegList =  {
     header: 'Personal Info',
     value: 
     [
         [
           {
             sort: 'control',
-            controlId: 'Fname',
+            controlId: 'email',
+            label: 'Email',
+            type: 'email',
+            placeholder: '',
+            require: true
+          }
+        ],
+        [
+          {
+            sort: 'control',
+            controlId: 'fname',
             label: 'First name',
             type: 'text',
-            placeholder: 'First name'
+            placeholder: 'First name',
+            require: true
           },
           {
             sort: 'control',
-            controlId: 'Lname',
+            controlId: 'lname',
             label: 'Last name',
             type: 'text',
-            placeholder: 'Last name'
+            placeholder: 'Last name',
+            require: true
           }
         ],
-        // [
-        //   {
-        //     sort: 'control',
-        //     controlId: 'Email',
-        //     label: 'Email address',
-        //     type: 'email',
-        //     placeholder: 'Email'
-        //   }
-        // ],
         [
           {
             sort: 'control',
-            controlId: 'Address',
+            controlId: 'address',
             label: 'Address',
             type: 'text',
-            placeholder: 'Address'
+            placeholder: 'Address',
+            require: true
           }
         ],
         [
           {
             sort: 'control',
-            controlId: 'DOB',
+            controlId: 'dob',
             label: 'Date of Birth',
             type: 'text',
-            placeholder: 'Date of Birth'
+            placeholder: 'DD/MM/YYYY',
+            require: true
           },
           {
             sort: 'select',
-            controlId: 'Sex',
+            controlId: 'sex',
             label: 'Sex',
             placeholder: "Sex",
+            require: true,
             options: [
               "Sex",
               "Female",
@@ -65,99 +67,127 @@ const patientInfoReg =  {
         [
           {
             sort: 'control',
-            controlId: 'Phone',
+            controlId: 'phone',
             label: 'Phone',
             type: 'text',
-            placeholder: 'Phone'
+            placeholder: 'Phone',
+            require: true
           },
           {
             sort: 'control',
-            controlId: 'SIN',
+            controlId: 'sin',
             label: 'SIN',
             type: 'text',
             placeholder: "SIN Number",
+            require: true
           },
         ],
         [
           {
             sort: 'control',
-            controlId: 'AHS',
-            label: 'AHS Number',
-            type: 'text',
-            placeholder: 'AHS Number'
+            controlId: 'password',
+            label: 'Password',
+            type: 'password',
+            placeholder: '',
+            require: true
           }
-        ],
-]}
+        ]
+      ]}
+      
+      
+      
+// ---------------------------------------------- Patient ------------------------------------------------//
+export const patientRegLists = () => {
+  return [patientAHS, PatientEmerReg, PatientInsuranceReg]
+}
 
-export const patientGuardianReg = {
-    header: 'Guardian',
-    value:[
-        [
-            {
-                sort: 'control',
-                controlId: 'GSIN',
-                label: '',
-                type: 'text',
-                placeholder: 'Guardian SIN'
-            }
-        ],
-    ]
+const patientAHS = {
+  header: 'Health number',
+  value:
+  [
+    [
+      {
+        sort: 'control',
+        controlId: 'AHS',
+        label: '',
+        type: 'text',
+        placeholder: 'AHS Number'
+      }
+    ],
+  ]
 }
 
 const PatientEmerReg = {
     header: 'Emergency Contact',
     value: 
     [
-        [
-            {
-                sort: 'control',
-                controlId: 'EName',
-                label: 'Name',
-                type: 'text',
-                placeholder: 'Name'
-            },
-            {
-                sort: 'control',
+      [
+        {
+          sort: 'control',
+          controlId: 'EName',
+          label: 'Name',
+          type: 'text',
+          placeholder: 'Name'
+        },
+        {
+          sort: 'control',
                 controlId: 'EPhone',
                 label: 'Phone',
                 type: 'text',
                 placeholder: 'Phone'
-            },
+              },
         ]
-    ]
+      ]
+    }
+    
+    const PatientInsuranceReg = {
+      header: 'Insurance',
+      value:
+      [
+        [
+          {
+            sort: 'control',
+            controlId: 'ICompany',
+            label: 'Name',
+            type: 'text',
+            placeholder: 'Company'
+          },
+          {
+            sort: 'control',
+            controlId: 'INum',
+            label: 'Number',
+            type: 'text',
+            placeholder: 'Number'
+          },
+        ],
+      ]
+    }
+        
+// ----------------------------------------------- MINOR ------------------------------------//
+export const patientGuardianReg = {
+  header: 'Guardian',
+  value:[
+    [
+      {
+        sort: 'control',
+        controlId: 'GSIN',
+        label: '',
+        type: 'text',
+        placeholder: 'Guardian SIN'
+      }
+    ],
+  ]
 }
 
-const PatientInsuranceReg = {
-    header: 'Insurance',
-    value:
-    [
-        [
-            {
-                sort: 'control',
-                controlId: 'ICompany',
-                label: 'Name',
-                type: 'text',
-                placeholder: 'Company'
-            },
-            {
-                sort: 'control',
-                controlId: 'INum',
-                label: 'Number',
-                type: 'text',
-                placeholder: 'Number'
-            },
-        ],
-    ]
-}
-    
-export const doctorInfoReg =  {
-  header: 'Personal Info',
-  value: 
-  [
+// ----------------------------------------------- DOCTOR --------------------------------------------//
+    export const doctorInfoReg =  {
+      header: 'Personal Info',
+      value: 
       [
-        {
-          sort: 'control',
-          controlId: 'Fname',
+        [
+          {
+            sort: 'control',
+            controlId: 'Fname',
           label: 'First name',
           type: 'text',
           placeholder: ''
@@ -216,12 +246,12 @@ export const doctorInfoReg =  {
         },
       ],
       // [
-      //   {
-      //     sort: 'control',
-      //     controlId: 'PracId',
-      //     label: 'PracId',
-      //     type: 'text',
-      //     placeholder: 'PracId'
-      //   }
-      // ],
-]}
+        //   {
+          //     sort: 'control',
+          //     controlId: 'PracId',
+          //     label: 'PracId',
+          //     type: 'text',
+          //     placeholder: 'PracId'
+          //   }
+          // ],
+        ]}
