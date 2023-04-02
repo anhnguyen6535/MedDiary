@@ -15,6 +15,7 @@ namespace Backend.Controllers
     public class UsersController : ControllerBase
     {
         private readonly GeneralContext _context;
+        private readonly DoctorsController _doctorsController;
 
         public UsersController(GeneralContext context)
         {
@@ -92,12 +93,15 @@ namespace Backend.Controllers
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<User>> PostUser(RegisterDTO register)
         {
-            _context.Users.Add(user);
+            _context.Users.Add(register.User);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.Sin }, user);
+            _context.Doctors.Add(register.Doctor);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetUser", new { id = register.User.Sin }, register.User);
         }
 
         // DELETE: api/Users/5
