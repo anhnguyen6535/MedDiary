@@ -6,6 +6,7 @@ namespace Backend.Models
     {
         [Key]
         public int Sin { get; set; }
+        [Required]
         public int GuardianId { get; set; }
     }
 }

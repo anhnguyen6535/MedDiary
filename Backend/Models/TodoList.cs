@@ -7,6 +7,7 @@ namespace Backend.Models
     {
         [Key]
         public int TodoId { get; set; }
+        [Required]
         public int Sin { get; set; }
         public string Name{ get; set; }
         public int IsComplete { get; set; }
