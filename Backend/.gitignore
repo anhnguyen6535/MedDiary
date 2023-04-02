@@ -13,6 +13,8 @@
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
+Database.db-shm
+Database.db-wal
 
 # Build results
 [Dd]ebug/
