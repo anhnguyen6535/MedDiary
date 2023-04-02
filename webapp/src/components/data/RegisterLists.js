@@ -87,24 +87,7 @@ const patientInfoReg =  {
             placeholder: 'AHS Number'
           }
         ],
-        // [
-        //     {
-        //         sort: 'control',
-        //         controlId: 'Pw',
-        //         label: 'Password',
-        //         type: 'password',
-        //         placeholder: 'Password'
-        //     },
-        //     {
-        //         sort: 'control',
-        //         controlId: 'Pw2',
-        //         label: 'Confirm password',
-        //         type: 'password',
-        //         placeholder: 'Confirm Password'
-        //     },
-        // ]   
-    ]
-}
+]}
 
 export const patientGuardianReg = {
     header: 'Guardian',
@@ -167,3 +150,78 @@ const PatientInsuranceReg = {
     ]
 }
     
+export const doctorInfoReg =  {
+  header: 'Personal Info',
+  value: 
+  [
+      [
+        {
+          sort: 'control',
+          controlId: 'Fname',
+          label: 'First name',
+          type: 'text',
+          placeholder: ''
+        },
+        {
+          sort: 'control',
+          controlId: 'Lname',
+          label: 'Last name',
+          type: 'text',
+          placeholder: ''
+        }
+      ],
+      [
+        {
+          sort: 'control',
+          controlId: 'Address',
+          label: 'Address',
+          type: 'text',
+          placeholder: ''
+        }
+      ],
+      [
+        {
+          sort: 'control',
+          controlId: 'DOB',
+          label: 'Date of Birth',
+          type: 'text',
+          placeholder: ''
+        },
+        {
+          sort: 'select',
+          controlId: 'Sex',
+          label: 'Sex',
+          placeholder: "Sex",
+          options: [
+            "Sex",
+            "Female",
+            "Male",
+          ]
+        },
+      ],
+      [
+        {
+          sort: 'control',
+          controlId: 'Phone',
+          label: 'Phone',
+          type: 'text',
+          placeholder: ''
+        },
+        {
+          sort: 'control',
+          controlId: 'SIN',
+          label: 'SIN',
+          type: 'text',
+          placeholder: "",
+        },
+      ],
+      // [
+      //   {
+      //     sort: 'control',
+      //     controlId: 'PracId',
+      //     label: 'PracId',
+      //     type: 'text',
+      //     placeholder: 'PracId'
+      //   }
+      // ],
+]}
