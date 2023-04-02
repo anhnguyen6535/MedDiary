@@ -63,22 +63,19 @@ export default function PreRegister() {
         <Forms fields={userRegList.value} header={userRegList.header} values={values} handler={handleInputChange} errors={errors}/>
 
         <Container>
-          {context.isDoctor ?
-            <Form.Group className="mb-3" controlId="confirmPassword">
-              <Form.Label>PracId</Form.Label>
-              <Form.Control type="text" value={pracId} onChange={e => setPracId(e.currentTarget.value)}/>
-            </Form.Group> 
-            :""
-          }
-
           <Form.Group className="mb-3" controlId="confirmPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Confirm Password" value={pwdCheck} onChange={e => setPwCheck(e.currentTarget.value)}/>
             {checkUpdate}
           </Form.Group>
 
-          {context.isDoctor ?"" :
-              <Form.Group className="mb-3" controlId="formBasicCheckbox">
+          {context.isDoctor ?
+              <Form.Group className="mb-3" controlId="pracId">
+                <Form.Label>PracId</Form.Label>
+                <Form.Control type="text" value={pracId} onChange={e => setPracId(e.currentTarget.value)}/>
+              </Form.Group>
+          :
+              <Form.Group className="mb-3" controlId="minor">
                   <Form.Check type="checkbox" label="I am a minor" value={isMinor} name='isMinor' onChange={() => setIsMinor(true)}/>
               </Form.Group>
           }
