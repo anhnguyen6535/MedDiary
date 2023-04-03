@@ -5,6 +5,8 @@ export const BASE_URL = 'https://localhost:7113/';
 export const ENDPOINTS = {
     participant: 'participant',
     user: 'Users',
+    doctor: 'Doctors',
+    patient: 'Patients'
 }
 
 export const createAPIEndpoint = (endpoint) => {
@@ -14,6 +16,9 @@ export const createAPIEndpoint = (endpoint) => {
         fetch: () => axios.get(url),
         fetchById: id => axios.get(url + id),
         post: newRecord => axios.post(url, newRecord),
+        docReg: newRecord => axios.post(url + 'Doctor', newRecord),
+        adultReg: newRecord => axios.post(url + 'Adult', newRecord),
+        minorReg: newRecord => axios.post(url + 'Minor', newRecord),
         log: info => axios.post(url + 'Login', info),
         put: (id, updatedRecord) => axios.put(url + id, updatedRecord),
         delete: id => axios.delete(url + id),

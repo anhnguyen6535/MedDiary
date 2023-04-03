@@ -2,6 +2,7 @@
 using Learning.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,26 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(GeneralContext))]
-    partial class GeneralContextModelSnapshot : ModelSnapshot
+    [Migration("20230402053652_addDOBUser")]
+    partial class addDOBUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
-
-            modelBuilder.Entity("Backend.Models.Adult", b =>
-                {
-                    b.Property<int>("Sin")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("MaritalStatus")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Sin");
-
-                    b.ToTable("Adults");
-                });
 
             modelBuilder.Entity("Backend.Models.Appointment", b =>
                 {
@@ -131,8 +120,7 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
+                    b.Property<long>("Phone")
                         .HasColumnType("varchar(15)");
 
                     b.HasKey("Sin");
@@ -186,20 +174,6 @@ namespace Backend.Migrations
                     b.HasKey("MedId");
 
                     b.ToTable("Medications");
-                });
-
-            modelBuilder.Entity("Backend.Models.Minor", b =>
-                {
-                    b.Property<int>("Sin")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("GuardianId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Sin");
-
-                    b.ToTable("Minors");
                 });
 
             modelBuilder.Entity("Backend.Models.Patient", b =>

@@ -6,9 +6,9 @@ namespace Backend.Models
     {
         [Key]
         public int Sin { get; set; }
-       
+        [Required]
         public string Iname { get; set; }
-        
+        [Required]
         public int Inumber { get; set; }
     }
 }

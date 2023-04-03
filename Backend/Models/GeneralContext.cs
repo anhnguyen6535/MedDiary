@@ -14,6 +14,8 @@ namespace Learning.Models
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Doctor> Doctors { get; set; } = null!;
         public DbSet<Patient> Patients { get; set; } = null!;
+        public DbSet<Adult> Adults { get; set; } = null!;
+        public DbSet<Minor> Minors { get; set; } = null!;
         public DbSet<Appointment> Appointments { get; set; } = null!;
         public DbSet<Medication> Medications { get; set; } = null!;
         public DbSet<Clinic> Clinics { get; set; } = null!;

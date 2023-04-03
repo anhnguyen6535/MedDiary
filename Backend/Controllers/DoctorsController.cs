@@ -28,7 +28,7 @@ namespace Backend.Controllers
             return await _context.Doctors.ToListAsync();
         }
 
-        // GET: api/Doctors/id
+        // GET: api/Doctors/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Doctor>> GetDoctor(int id)
         {
@@ -42,11 +42,10 @@ namespace Backend.Controllers
             return doctor;
         }
 
-
-        // PUT: api/Doctors/id
+        // PUT: api/Doctors/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPatient(int id, Doctor doctor)
+        public async Task<IActionResult> PutDoctor(int id, Doctor doctor)
         {
             if (id != doctor.Sin)
             {
@@ -77,17 +76,17 @@ namespace Backend.Controllers
         // POST: api/Doctors
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Patient>> PostPatient(Doctor doctor)
+        public async Task<ActionResult<Doctor>> PostDoctor(Doctor doctor)
         {
             _context.Doctors.Add(doctor);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = doctor.Sin }, doctor);
+            return CreatedAtAction("GetDoctor", new { id = doctor.Sin }, doctor);
         }
 
-        // DELETE: api/Doctors/id
+        // DELETE: api/Doctors/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePatient(int id)
+        public async Task<IActionResult> DeleteDoctor(int id)
         {
             var doctor = await _context.Doctors.FindAsync(id);
             if (doctor == null)

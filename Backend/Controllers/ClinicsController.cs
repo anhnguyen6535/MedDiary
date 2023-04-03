@@ -44,7 +44,7 @@ namespace Backend.Controllers
         }
         // DELETE: api/Clinics
         [HttpDelete]
-        public async Task<IActionResult> DeleteClinic(Int64 phone)
+        public async Task<IActionResult> DeleteClinic(string phone)
         {
             var clinic = await _context.Clinics.FindAsync(phone);
             if (clinic == null)
@@ -60,7 +60,7 @@ namespace Backend.Controllers
         // PUT: api/Clinics
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut]
-        public async Task<IActionResult> PutClinic(Int64 phone, Clinic clinic)
+        public async Task<IActionResult> PutClinic(string phone, Clinic clinic)
         {
             
             if (!ClinicExists(phone))
@@ -81,7 +81,7 @@ namespace Backend.Controllers
 
             return NoContent();
         }
-        private bool ClinicExists(Int64 phone)
+        private bool ClinicExists(string phone)
         {
             return _context.Clinics.Any(e => e.Phone == phone);
         }

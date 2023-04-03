@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import { filterObjList } from './data/ListFilter'
+import { filterObjList } from './data/helper'
 import { VerticalTable } from './TableComponent'
 
 export default function LabResults() {
