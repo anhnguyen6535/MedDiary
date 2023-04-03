@@ -16,26 +16,28 @@ export const register = (User, Patient, values) =>{
     }
     Patient.isMinor ?type.GuardianId = values.GuardianId :type.MaritalStatus = values.MaritalStatus
 
-    Patient.isMinor ?
-    createAPIEndpoint(ENDPOINTS.user)
-                .adultReg({User, Patient, EmergencyContact, Insurance, Adult: type})
-                .then(res => {
-                        console.log("success");
-                        // setContext({ userId: res.data.participantId })
-                        // navigate('/profile')
-                })
-                .catch(err => {
-                    console.log("fail");
-                })
-    :
-    createAPIEndpoint(ENDPOINTS.user)
-                .minorReg({User, Patient, EmergencyContact, Insurance, Minor: type})
-                .then(res => {
-                        console.log("success");
-                        // setContext({ userId: res.data.participantId })
-                        // navigate('/profile')
-                })
-                .catch(err => {
-                    console.log("fail");
-                })
+    if(!Patient.isMinor){
+        createAPIEndpoint(ENDPOINTS.user)
+                    .adultReg({User, Patient, EmergencyContact, Insurance, Adult: type})
+                    .then(res => {
+                            console.log("success");
+                            // setContext({ userId: res.data.participantId })
+                            // navigate('/profile')
+                    })
+                    .catch(err => {
+                        console.log("fail");
+                    })
+    }
+    else{
+        createAPIEndpoint(ENDPOINTS.user)
+                    .minorReg({User, Patient, EmergencyContact, Insurance, Minor: type})
+                    .then(res => {
+                            console.log("successM");
+                            // setContext({ userId: res.data.participantId })
+                            // navigate('/profile')
+                    })
+                    .catch(err => {
+                        console.log("fail");
+                    })
+    }
 }

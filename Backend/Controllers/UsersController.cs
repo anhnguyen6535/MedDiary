@@ -139,7 +139,7 @@ namespace Backend.Controllers
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("Minor")]
-        public async Task<ActionResult<User>> PostMinorPatientUser(AdultRegisterDTO register)
+        public async Task<ActionResult<User>> PostMinorPatientUser(MinorRegisterDTO register)
         {
             if (UserExists(register.User.Sin) || PatientExists(register.Patient.Sin))
             {
@@ -158,7 +158,7 @@ namespace Backend.Controllers
             _context.EmergencyContacts.Add(register.EmergencyContact);
             await _context.SaveChangesAsync();
 
-            _context.Adults.Add(register.Adult);
+            _context.Minors.Add(register.Minor);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = register.User.Sin }, register.User);
