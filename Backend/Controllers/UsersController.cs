@@ -108,6 +108,62 @@ namespace Backend.Controllers
             return CreatedAtAction("GetUser", new { id = register.User.Sin }, register.User);
         }
 
+        // POST: api/Users
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost("Adult")]
+        public async Task<ActionResult<User>> PostAdultPatientUser(AdultRegisterDTO register)
+        {
+            if (UserExists(register.User.Sin) || PatientExists(register.Patient.Sin))
+            {
+                return BadRequest("User exists");
+            }
+
+            _context.Users.Add(register.User);
+            await _context.SaveChangesAsync();
+
+            _context.Patients.Add(register.Patient);
+            await _context.SaveChangesAsync();
+
+            _context.Insurances.Add(register.Insurance);
+            await _context.SaveChangesAsync();
+
+            _context.EmergencyContacts.Add(register.EmergencyContact);
+            await _context.SaveChangesAsync();
+
+            _context.Adults.Add(register.Adult);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetUser", new { id = register.User.Sin }, register.User);
+        }
+
+        // POST: api/Users
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost("Minor")]
+        public async Task<ActionResult<User>> PostMinorPatientUser(AdultRegisterDTO register)
+        {
+            if (UserExists(register.User.Sin) || PatientExists(register.Patient.Sin))
+            {
+                return BadRequest("User exists");
+            }
+
+            _context.Users.Add(register.User);
+            await _context.SaveChangesAsync();
+
+            _context.Patients.Add(register.Patient);
+            await _context.SaveChangesAsync();
+
+            _context.Insurances.Add(register.Insurance);
+            await _context.SaveChangesAsync();
+
+            _context.EmergencyContacts.Add(register.EmergencyContact);
+            await _context.SaveChangesAsync();
+
+            _context.Adults.Add(register.Adult);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetUser", new { id = register.User.Sin }, register.User);
+        }
+
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
@@ -132,6 +188,11 @@ namespace Backend.Controllers
         private bool DoctorExists(int id)
         {
             return _context.Doctors.Any(e => e.PracId == id);
+        }
+
+        private bool PatientExists(int id)
+        {
+            return _context.Patients.Any(e => e.Sin == id);
         }
     }
 }
