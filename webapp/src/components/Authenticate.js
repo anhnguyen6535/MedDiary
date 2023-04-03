@@ -7,7 +7,7 @@ export default function Authenticate() {
 
     return (
       //  console.log(context.userId)
-        context.userId == 0
+        context.sin == 0
             ? <Navigate to="/" />
             : <Outlet />
     )

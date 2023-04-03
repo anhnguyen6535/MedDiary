@@ -15,6 +15,7 @@ import LabResults from './components/LabResults';
 import PreRegister from './components/PreRegister';
 import useStateContext from './hooks/useStateContext';
 import DoctorRegister from './components/doctors/DoctorRegister';
+import SuccessRegister from './components/SuccessRegister';
 
 function App() {
   const { context} = useStateContext();
@@ -27,6 +28,7 @@ function App() {
               <Route path="/login" element={<LoginPage/>}></Route>
               <Route path="/pre-register" element={<PreRegister/>}></Route>
               <Route path="/register" element={<PatientRegister/>}></Route>
+              <Route path="/success-register" element={<SuccessRegister/>}></Route>
           </Route>
         </Route>
         <Route element={<Authenticate />}>

@@ -3,10 +3,14 @@ import { Button, Container, Form } from 'react-bootstrap';
 import useForm from '../../hooks/useForm';
 import { patientGuardianReg, patientMaritualReg, patientRegLists } from '../data/RegisterLists';
 import Forms from '../Forms';
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { register } from './patientAPI';
+import useStateContext from '../../hooks/useStateContext';
+import { createAPIEndpoint, ENDPOINTS } from '../../api';
 
 export default function PatientRegister() {
+  const navigate = useNavigate()
+  const {setContext} = useStateContext();
   // Get objects from pre-register
   const user = useLocation().state.user;
   const patient = useLocation().state.patient;
@@ -33,7 +37,29 @@ export default function PatientRegister() {
   }= useForm(getFreshModel)
 
   const clickHandler = () =>{
-    register(user, patient, values)
+    const {Patient, User, EmergencyContact, Insurance, type} = register(user, patient, values)
+    if(!Patient.isMinor){
+      createAPIEndpoint(ENDPOINTS.user)
+                  .adultReg({User, Patient, EmergencyContact, Insurance, Adult: type})
+                  .then(res => {
+                          console.log("success");
+                          navigate('/success-register')
+                  })
+                  .catch(err => {
+                      console.log("fail");
+                  })
+    }
+    else{
+        createAPIEndpoint(ENDPOINTS.user)
+                    .minorReg({User, Patient, EmergencyContact, Insurance, Minor: type})
+                    .then(res => {
+                            console.log("successM");
+                            navigate('/success-register')
+                    })
+                    .catch(err => {
+                        console.log("fail");
+                    })
+    }
   }
 
   return (

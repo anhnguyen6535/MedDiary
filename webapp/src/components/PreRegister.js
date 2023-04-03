@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Button, Col, Container, Form } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
+import { createAPIEndpoint, ENDPOINTS } from '../api';
 import useForm from '../hooks/useForm'
 import useStateContext from '../hooks/useStateContext';
 import { createObjFromList } from './data/helper';
@@ -45,7 +46,16 @@ export default function PreRegister() {
         e.preventDefault();
         if (validate()){
             if(context.isDoctor){ 
-              register(values, {sin: values.sin, pracId: id})
+              createAPIEndpoint(ENDPOINTS.user)
+                .docReg({User: values, Doctor: {sin: values.sin, pracId: id}})
+                .then(res => {
+                    console.log("success");
+                    // setContext({ userId: res.data.participantId })
+                    navigate('/success-register')
+                })
+                .catch(err => {
+                    console.log("fail");
+                })
             }else{
               console.log(values);
               navigate('/register',{state: {

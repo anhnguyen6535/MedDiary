@@ -37,7 +37,7 @@ export default function LoginPage() {
       createAPIEndpoint(ENDPOINTS.user)
                 .log(values)
                 .then(res => {
-                    setContext({ userId: res.data.participantId })
+                    setContext({ sin: res.data.sin})
                     navigate('/profile')
                 })
                 .catch(err => {
