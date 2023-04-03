@@ -96,7 +96,7 @@ export const userRegList =  {
       
 // ---------------------------------------------- Patient ------------------------------------------------//
 export const patientRegLists = () => {
-  return [patientAHS, PatientEmerReg, PatientInsuranceReg]
+  return [PatientEmerReg, PatientInsuranceReg]
 }
 
 const patientAHS = {
@@ -122,17 +122,19 @@ const PatientEmerReg = {
       [
         {
           sort: 'control',
-          controlId: 'EName',
+          controlId: 'Name',
           label: 'Name',
           type: 'text',
-          placeholder: 'Name'
+          placeholder: 'Name',
+          require: true
         },
         {
           sort: 'control',
-                controlId: 'EPhone',
+                controlId: 'Phone',
                 label: 'Phone',
                 type: 'text',
-                placeholder: 'Phone'
+                placeholder: 'Phone',
+                require: true
               },
         ]
       ]
@@ -145,17 +147,19 @@ const PatientEmerReg = {
         [
           {
             sort: 'control',
-            controlId: 'ICompany',
+            controlId: 'Iname',
             label: 'Name',
             type: 'text',
-            placeholder: 'Company'
+            placeholder: 'Company',
+            require: true
           },
           {
             sort: 'control',
-            controlId: 'INum',
+            controlId: 'Inumber',
             label: 'Number',
             type: 'text',
-            placeholder: 'Number'
+            placeholder: 'Number',
+            require: true
           },
         ],
       ]
@@ -168,10 +172,31 @@ export const patientGuardianReg = {
     [
       {
         sort: 'control',
-        controlId: 'GSIN',
-        label: '',
+        controlId: 'GuardianId',
+        label: 'Guardian SIN',
         type: 'text',
-        placeholder: 'Guardian SIN'
+        placeholder: 'Guardian SIN',
+        require: true
+      }
+    ],
+  ]
+}
+
+// ----------------------------------------------- MINOR ------------------------------------//
+export const patientMaritualReg = {
+  header: 'Maritual Status',
+  value:[
+    [
+      {
+        sort: 'select',
+        controlId: 'MaritalStatus',
+        label: 'Marital Status',
+        require: true,
+        options: [
+          "Single",
+          "Married",
+          "Divorced"
+        ]
       }
     ],
   ]
