@@ -56,7 +56,7 @@ namespace Backend.Controllers
                 return NotFound("User does not exist.");
             }
 
-            return Ok(temp);
+            return Ok(user);
         }
 
         // PUT: api/Users/5
@@ -165,19 +165,82 @@ namespace Backend.Controllers
         }
 
         // DELETE: api/Users/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        [HttpDelete("id")]
+        public async Task<IActionResult> DeleteUser(int sin)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.FindAsync(sin);
             if (user == null)
             {
                 return NotFound();
             }
+            else
+            {
+                if (user.IsDoctor)
+                {
+                    var doctor = await _context.Doctors.FindAsync(sin);
+                    if (doctor == null) return NotFound();
+                    else
+                    {
+                        _context.Doctors.Remove(doctor);
+                        await _context.SaveChangesAsync();
+                    } 
+                }
+                else  // user is patient
+                {
+                    var patient = await _context.Patients.FindAsync(sin);
+                    if (patient == null) return NotFound();
+                    else
+                    {
+                        DeletePatientTuple(patient);
+                    }
+                }
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
+            }
 
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
+            
 
             return NoContent();
+        }
+
+        private async void DeletePatientTuple(Patient patient)
+        {
+            if (patient.IsMinor)
+            {
+                var minor = await _context.Minors.FindAsync(patient.Sin);
+                if (minor != null)
+                {
+                    _context.Minors.Remove(minor);                                      // Delete from Minor
+                    await _context.SaveChangesAsync();
+                }
+            }
+            else
+            {
+                var adult = await _context.Adults.FindAsync(patient.Sin);
+                if(adult != null)
+                {
+                    _context.Adults.Remove(adult);                                      // Delete from Adult
+                    await _context.SaveChangesAsync();
+                }
+            }
+            _context.Patients.Remove(patient);                                      // Delete Patient
+            await _context.SaveChangesAsync();
+
+            var insurance = await _context.Insurances.FindAsync(patient.Sin);       // Delete Insurance
+            if(insurance != null)
+            {
+                _context.Insurances.Remove(insurance);
+                await _context.SaveChangesAsync();
+            }
+
+            var emergency = await _context.EmergencyContacts.FindAsync(patient.Sin);    // Delete Emergency
+            if(emergency != null)
+            {
+                _context.EmergencyContacts.Remove(emergency);
+                await _context.SaveChangesAsync();
+            }
+
+
         }
 
         private bool UserExists(int id)
