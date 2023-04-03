@@ -3,7 +3,7 @@ import { Button, Col, Container, Form } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import useForm from '../hooks/useForm'
 import useStateContext from '../hooks/useStateContext';
-import { createObjFromList } from './data/ListFilter';
+import { createObjFromList } from './data/helper';
 import { userRegList } from './data/RegisterLists';
 import { validatePw } from './data/validation';
 import { register } from './doctors/doctorAPI';
@@ -15,10 +15,10 @@ export default function PreRegister() {
     const [pwdCheck, setPwCheck] = useState('')
     const [checkUpdate, setUpdate] = useState(false)
     const [isMinor, setIsMinor] = useState(false)
-    const [pracId, setPracId] = useState("")
+    const [id, setId] = useState("")
 
     const userObj = createObjFromList(userRegList, {}, context.isDoctor) 
-
+    
     const getFreshModel = () =>{return userObj}
     const {
       values,
@@ -26,6 +26,8 @@ export default function PreRegister() {
       setErrors,
       handleInputChange
     }= useForm(getFreshModel)
+    
+    // errors = createObjFromList(userRegList, {}, null) 
 
     useEffect(() =>{
         if(values.password != "")
@@ -43,14 +45,13 @@ export default function PreRegister() {
         e.preventDefault();
         if (validate()){
             if(context.isDoctor){ 
-              register(values, {sin: values.sin, pracId})
+              register(values, {sin: values.sin, pracId: id})
             }else{
-              values.isMinor = isMinor
-              console.log(values)
-              // navigate('/register',{state: {
-              //   user: values,
-              //   isMinor
-              // }})
+              console.log(values);
+              navigate('/register',{state: {
+                user: values,
+                patient: {sin: values.sin, healthId: id, isMinor}
+              }})
             } 
         }else{
           console.log(errors);
@@ -80,18 +81,24 @@ export default function PreRegister() {
           {context.isDoctor ?
               <Form.Group className="mb-3" controlId="pracId" >
                 <Form.Label>PracId</Form.Label>
-                <Form.Control type="text" value={pracId} onChange={e => setPracId(e.currentTarget.value)} required/>
+                <Form.Control type="text" value={id} onChange={e => setId(e.currentTarget.value)} required/>
               </Form.Group>
           :
-              <Form.Group className="mb-3" controlId="minor" required>
-                  <Form.Check type="checkbox" label="I am a minor" value={isMinor} name='isMinor' onChange={() => setIsMinor(true)} required/>
-              </Form.Group>
+              <>
+                  <Form.Group className="mb-3" controlId="healthId" >
+                    <Form.Label>Health Number</Form.Label>
+                    <Form.Control type="text" value={id} onChange={e => setId(e.currentTarget.value)} required/>
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="minor">
+                      <Form.Check type="checkbox" label="I am a minor" value={isMinor} name='isMinor' onChange={() => setIsMinor(true)}/>
+                  </Form.Group>
+              </>
           }
         </Container>
         
         <div>
           <Button variant="primary" type="submit">
-            Next
+            {context.isDoctor ?"Create new account" :"Next"}
           </Button>
           <Button variant='link' onClick={() => navigate('/login')} >Login</Button>
         </div>

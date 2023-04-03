@@ -26,7 +26,7 @@ function App() {
           <Route element={<IdentityCheck />}>
               <Route path="/login" element={<LoginPage/>}></Route>
               <Route path="/pre-register" element={<PreRegister/>}></Route>
-              <Route path="/register" element={context.isDoctor ?<DoctorRegister/> :<PatientRegister/>}></Route>
+              <Route path="/register" element={<PatientRegister/>}></Route>
           </Route>
         </Route>
         <Route element={<Authenticate />}>
