@@ -28,33 +28,41 @@ export default function PreRegister() {
     }= useForm(getFreshModel)
 
     useEffect(() =>{
+        if(values.password != "")
+          errors.password = validatePw(values.password)
         if(pwdCheck != '' && pwdCheck == values.password){
             setUpdate(<p style={{color: "green"}}>Correct</p>)
-        }else setUpdate(<p style={{color: "red"}}>Do not match</p>)
-    },[pwdCheck])
+            errors.confirmPassword = true
+        }else{
+          setUpdate(<p style={{color: "red"}}>Do not match</p>)
+          errors.confirmPassword = false
+        } 
+    },[pwdCheck,values.password])
 
     const next = e => {
         e.preventDefault();
         if (validate()){
-          console.log(values)
             if(context.isDoctor){ 
               register(values, {sin: values.sin, pracId})
             }else{
               values.isMinor = isMinor
-              navigate('/register',{state: {
-                user: values,
-                isMinor
-              }})
+              console.log(values)
+              // navigate('/register',{state: {
+              //   user: values,
+              //   isMinor
+              // }})
             } 
-        }
+        }else{
+          console.log(errors);
+        } 
     }
 
     const validate = () => {
         let temp = {}
         temp.email = (/\S+@\S+\.\S+/).test(values.email) ? "" : "Email is not valid."
         temp.password = validatePw(values.password)
-        setErrors(temp)
-        return Object.values(temp).every(x => x == "")
+        setErrors({confirmPassword: errors.confirmPassword, email: temp.email, password: temp.password})
+        return Object.values(temp).every(x => x == "") && errors.confirmPassword
       }
             
   return (
@@ -65,18 +73,18 @@ export default function PreRegister() {
         <Container>
           <Form.Group className="mb-3" controlId="confirmPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Confirm Password" value={pwdCheck} onChange={e => setPwCheck(e.currentTarget.value)}/>
+            <Form.Control type="password" placeholder="Confirm Password" value={pwdCheck} onChange={e => setPwCheck(e.currentTarget.value)} required/>
             {checkUpdate}
           </Form.Group>
 
           {context.isDoctor ?
-              <Form.Group className="mb-3" controlId="pracId">
+              <Form.Group className="mb-3" controlId="pracId" >
                 <Form.Label>PracId</Form.Label>
-                <Form.Control type="text" value={pracId} onChange={e => setPracId(e.currentTarget.value)}/>
+                <Form.Control type="text" value={pracId} onChange={e => setPracId(e.currentTarget.value)} required/>
               </Form.Group>
           :
-              <Form.Group className="mb-3" controlId="minor">
-                  <Form.Check type="checkbox" label="I am a minor" value={isMinor} name='isMinor' onChange={() => setIsMinor(true)}/>
+              <Form.Group className="mb-3" controlId="minor" required>
+                  <Form.Check type="checkbox" label="I am a minor" value={isMinor} name='isMinor' onChange={() => setIsMinor(true)} required/>
               </Form.Group>
           }
         </Container>

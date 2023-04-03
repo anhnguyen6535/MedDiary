@@ -55,10 +55,8 @@ export const userRegList =  {
             sort: 'select',
             controlId: 'sex',
             label: 'Sex',
-            placeholder: "Sex",
             require: true,
             options: [
-              "Sex",
               "Female",
               "Male",
             ]
@@ -221,9 +219,7 @@ export const patientGuardianReg = {
           sort: 'select',
           controlId: 'Sex',
           label: 'Sex',
-          placeholder: "Sex",
           options: [
-            "Sex",
             "Female",
             "Male",
           ]

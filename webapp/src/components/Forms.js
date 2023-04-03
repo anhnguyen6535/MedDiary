@@ -8,11 +8,12 @@ const sortType = (ele,values, handler) => {
     }
     else if(ele.sort == 'select'){
         return(
-            <Form.Select value={values[ele.controlId]} name={ele.controlId} onChange={handler} required={ele.require}>
+            <Form.Control required={ele.require} as="select" type="select" value={values[ele.controlId]} name={ele.controlId} onChange={handler}>
+                <option value="">Select</option> 
                 {ele.options.map((op, index) =>
-                    <option key={index}>{op}</option>
+                    <option key={index} value={op}>{op}</option>
                 )}
-            </Form.Select>
+            </Form.Control>
         )
     }else{
         return <Form.Check size="xx-large" type="checkbox" label={ele.placeholder} required={ele.require}/>
