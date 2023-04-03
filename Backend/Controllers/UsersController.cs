@@ -56,7 +56,7 @@ namespace Backend.Controllers
                 return NotFound("User does not exist.");
             }
 
-            return Ok(user);
+            return Ok(temp);
         }
 
         // PUT: api/Users/5
