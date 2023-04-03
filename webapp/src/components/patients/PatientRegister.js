@@ -4,7 +4,6 @@ import useForm from '../../hooks/useForm';
 import { patientGuardianReg, patientMaritualReg, patientRegLists } from '../data/RegisterLists';
 import Forms from '../Forms';
 import { useLocation } from 'react-router-dom'
-import UserRegister from '../UserRegister';
 import { register } from './patientAPI';
 
 export default function PatientRegister() {

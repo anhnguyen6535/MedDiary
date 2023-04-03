@@ -1,36 +1,41 @@
 import { createAPIEndpoint, ENDPOINTS } from "../../api";
 
-export const register = (user, patient, values) =>{
+export const register = (User, Patient, values) =>{
     let type = {
-        Sin: user.sin,
+        Sin: User.sin,
     }
-    const emer = {
-        Sin: user.sin,
+    const EmergencyContact = {
+        Sin: User.sin,
         Name: values.Name,
         Phone: values.Phone
     }
-    const ins = {
-        Sin: user.sin,
+    const Insurance = {
+        Sin: User.sin,
         Iname: values.Iname,
-        Inumber: values.Inumber
+        Inumber: values.Inumber             
     }
-    patient.isMinor ?type.GuardianId = values.GuardianId :type.MaritalStatus = values.MaritalStatus
-    console.log(user);
-    console.log(patient);
-    console.log(emer);
-    console.log(ins);
-    console.log(type);
-    // console.log(type);
-    // createAPIEndpoint(ENDPOINTS.user)
-    //             .docReg({User: user, Doctor: doctor})
-    //             .then(res => {
-    //                     console.log("success");
-    //                     // setContext({ userId: res.data.participantId })
-    //                     // navigate('/profile')
-    //             })
-    //             .catch(err => {
-    //                 console.log("fail");
-                //   setSub(true)
-                //   setValues({email: '', password: '', isDoctor: context.isDoctor})
-                // })
+    Patient.isMinor ?type.GuardianId = values.GuardianId :type.MaritalStatus = values.MaritalStatus
+
+    Patient.isMinor ?
+    createAPIEndpoint(ENDPOINTS.user)
+                .adultReg({User, Patient, EmergencyContact, Insurance, Adult: type})
+                .then(res => {
+                        console.log("success");
+                        // setContext({ userId: res.data.participantId })
+                        // navigate('/profile')
+                })
+                .catch(err => {
+                    console.log("fail");
+                })
+    :
+    createAPIEndpoint(ENDPOINTS.user)
+                .minorReg({User, Patient, EmergencyContact, Insurance, Minor: type})
+                .then(res => {
+                        console.log("success");
+                        // setContext({ userId: res.data.participantId })
+                        // navigate('/profile')
+                })
+                .catch(err => {
+                    console.log("fail");
+                })
 }
