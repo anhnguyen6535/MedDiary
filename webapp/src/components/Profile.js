@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap';
 import { createAPIEndpoint, ENDPOINTS } from '../api';
 import useStateContext from '../hooks/useStateContext';
-import { userDTO } from './data/userDTO';
+import { userDTO } from './helperModules/userDTO';
 import { HorizontalTable } from './TableComponent';
 
 export default function Profile() {
