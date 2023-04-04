@@ -1,7 +1,7 @@
 import React from 'react'
 import { ENDPOINTS } from '../api';
 import ArrayObjAPIProcessor from './ArrayObjAPIProcessor';
-import { medicaionDTO } from './data/userDTO';
+import { medicaionDTO } from './patients/PatientDTO';
 
 export default function Medication() {
 
