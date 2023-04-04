@@ -42,6 +42,20 @@ namespace Backend.Controllers
             return labtests;
         }
 
+        // GET: api/Labtests/date
+        [HttpGet("Date")]
+        public async Task<ActionResult<IEnumerable<Labtest>>> GetPatientLabtestByDate(string date)
+        {
+            var labtests = await _context.Labtest.Where(x => x.Date == date).ToListAsync();
+
+            if (labtests == null)
+            {
+                return NotFound();
+            }
+
+            return labtests;
+        }
+
         // PUT: api/Labtests/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
