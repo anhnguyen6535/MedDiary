@@ -29,3 +29,4 @@ export default function Profile() {
     <Container><HorizontalTable val ={values} header={headers} /></Container>
   )
 }
+  
