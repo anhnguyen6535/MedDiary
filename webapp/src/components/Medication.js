@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap';
 import { createAPIEndpoint, ENDPOINTS } from '../api';
 import useStateContext from '../hooks/useStateContext';
-import { filterObjList } from './data/helper';
 import { medicaionDTO } from './data/userDTO';
 import { VerticalTable } from './TableComponent';
 
@@ -28,7 +27,6 @@ export default function Medication() {
   }, [])
 
   return (
-
     <Container>
       <VerticalTable header={headers} val={values} />
     </Container>
