@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { createAPIEndpoint, ENDPOINTS } from '../api';
 import useForm from '../hooks/useForm'
 import useStateContext from '../hooks/useStateContext';
-import { createObjFromList } from './data/helper';
+import { createObjFromList } from './helperModules/helper';
 import { userRegList } from './data/RegisterLists';
-import { validatePw } from './data/validation';
+import { validatePw } from './helperModules/validation';
 import { register } from './doctors/doctorAPI';
 import Forms from './Forms';
 
@@ -47,7 +47,7 @@ export default function PreRegister() {
         if (validate()){
             if(context.isDoctor){ 
               createAPIEndpoint(ENDPOINTS.user)
-                .docReg({User: values, Doctor: {sin: values.sin, pracId: id}})
+                .customizePost({User: values, Doctor: {sin: values.sin, pracId: id}},'Doctor')
                 .then(res => {
                     console.log("success");
                     // setContext({ userId: res.data.participantId })

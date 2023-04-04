@@ -1,30 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap';
+import { createAPIEndpoint, ENDPOINTS } from '../api';
 import useStateContext from '../hooks/useStateContext';
-import { profile } from './patients/PatientDTO';
+import { userDTO } from './helperModules/userDTO';
 import { HorizontalTable } from './TableComponent';
 
 export default function Profile() {
   const { context} = useStateContext();
+  const [user, GetUser] = useState('')
 
-  //FIXME: FAKE API DATA
-  const profileP = { 
-    firstname: 'Helen',
-    lastname: "Max",
-    email: "helenMax@gmail.com",
-    ahs: "090909090909"
-}
-
-  const profileD = { 
-    firstname: 'Mad',
-    lastname: "Max",
-    email: "madMax@gmail.com",
-    pracID: "090909090909"
-}
-
+  // load data from API
+  useEffect(() => {
+    createAPIEndpoint(ENDPOINTS.user)
+      .fetchById(context.sin)
+      .then(res => {
+          GetUser(res.data)
+        })
+        .catch(err => {
+          // setSub(true)
+          // setValues({email: '', password: '', isDoctor: context.isDoctor})
+        })
+  },[])
+      
   // Processing
-  const values = Object.values(context.isDoctor ?profileD :profileP)
+  const {headers, values} = userDTO(user)
+
   return (
-    <Container><HorizontalTable val ={values} header={context.isDoctor ?profile :profile} /></Container>
+    <Container><HorizontalTable val ={values} header={headers} /></Container>
   )
 }
+  

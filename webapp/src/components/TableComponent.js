@@ -6,7 +6,7 @@ export function HorizontalTable({val, header}) {
   return (
     <Container className='d-flex justify-content-md-center' >
 
-            <Table bordered size="sm" style={{marginTop: "10%", width:"60%", border: "2px solid #36424A"}}>
+            <Table bordered size="sm" style={{marginTop: "10%", width:"60%"}}>
                 <tbody >
                     {header.map((hd, index) => 
                         <tr key={index}>
