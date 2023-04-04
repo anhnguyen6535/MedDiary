@@ -1,6 +1,10 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
+import { ENDPOINTS } from '../api'
+import ArrayObjAPIProcessor from './ArrayObjAPIProcessor'
 import { filterObjList } from './data/helper'
+import { medicaionDTO } from './data/userDTO'
+import Medication from './Medication'
 import { VerticalTable } from './TableComponent'
 
 export default function LabResults() {
@@ -25,8 +29,9 @@ export default function LabResults() {
   const {headers, values} = filterObjList(labList)
 
   return (
-    <Container>
-        <VerticalTable header={headers} val={values} />
-    </Container>
+    <ArrayObjAPIProcessor apiPath={ENDPOINTS.medicaion} dtoFilter={(e) => medicaionDTO(e)}/>
+    // <Container>
+    //     <VerticalTable header={headers} val={values} />
+    // </Container>
   )
 }
