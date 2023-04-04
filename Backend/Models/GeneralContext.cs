@@ -16,6 +16,7 @@ namespace Learning.Models
         public DbSet<Patient> Patients { get; set; } = null!;
         public DbSet<Adult> Adults { get; set; } = null!;
         public DbSet<Minor> Minors { get; set; } = null!;
+        public DbSet<Labtest> Labtests { get; set; } = null!;
         public DbSet<Appointment> Appointments { get; set; } = null!;
         public DbSet<Medication> Medications { get; set; } = null!;
         public DbSet<Clinic> Clinics { get; set; } = null!;
@@ -23,6 +24,7 @@ namespace Learning.Models
         public DbSet<EmergencyContact> EmergencyContacts { get; set; } = null!;
         public DbSet<Insurance> Insurances { get; set; } = null!;
         public DbSet<TodoList> TodoLists { get; set; } = null!;
+        public DbSet<Backend.Models.Labtest> Labtest { get; set; }
         // // THESE MODELS FOR TESTING WILL BE REMOVED
 
         // public DbSet<Person> Persons { get; set; } = null!;
