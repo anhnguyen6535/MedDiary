@@ -1,11 +1,12 @@
 import React from 'react'
-import { ENDPOINTS } from '../api';
+import { createAPIEndpoint, ENDPOINTS } from '../api';
 import ArrayObjAPIProcessor from './ArrayObjAPIProcessor';
 import { medicaionDTO } from './patients/PatientDTO';
 
 export default function Medication() {
 
   return (
-    <ArrayObjAPIProcessor apiPath={ENDPOINTS.medicaion} dtoFilter={(e) => medicaionDTO(e)}/>
+    <ArrayObjAPIProcessor dtoFilter={(e) => medicaionDTO(e)} action={(a) => createAPIEndpoint(ENDPOINTS.medicaion)
+      .fetchById(a)}/>
   )
 }

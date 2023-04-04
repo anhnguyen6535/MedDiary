@@ -4,15 +4,14 @@ import { createAPIEndpoint, ENDPOINTS } from '../api';
 import useStateContext from '../hooks/useStateContext';
 import { VerticalTable } from './TableComponent';
 
-export default function ArrayObjAPIProcessor({apiPath, dtoFilter}) {
+export default function ArrayObjAPIProcessor({dtoFilter, action}) {
     const { context } = useStateContext();
     const [headers, setHeaders] = useState([]);
     const [values, setValues] = useState([]);
   
     // load data from API
     useEffect(() => {
-      createAPIEndpoint(apiPath)
-        .fetchById(context.sin)
+      action(context.sin)
         .then(res => {
           const {headers, values} = dtoFilter(res.data);
           setHeaders(headers);
