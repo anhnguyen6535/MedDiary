@@ -1,32 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Container } from 'react-bootstrap';
+import { createAPIEndpoint, ENDPOINTS } from '../api';
+import useStateContext from '../hooks/useStateContext';
 import { filterObjList } from './data/helper';
+import { medicaionDTO } from './data/userDTO';
 import { VerticalTable } from './TableComponent';
 
 export default function Medication() {
+  const { context } = useStateContext();
+  const [headers, setHeaders] = useState([]);
+  const [values, setValues] = useState([]);
 
-  // FIXME FAKE DATA
-  const medList = [
-    {
-        date: "28/03/2002",
-        name: "ABC",
-        duration: "14 days",
-        dosage: "1 morning 1 night"
-    },
-    {
-        date: "28/03/2002",
-        name: "EFG",
-        duration: "14 days",
-        dosage: "1 morning 1 night"
-    },
-  ] 
-
-  // filterObjList convert object to 2 arrays called headers and values
-  const {headers, values} = filterObjList(medList)
+  // load data from API
+  useEffect(() => {
+    createAPIEndpoint(ENDPOINTS.medicaion)
+      .fetchById(context.sin)
+      .then(res => {
+        const {headers, values} = medicaionDTO(res.data);
+        setHeaders(headers);
+        setValues(values);
+      })  
+      .catch(err => {
+        console.log(err);
+        // setSub(true)
+        // setValues({email: '', password: '', isDoctor: context.isDoctor})
+      })
+  }, [])
 
   return (
+
     <Container>
-        <VerticalTable header={headers} val={values} />
+      <VerticalTable header={headers} val={values} />
     </Container>
   )
 }
