@@ -47,7 +47,7 @@ export default function PreRegister() {
         if (validate()){
             if(context.isDoctor){ 
               createAPIEndpoint(ENDPOINTS.user)
-                .docReg({User: values, Doctor: {sin: values.sin, pracId: id}})
+                .customizePost({User: values, Doctor: {sin: values.sin, pracId: id}},'Doctor')
                 .then(res => {
                     console.log("success");
                     // setContext({ userId: res.data.participantId })

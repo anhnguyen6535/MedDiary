@@ -40,7 +40,7 @@ export default function PatientRegister() {
     const {Patient, User, EmergencyContact, Insurance, type} = register(user, patient, values)
     if(!Patient.isMinor){
       createAPIEndpoint(ENDPOINTS.user)
-                  .adultReg({User, Patient, EmergencyContact, Insurance, Adult: type})
+                  .customizePost({User, Patient, EmergencyContact, Insurance, Adult: type}, 'Adult')
                   .then(res => {
                           console.log("success");
                           navigate('/success-register')
@@ -51,7 +51,7 @@ export default function PatientRegister() {
     }
     else{
         createAPIEndpoint(ENDPOINTS.user)
-                    .minorReg({User, Patient, EmergencyContact, Insurance, Minor: type})
+                    .customizePost({User, Patient, EmergencyContact, Insurance, Minor: type}, 'Minor')
                     .then(res => {
                             console.log("successM");
                             navigate('/success-register')
