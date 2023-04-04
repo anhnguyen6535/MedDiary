@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap';
 import { createAPIEndpoint, ENDPOINTS } from '../api';
 import useStateContext from '../hooks/useStateContext';
-import { medicaionDTO } from './data/userDTO';
 import { VerticalTable } from './TableComponent';
 
 export default function ArrayObjAPIProcessor({apiPath, dtoFilter}) {
