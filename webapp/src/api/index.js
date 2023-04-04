@@ -17,7 +17,6 @@ export const createAPIEndpoint = (endpoint) => {
     return {
         fetch: () => axios.get(url),
         fetchById: id => axios.get(url + id),
-        getLabById: id => axios.get(url + 'Date?date=' + id),
         post: newRecord => axios.post(url, newRecord),
         docReg: newRecord => axios.post(url + 'Doctor', newRecord),
         adultReg: newRecord => axios.post(url + 'Adult', newRecord),
