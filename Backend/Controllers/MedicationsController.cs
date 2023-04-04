@@ -36,6 +36,20 @@ namespace Backend.Controllers
             return medications;
         }
 
+        // POST: api/Medications/date
+        [HttpPost("Date")]
+        public async Task<ActionResult<IEnumerable<Medication>>> GetMedicationByDate(MedByDateDTO dto)
+        {
+            var medications = await _context.Medications.Where(x => x.Date == dto.Date && x.PatientId == dto.PatientSin).ToListAsync();
+
+            if (medications == null)
+            {
+                return NotFound();
+            }
+
+            return medications;
+        }
+
 
         //FIX ERROR RESPONSE 500
         // POST: api/Medications
