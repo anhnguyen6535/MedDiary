@@ -21,8 +21,6 @@ export default function ArrayObjAPIProcessor({apiPath, dtoFilter}) {
         })  
         .catch(err => {
           console.log(err);
-          // setSub(true)
-          // setValues({email: '', password: '', isDoctor: context.isDoctor})
         })
     }, [])
   
