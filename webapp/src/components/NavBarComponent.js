@@ -33,7 +33,7 @@ export default function NavBarComponent() {
                   {context.isDoctor ?'' :<NavDropdown.Item href="#action/3.2">Todo List</NavDropdown.Item>}
                 </NavDropdown>
                 <NavDropdown title="Clinic Log" id="basic-nav-dropdown" style={{fontSize: '25px'}}>
-                  <NavDropdown.Item href="#action/3.1">Clinic Visits</NavDropdown.Item>
+                  <NavDropdown.Item  onClick={() => navigate('/Clinic-Visit')}>Clinic Visits</NavDropdown.Item>
                   <NavDropdown.Item onClick={() => navigate('/medication')}>Medication</NavDropdown.Item>
                   <NavDropdown.Item onClick={() => navigate('/lab-results')}>Lab Results</NavDropdown.Item>
                 </NavDropdown>

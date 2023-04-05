@@ -16,30 +16,36 @@ import PreRegister from './components/PreRegister';
 import useStateContext from './hooks/useStateContext';
 import DoctorRegister from './components/doctors/DoctorRegister';
 import SuccessRegister from './components/SuccessRegister';
+import ClinicVisitExpanded from './components/ClinicVisitExpanded';
+import ClinicVisit from './components/ClinicVisit';
+import ClinicVisitForm from './components/ClinicVisitForm'
 
 function App() {
-  const { context} = useStateContext();
+  const { context } = useStateContext();
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LogoHeader />}>
-          <Route path="/" element={<LandingPage />}/>
+          <Route path="/" element={<LandingPage />} />
           <Route element={<IdentityCheck />}>
-              <Route path="/login" element={<LoginPage/>}></Route>
-              <Route path="/pre-register" element={<PreRegister/>}></Route>
-              <Route path="/register" element={<PatientRegister/>}></Route>
-              <Route path="/success-register" element={<SuccessRegister/>}></Route>
+            <Route path="/login" element={<LoginPage />}></Route>
+            <Route path="/pre-register" element={<PreRegister />}></Route>
+            <Route path="/register" element={<PatientRegister />}></Route>
+            <Route path="/success-register" element={<SuccessRegister />}></Route>
           </Route>
         </Route>
         <Route element={<Authenticate />}>
           <Route path="/" element={<Layout />}>
             <Route path="/profile" element={<Profile />} />
-            <Route path="/medication" element={<Medication />}/>
-            <Route path="/lab-results" element={<LabResults />}/>
+            <Route path="/medication" element={<Medication />} />
+            <Route path="/lab-results" element={<LabResults />} />
             <Route path="/medical-history" element={<MedicalHistory />} />
+            <Route path="/Clinic-Visit-Form" element={<ClinicVisitForm />} />
+            <Route path="/Clinic-Visit" element={<ClinicVisit />} />
+            <Route path="/Clinic-Visit-Expanded" element={<ClinicVisitExpanded />} />
           </Route>
         </Route>
-      </Routes>  
+      </Routes>
     </BrowserRouter >
   );
 }
