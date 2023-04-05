@@ -19,6 +19,7 @@ import SuccessRegister from './components/SuccessRegister';
 import ClinicVisitExpanded from './components/ClinicVisitExpanded';
 import ClinicVisit from './components/ClinicVisit';
 import ClinicVisitForm from './components/ClinicVisitForm'
+import SearchPatient from './components/doctors/SearchPatient';
 
 function App() {
   const { context } = useStateContext();
@@ -40,6 +41,7 @@ function App() {
             <Route path="/medication" element={<Medication />} />
             <Route path="/lab-results" element={<LabResults />} />
             <Route path="/medical-history" element={<MedicalHistory />} />
+            <Route path="/search-patient" element={<SearchPatient />} />
             <Route path="/Clinic-Visit-Form" element={<ClinicVisitForm />} />
             <Route path="/Clinic-Visit" element={<ClinicVisit />} />
             <Route path="/Clinic-Visit-Expanded" element={<ClinicVisitExpanded />} />
