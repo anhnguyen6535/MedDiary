@@ -1,31 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Container, Button } from "react-bootstrap";
 import { filterObjList } from "./helperModules/helper";
 import { VerticalTable, VerticalTableLink } from './TableComponent';
 import useStateContext from '../hooks/useStateContext';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { createAPIEndpoint, ENDPOINTS } from '../api';
 
 
 
 
-export default function ClinicVisit() {
-
+export default function ClinicVisit({sin}) {
+    const {context} = useStateContext()
+    const navigate = useNavigate()
+    
     // FIXME FAKE DATA 
-
-    const naviagte = useNavigate()
+    // 23/03/2023 is a real date in the db
     const clinicdata = [
         {
-            Date: "01/30/2023",
+            Date: "23/03/2023",
             ClinicName: "asd",
             Pysician: "Dr.bob"
           },
           {
-            Date: "04/26/2022",
+            Date: "23/03/2023",
             ClinicName: "rand clinic",
             Pysician: "Dr.joe"
           },
           {
-            Date:"12/6/2021",
+            Date:"23/03/2023",
             ClinicName: "bob clinic",
             Pysician: "Dr.basdasd"
           },
@@ -41,29 +43,18 @@ export default function ClinicVisit() {
           }
     ]
 
-    const {context} = useStateContext()
+    function handler(date) {
+      navigate('/Clinic-Visit-Expanded',{state: {
+        sin: context.isDoctor ?sin :context.sin,
+        date
+      }})
+    }
 
     const {headers, values} = filterObjList(clinicdata)
 
-    function handler() {
-      naviagte('/Clinic-Visit-Expanded', {state: {
-        User: 2, 
-        Date: "01/30/2023"
-        
-      }})
-
-    }
-
     return(
         <Container>
-          <VerticalTableLink header={headers} val ={values}  ></VerticalTableLink>
-
-          {context.isDoctor ? 
-         ''
-          :
-          <Button variant="primary" className="ms-2" >
-          Add Visit
-       </Button>    }
+          <VerticalTableLink header={headers} val ={values} handler={handler}></VerticalTableLink>
         </Container>
     )
 

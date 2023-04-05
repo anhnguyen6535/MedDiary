@@ -24,7 +24,7 @@ export default function NavBarComponent() {
               context.isDoctor ?
               <>
                 <Nav.Link style={{fontSize: '25px'}}>Profile</Nav.Link>
-                <Nav.Link style={{fontSize: '25px'}}>Clinic log</Nav.Link>
+                <Nav.Link onClick={() => navigate('/search-patient')} style={{fontSize: '25px'}}>Clinic log</Nav.Link>
               </>
               : 
               <>

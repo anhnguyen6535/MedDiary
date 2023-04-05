@@ -23,3 +23,39 @@ a{
   min-height: 600px;
   border: 1px #282c34;
 }
+
+
+/* ---Patient Search Styles --- */
+.buttonS{
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  background-color: inherit;
+   transition: transform .7s ease-in-out;
+  margin-left:10px;
+
+}
+.buttonS:hover{
+  transform: rotate(360deg);
+
+}
+
+/* imageS{
+  width: 70px;
+  height: 70px;
+} */
+.inputS[type="text"]{
+  padding:10px;
+  border:2px solid var(--green);
+  outline :none;
+  border-radius:5px;
+  font-size:24px;
+  color: var(--black);
+}
+
+.search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:40px;
+}

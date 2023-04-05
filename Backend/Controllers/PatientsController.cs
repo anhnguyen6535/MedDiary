@@ -20,7 +20,7 @@ namespace Backend.Controllers
         {
             _context = context;
         }
-        // Gets list of Patients
+
         // GET: api/Patients
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Patient>>> GetPatients()
@@ -28,12 +28,11 @@ namespace Backend.Controllers
             return await _context.Patients.ToListAsync();
         }
 
-        // Gets selected Patient
-        // GET: api/Patients
+        // GET: api/Patients/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Patient>> GetPatient(int id)
+        public async Task<ActionResult<Patient>> GetPatient(string id)
         {
-            var patient = await _context.Patients.FindAsync(id);
+            var patient = await _context.Patients.Where(x => x.HealthId == id).FirstOrDefaultAsync();
 
             if (patient == null)
             {
@@ -43,8 +42,7 @@ namespace Backend.Controllers
             return patient;
         }
 
-        // Saves Changes to Patient Information
-        // PUT: api/Patients
+        // PUT: api/Patients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPatient(int id, Patient patient)
@@ -75,20 +73,18 @@ namespace Backend.Controllers
             return NoContent();
         }
 
-        // Creates Patient
         // POST: api/Patients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Patient>> PostPatient(Patient patient)
-        { 
+        {
             _context.Patients.Add(patient);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPatient", new { id = patient.Sin }, patient);
         }
 
-        // Delete Patient
-        // DELETE: api/Patients
+        // DELETE: api/Patients/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePatient(int id)
         {

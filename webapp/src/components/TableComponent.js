@@ -49,10 +49,7 @@ export function VerticalTable({val, header}) {
   )
 }
 
-export function VerticalTableLink({val, header}) {
-  const navigate = useNavigate()
-
-  
+export function VerticalTableLink({val, header, handler}) {
 
   return (
     <Container className='d-flex justify-content-md-center' >
@@ -66,7 +63,7 @@ export function VerticalTableLink({val, header}) {
         </thead>
         <tbody>
           {val.map((v, index) => (
-            <tr key={index} onClick={() => navigate('/Clinic-Visit-Expanded')}>
+            <tr key={index} onClick={() => handler(v[0])}>
               {v.map((ele, index) => (
                 <td key={index}>{ele}</td>
               ))}

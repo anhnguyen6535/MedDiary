@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap';
-import { createAPIEndpoint, ENDPOINTS } from '../api';
 import useStateContext from '../hooks/useStateContext';
 import { VerticalTable } from './TableComponent';
 
@@ -8,7 +7,7 @@ export default function ArrayObjAPIProcessor({dtoFilter, action}) {
     const { context } = useStateContext();
     const [headers, setHeaders] = useState([]);
     const [values, setValues] = useState([]);
-  
+
     // load data from API
     useEffect(() => {
       action(context.sin)
@@ -23,7 +22,7 @@ export default function ArrayObjAPIProcessor({dtoFilter, action}) {
     }, [])
   
     return (
-      <Container>
+      <Container>  
         <VerticalTable header={headers} val={values} />
       </Container>
     )

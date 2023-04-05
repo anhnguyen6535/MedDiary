@@ -4,12 +4,12 @@ import useStateContext from '../hooks/useStateContext'
 import ArrayObjAPIProcessor from './ArrayObjAPIProcessor'
 import { medicaionDTO } from './patients/PatientDTO'
 
-export default function MedByDate() {
-    const {context} = useStateContext()
+export default function MedByDate({date, sin}) {
     const medByDateDTO = {
-        Date: "24/03/2023",
-        PatientSin: context.sin
+        Date: date,
+        PatientSin: sin
     }
+    console.log(medByDateDTO);
   return (
     <ArrayObjAPIProcessor dtoFilter={(e) => medicaionDTO(e)} action={(a) => createAPIEndpoint(ENDPOINTS.medicaion)
         .customizePost(medByDateDTO, 'Date')}/>
