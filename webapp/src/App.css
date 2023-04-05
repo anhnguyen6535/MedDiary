@@ -24,7 +24,9 @@ a{
   border: 1px #282c34;
 }
 
-button{
+
+/* ---Patient Search Styles --- */
+.buttonS{
   border: none;
   cursor: pointer;
   appearance: none;
@@ -33,16 +35,16 @@ button{
   margin-left:10px;
 
 }
-button:hover{
+.buttonS:hover{
   transform: rotate(360deg);
 
 }
 
-img{
+/* imageS{
   width: 70px;
   height: 70px;
-}
-input[type="text"]{
+} */
+.inputS[type="text"]{
   padding:10px;
   border:2px solid var(--green);
   outline :none;

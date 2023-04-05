@@ -3,13 +3,13 @@ import { Container, Button } from "react-bootstrap";
 import { filterObjList } from "./helperModules/helper";
 import { VerticalTable, VerticalTableLink } from './TableComponent';
 import useStateContext from '../hooks/useStateContext';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 
 
 export default function ClinicVisit() {
-
+    const sin = useLocation().state.sin
     // FIXME FAKE DATA 
 
     const naviagte = useNavigate()
@@ -40,7 +40,7 @@ export default function ClinicVisit() {
             Pysician: "Dr.xxxxxxx"
           }
     ]
-
+    console.log(sin);
     const {context} = useStateContext()
 
     const {headers, values} = filterObjList(clinicdata)

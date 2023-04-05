@@ -8,7 +8,8 @@ export const ENDPOINTS = {
     doctor: 'Doctors',
     patient: 'Patients',
     medicaion: 'Medications',
-    lab: 'Labtests'
+    lab: 'Labtests',
+    patient: 'Patients'
 }
 
 export const createAPIEndpoint = (endpoint) => {
