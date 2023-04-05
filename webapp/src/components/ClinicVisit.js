@@ -14,19 +14,20 @@ export default function ClinicVisit({sin}) {
     const navigate = useNavigate()
     
     // FIXME FAKE DATA 
+    // 23/03/2023 is a real date in the db
     const clinicdata = [
         {
-            Date: "01/30/2023",
+            Date: "23/03/2023",
             ClinicName: "asd",
             Pysician: "Dr.bob"
           },
           {
-            Date: "04/26/2022",
+            Date: "23/03/2023",
             ClinicName: "rand clinic",
             Pysician: "Dr.joe"
           },
           {
-            Date:"12/6/2021",
+            Date:"23/03/2023",
             ClinicName: "bob clinic",
             Pysician: "Dr.basdasd"
           },
@@ -42,28 +43,18 @@ export default function ClinicVisit({sin}) {
           }
     ]
 
+    function handler(date) {
+      navigate('/Clinic-Visit-Expanded',{state: {
+        sin: context.isDoctor ?sin :context.sin,
+        date
+      }})
+    }
 
     const {headers, values} = filterObjList(clinicdata)
 
-    function handler() {
-      navigate('/Clinic-Visit-Expanded', {state: {
-        User: 2, 
-        Date: "23/03/2023"
-        
-      }})
-
-    }
-
     return(
         <Container>
-          <VerticalTableLink header={headers} val ={values}  ></VerticalTableLink>
-
-          {context.isDoctor ? 
-         ''
-          :
-          <Button variant="primary" className="ms-2" >
-          Add Visit
-       </Button>    }
+          <VerticalTableLink header={headers} val ={values} handler={handler}></VerticalTableLink>
         </Container>
     )
 

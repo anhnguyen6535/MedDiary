@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
 import { useLocation } from 'react-router-dom'
 import ClinicVisit from '../ClinicVisit'
 
@@ -20,6 +21,11 @@ export default function ClinicVisitView() {
 
 
   return (
-    <ClinicVisit sin={sin}/>
+    <>
+        <ClinicVisit sin={sin}/>
+        <Button variant="primary" className="ms-2" >
+          Add Visit
+        </Button>
+    </>
   )
 }
