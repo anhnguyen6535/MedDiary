@@ -1,18 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Container, Button } from "react-bootstrap";
 import { filterObjList } from "./helperModules/helper";
 import { VerticalTable, VerticalTableLink } from './TableComponent';
 import useStateContext from '../hooks/useStateContext';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { createAPIEndpoint, ENDPOINTS } from '../api';
 
 
 
 
-export default function ClinicVisit() {
-    const sin = useLocation().state.sin
+export default function ClinicVisit({sin}) {
+    const {context} = useStateContext()
+    const navigate = useNavigate()
+    
     // FIXME FAKE DATA 
-
-    const naviagte = useNavigate()
     const clinicdata = [
         {
             Date: "01/30/2023",
@@ -40,15 +41,14 @@ export default function ClinicVisit() {
             Pysician: "Dr.xxxxxxx"
           }
     ]
-    console.log(sin);
-    const {context} = useStateContext()
+
 
     const {headers, values} = filterObjList(clinicdata)
 
     function handler() {
-      naviagte('/Clinic-Visit-Expanded', {state: {
+      navigate('/Clinic-Visit-Expanded', {state: {
         User: 2, 
-        Date: "01/30/2023"
+        Date: "23/03/2023"
         
       }})
 

@@ -21,7 +21,7 @@ export default function ClinicVisitExpanded() {
 
     return(
         <Container>
-            <MedByDate date = {clinicdata.Date}></MedByDate>
+            <MedByDate date = {clinicdata[0].Date}></MedByDate>
            
         </Container>
     )
