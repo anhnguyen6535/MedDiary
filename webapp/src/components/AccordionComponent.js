@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { Accordion, Form } from 'react-bootstrap'
-import useForm from '../../hooks/useForm'
-import AccordionComponent from '../AccordionComponent'
+import useForm from '../hooks/useForm'
 
-export default function Todo() {
+// FIXME: similar to Todo.js will be deleted if doesnt use
+export default function AccordionComponent() {
     const [displayTask, setDisplayTask] = useState()
     const [displayComplete, setDisplayComplete] = useState()
     const todos = [
         {
             name:'Appoinment with Dr.Kim',
+            date: '23/04/2023',
             description: 'Hello',
             isComplete: false 
         },
         {
             name:'Blood test',
+            date: '',
             description: 'Hello',
             isComplete: false  
         },
         {
             name:'Appoinment with Dr.Hu',
+            date: '23/04/2023',
             description: 'Hello',
             isComplete: true  
         }
@@ -68,7 +71,8 @@ export default function Todo() {
                     <Form.Check size="xx-large" label={task.name} type="checkbox" onChange={handleInputChange} onClick={e => clickHandler(task)} checked={check}/>
                 </Accordion.Header>
                 <Accordion.Body>
-                    <p>{task.description}</p>
+                    <p>Date: {task.date}</p>
+                    <p>Description: {task.description}</p>
                 </Accordion.Body>
             </Accordion.Item>
         );
