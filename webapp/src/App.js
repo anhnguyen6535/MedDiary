@@ -17,6 +17,7 @@ import ClinicVisitExpanded from './components/ClinicVisitExpanded';
 import ClinicVisitForm from './components/ClinicVisitForm'
 import SearchPatient from './components/doctors/SearchPatient';
 import ClinicLog from './components/ClinicLog';
+import Todo from './components/patients/Todo';
 
 function App() {
   const { context } = useStateContext();
@@ -37,6 +38,11 @@ function App() {
             {/* Doctor only */}
             <Route element={<IdentityCheck cond={false} />}>
               <Route path="/search-patient" element={<SearchPatient />} />
+            </Route>
+
+            {/* Patient only */}
+            <Route element={<IdentityCheck cond={true} />}>
+              <Route path="/todo" element={<Todo/>} />
             </Route>
 
             <Route path="/profile" element={<Profile />} />

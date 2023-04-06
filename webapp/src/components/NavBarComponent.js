@@ -28,7 +28,7 @@ export default function NavBarComponent() {
               <>
                 <Nav.Link onClick={() => navigate('/profile')} style={{fontSize: '25px'}}>Profile</Nav.Link>
                 <Nav.Link onClick={clinicLogDirect} style={{fontSize: '25px'}}>Clinic log</Nav.Link>
-                {context.isDoctor ?'' :<Nav.Link onClick={() => console.log("todo")} style={{fontSize: '25px'}}>Todo list</Nav.Link>}
+                {context.isDoctor ?'' :<Nav.Link onClick={() => navigate('/todo')} style={{fontSize: '25px'}}>Todo list</Nav.Link>}
               </>
           </Nav>
 
