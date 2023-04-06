@@ -17,15 +17,15 @@ export const firstLetterUpper = (list) => {
     return res
 }
 
-//converts list to object
-export const createObjFromList = (list, preValue, isDoctor) => {
+//converts list of list to object
+export const createObjFromList = (list, preValue, isDoctor, val) => {
     let temp = []
     let tempObj = {...preValue}         //copy whatever data needed 
-    tempObj.isDoctor = isDoctor
+    if(isDoctor != null) tempObj.isDoctor = isDoctor 
 
     // create object with list properties
-    list.value.map(obj => {
-        obj.map(ele => temp.push(ele.controlId))})
+    list.map(obj => {
+        obj.map(ele => temp.push(ele[val]))})
     
     temp.map(e => tempObj[e] = '')
 

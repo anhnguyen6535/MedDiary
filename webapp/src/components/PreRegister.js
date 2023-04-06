@@ -18,7 +18,7 @@ export default function PreRegister() {
     const [isMinor, setIsMinor] = useState(false)
     const [id, setId] = useState("")
 
-    const userObj = createObjFromList(userRegList, {}, context.isDoctor) 
+    const userObj = createObjFromList(userRegList.value, {}, context.isDoctor, "controlId") 
     
     const getFreshModel = () =>{return userObj}
     const {
