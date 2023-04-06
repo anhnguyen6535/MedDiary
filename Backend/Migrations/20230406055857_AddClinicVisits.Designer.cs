@@ -2,6 +2,7 @@
 using Learning.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(GeneralContext))]
-    partial class GeneralContextModelSnapshot : ModelSnapshot
+    [Migration("20230406055857_AddClinicVisits")]
+    partial class AddClinicVisits
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
@@ -345,8 +348,8 @@ namespace Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Phone")
-                        .HasColumnType("varchar(15)");
+                    b.Property<string>("Location")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("DoctorId");
 

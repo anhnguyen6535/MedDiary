@@ -40,7 +40,7 @@ namespace Backend.Controllers
             _context.Clinics.Add(clinic);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetClinic", new {Phone = clinic.Phone }, clinic);
+            return CreatedAtAction("GetClinic", new {phone = clinic.Phone }, clinic);
         }
         // DELETE: api/Clinics
         [HttpDelete]
