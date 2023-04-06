@@ -7,6 +7,7 @@ const getFreshContext = () => {
     if (localStorage.getItem('context') === null)
         localStorage.setItem('context', JSON.stringify({
             sin: 0,
+            patientSin: 0,
             isDoctor: undefined,
         }))
     return JSON.parse(localStorage.getItem('context'))
@@ -23,8 +24,8 @@ export default function useStateContext() {
             setContext(getFreshContext())
         },
         partiallyResetContext: () => {
-            setContext({ sin: 0, isDoctor: context.isDoctor })
-        }
+            setContext({ sin: 0, patientSin: 0, isDoctor: context.isDoctor })
+        },
     };
 }
 

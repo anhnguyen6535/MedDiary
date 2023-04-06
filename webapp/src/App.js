@@ -10,17 +10,13 @@ import LogoHeader from './components/LogoHeader';
 import IdentityCheck from './components/IdentityCheck';
 import PatientRegister from './components/patients/PatientRegister';
 import LoginPage from './components/LoginPage';
-import Medication from './components/Medication';
-import LabResults from './components/LabResults';
 import PreRegister from './components/PreRegister';
 import useStateContext from './hooks/useStateContext';
-import DoctorRegister from './components/doctors/DoctorRegister';
 import SuccessRegister from './components/SuccessRegister';
 import ClinicVisitExpanded from './components/ClinicVisitExpanded';
-import ClinicVisit from './components/ClinicVisit';
 import ClinicVisitForm from './components/ClinicVisitForm'
 import SearchPatient from './components/doctors/SearchPatient';
-import ClinicVisitView from './components/doctors/ClinicVisitView';
+import ClinicLog from './components/ClinicLog';
 
 function App() {
   const { context } = useStateContext();
@@ -29,7 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LogoHeader />}>
           <Route path="/" element={<LandingPage />} />
-          <Route element={<IdentityCheck />}>
+          <Route element={<IdentityCheck cond={undefined} />}>
             <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/pre-register" element={<PreRegister />}></Route>
             <Route path="/register" element={<PatientRegister />}></Route>
@@ -38,13 +34,15 @@ function App() {
         </Route>
         <Route element={<Authenticate />}>
           <Route path="/" element={<Layout />}>
+            {/* Doctor only */}
+            <Route element={<IdentityCheck cond={false} />}>
+              <Route path="/search-patient" element={<SearchPatient />} />
+            </Route>
+
             <Route path="/profile" element={<Profile />} />
-            <Route path="/medication" element={<Medication />} />
-            <Route path="/lab-results" element={<LabResults />} />
             <Route path="/medical-history" element={<MedicalHistory />} />
-            <Route path="/search-patient" element={<SearchPatient />} />
             <Route path="/Clinic-Visit-Form" element={<ClinicVisitForm />} />
-            <Route path="/Clinic-Visit" element={context.isDoctor ?<ClinicVisitView/> : <ClinicVisit />} />
+            <Route path="/clinic-log" element={<ClinicLog/>} />
             <Route path="/Clinic-Visit-Expanded" element={<ClinicVisitExpanded />} />
           </Route>
         </Route>

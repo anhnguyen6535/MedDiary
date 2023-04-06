@@ -5,25 +5,27 @@ import { VerticalTable } from './TableComponent';
 
 export default function ArrayObjAPIProcessor({dtoFilter, action}) {
     const { context } = useStateContext();
-    const [headers, setHeaders] = useState([]);
-    const [values, setValues] = useState([]);
+    const user = context.isDoctor ?context.patientSin :context.sin 
+    const [display, setDisplay] = useState()
 
     // load data from API
     useEffect(() => {
-      action(context.sin)
+      action(user)
         .then(res => {
           const {headers, values} = dtoFilter(res.data);
-          setHeaders(headers);
-          setValues(values);
+          setDisplay(<VerticalTable header={headers} val={values} />)
         })  
         .catch(err => {
           console.log(err);
+          setDisplay(
+            <p>No results found!</p>
+          )
         })
     }, [])
   
     return (
       <Container>  
-        <VerticalTable header={headers} val={values} />
+        {display}
       </Container>
     )
 }

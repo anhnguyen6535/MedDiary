@@ -1,11 +1,8 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
-import { useLocation } from 'react-router-dom'
 import ClinicVisit from '../ClinicVisit'
 
 export default function ClinicVisitView() {
-    const sin = useLocation().state.sin 
-
     // WAIT FOR BACKEND
     // useEffect(() =>{
     //   createAPIEndpoint(ENDPOINTS.clinicVisit)
@@ -22,7 +19,7 @@ export default function ClinicVisitView() {
 
   return (
     <>
-        <ClinicVisit sin={sin}/>
+        <ClinicVisit/>
         <Button variant="primary" className="ms-2" >
           Add Visit
         </Button>
