@@ -1,18 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { createAPIEndpoint, ENDPOINTS } from '../../api'
+import useStateContext from '../../hooks/useStateContext'
 
 export default function SearchPatient() {
+    const { context, setContext, partiallyResetContext } = useStateContext();
     const [id, SetId] = useState('')
     const [placeholder, SetPlaceholder] = useState('Search Patient Id')
     const navigate = useNavigate()
+
+    useEffect(() => {
+        setContext({patientSin: 0})
+        console.log(context)
+      }, [])
 
     const searchHandler = () =>{
         createAPIEndpoint(ENDPOINTS.patient)
                 .fetchById(id)
                 .then(res => {
-                    navigate('/Clinic-Visit', {state:{sin: res.data.sin}})
+                    setContext({ patientSin: res.data.sin})
+                    navigate('/clinic-log')
                 })
                 .catch(err => {
                     SetId('')

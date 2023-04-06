@@ -3,13 +3,9 @@ import { Container, Button } from "react-bootstrap";
 import { filterObjList } from "./helperModules/helper";
 import { VerticalTable, VerticalTableLink } from './TableComponent';
 import useStateContext from '../hooks/useStateContext';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { createAPIEndpoint, ENDPOINTS } from '../api';
+import { useNavigate } from 'react-router-dom';
 
-
-
-
-export default function ClinicVisit({sin}) {
+export default function ClinicVisit() {
     const {context} = useStateContext()
     const navigate = useNavigate()
     
@@ -45,7 +41,7 @@ export default function ClinicVisit({sin}) {
 
     function handler(date) {
       navigate('/Clinic-Visit-Expanded',{state: {
-        sin: context.isDoctor ?sin :context.sin,
+        sin: context.isDoctor ?context.patientSin :context.sin,
         date
       }})
     }

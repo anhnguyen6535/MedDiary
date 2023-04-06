@@ -13,6 +13,11 @@ export default function NavBarComponent() {
     navigate('/')
   }
 
+  const clinicLogDirect = () => {
+    context.isDoctor ? navigate('/search-patient')
+                     : navigate('/clinic-log')
+  }
+
   return (
     <Navbar style={{backgroundColor: '#36424A'}} variant="dark">
       <Container fluid>
@@ -20,25 +25,11 @@ export default function NavBarComponent() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            {
-              context.isDoctor ?
               <>
-                <Nav.Link style={{fontSize: '25px'}}>Profile</Nav.Link>
-                <Nav.Link onClick={() => navigate('/search-patient')} style={{fontSize: '25px'}}>Clinic log</Nav.Link>
+                <Nav.Link onClick={() => navigate('/profile')} style={{fontSize: '25px'}}>Profile</Nav.Link>
+                <Nav.Link onClick={clinicLogDirect} style={{fontSize: '25px'}}>Clinic log</Nav.Link>
+                {context.isDoctor ?'' :<Nav.Link onClick={() => console.log("todo")} style={{fontSize: '25px'}}>Todo list</Nav.Link>}
               </>
-              : 
-              <>
-                <NavDropdown title="Profile" id="basic-nav-dropdown" style={{fontSize: '25px'}}>
-                  <NavDropdown.Item href="#action/3.1">Information</NavDropdown.Item>
-                  {context.isDoctor ?'' :<NavDropdown.Item href="#action/3.2">Todo List</NavDropdown.Item>}
-                </NavDropdown>
-                <NavDropdown title="Clinic Log" id="basic-nav-dropdown" style={{fontSize: '25px'}}>
-                  <NavDropdown.Item  onClick={() => navigate('/Clinic-Visit')}>Clinic Visits</NavDropdown.Item>
-                  <NavDropdown.Item onClick={() => navigate('/medication')}>Medication</NavDropdown.Item>
-                  <NavDropdown.Item onClick={() => navigate('/lab-results')}>Lab Results</NavDropdown.Item>
-                </NavDropdown>
-              </>
-            }
           </Nav>
 
           <Button variant="outline-success" onClick={logout}>Log out</Button>
