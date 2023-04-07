@@ -24,7 +24,7 @@ namespace Backend.Controllers
 
         // GET: api/TodoLists/id
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<TodoList>>> GetPatientTodoLists(int id)
+        public async Task<ActionResult<IEnumerable<TodoDTO>>> GetPatientTodoLists(int id)
         {
             var todoLists = await _context.TodoLists.Where(x => x.Sin == id).ToListAsync();
 
@@ -33,7 +33,9 @@ namespace Backend.Controllers
                 return NotFound();
             }
 
-            return todoLists;
+            var dto = todoLists.Select((x) => ConvertToDTO(x)).ToList();
+
+            return dto;
         }
 
 
@@ -75,6 +77,17 @@ namespace Backend.Controllers
         private bool DiagnosisExists(int id, string name)
         {
             return _context.TodoLists.Any(e => e.Sin == id) && _context.TodoLists.Any(e => e.Name == name);
+        }
+
+        private TodoDTO ConvertToDTO(TodoList todoList)
+        {
+            TodoDTO dto = new()
+            {
+                Name = todoList.Name,
+                IsComplete = todoList.IsComplete,
+                Description = todoList.Description
+            };
+            return dto;
         }
     }
 
