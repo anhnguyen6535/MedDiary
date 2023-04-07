@@ -38,9 +38,10 @@ function MedicationRow({ medication, onChange, onRemove }) {
                 className="ms-1"
 
             />
+
             <Button variant="danger" className="ms-2" onClick={onRemove}>
                 Remove
-                
+
             </Button>
         </div>
 
@@ -49,13 +50,32 @@ function MedicationRow({ medication, onChange, onRemove }) {
 
 function DiagnosisRow({ value, onChange, onRemove }) {
     return (
-        <div className="d-flex">
+        <div className="d-flex mb-2">
             <Form.Control
                 as="textarea"
                 rows={3}
                 value={value}
                 onChange={onChange}
                 placeholder="Diagnosis"
+                className='ms-1'
+            />
+            <Button variant="danger" className="ms-2" onClick={onRemove}>
+                Remove
+            </Button>
+        </div>
+    );
+}
+
+function TodoRow({ todo, onChange, onRemove }) {
+    return (
+        <div className="d-flex mb-2">
+            <Form.Control
+                type="text"
+             
+                value={todo}
+                onChange={onChange}
+                placeholder="Todo"
+                className="ms-1"
             />
             <Button variant="danger" className="ms-2" onClick={onRemove}>
                 Remove
@@ -67,13 +87,15 @@ function DiagnosisRow({ value, onChange, onRemove }) {
 export default function AppointmentForm() {
     const [medications, setMedications] = useState([{ name: '', datePrescribed: '', duration: '', dosage: '' }]);
     const [diagnoses, setDiagnoses] = useState(['']);
+    const [todos, setTodos] = useState(['']);
+
 
     function handleAddMedication() {
         setMedications([...medications, { name: '', datePrescribed: '', duration: '', dosage: '' }]);
     }
 
     function handleRemoveMedication(index) {
-        setMedications(medications.filter((_, i) => i !== index));
+        setMedications(medications.filter((_, i) => i !== 1));
     }
 
     function handleMedicationChange(index, medication) {
@@ -82,12 +104,22 @@ export default function AppointmentForm() {
         setMedications(newMedications);
     }
 
+    function handleAddTodo() {
+        setTodos([...todos, { todo: '' }]);
+    }
+
+    function handleRemoveTodo(index) {
+        setTodos(todos.filter((_, i) => i !== 1));
+    }
+
+
+
     function handleAddDiagnosis() {
         setDiagnoses([...diagnoses, '']);
     }
 
     function handleRemoveDiagnosis(index) {
-        setDiagnoses(diagnoses.filter((_, i) => i !== index));
+        setDiagnoses(diagnoses.filter((_, i) => i !== 1));
     }
 
     function handleDiagnosisChange(index, value) {
@@ -131,7 +163,7 @@ export default function AppointmentForm() {
 
                 <Form.Label>Diagnosis/Notes:</Form.Label>
                 {diagnoses.map((diagnosis, index) => (
-                    
+
                     <Form.Group
                         key={index}
                         className="mb-3"
@@ -145,6 +177,9 @@ export default function AppointmentForm() {
                     </Form.Group>
                 ))}
 
+
+
+
                 <Form.Group className="mb-3">
                     <Form.Label>Medications:</Form.Label>
                     {medications.map((medication, index) => (
@@ -156,13 +191,32 @@ export default function AppointmentForm() {
                             />
                         </Form.Group>
                     ))}
-
                 </Form.Group>
 
-                <Button variant="primary" className="ms-2" onClick={handleAddDiagnosis}>
+                                <Form.Label >Todo:</Form.Label>
+                {todos.map((todo, index) => (
+                    <Form.Group className="mb-3" key={index} controlId={`formTodo${index}`}>
+                        <TodoRow
+                            todo={todo.todo}
+                            onChange={(e) => {
+                                const newTodos = [...todos];
+                                newTodos[index].todo = e.target.value;
+                                setTodos(newTodos);
+                            }}
+                            onRemove={() => handleRemoveTodo(index)}
+                        />
+                    </Form.Group>
+                ))}
+
+
+                <Button variant="success" className="ms-2" onClick={handleAddTodo}>
+                    Add Todo
+                </Button>
+
+                <Button variant="success" className="ms-2" onClick={handleAddDiagnosis}>
                     Add Diagnosis
                 </Button>
-                <Button variant="primary" className="ms-2" onClick={handleAddMedication}>
+                <Button variant="success" className="ms-2" onClick={handleAddMedication}>
                     Add Medication
                 </Button>
                 <Button type="submit" className="ms-2">
