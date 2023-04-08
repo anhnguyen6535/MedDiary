@@ -1,45 +1,49 @@
 import React, { useEffect, useState } from 'react'
 import { Accordion, Form } from 'react-bootstrap'
-import useForm from '../../hooks/useForm'
-import AccordionComponent from '../AccordionComponent'
+import { createAPIEndpoint, ENDPOINTS } from '../../api'
+import useStateContext from '../../hooks/useStateContext'
 
 export default function Todo() {
+    const {context} = useStateContext()
     const [displayTask, setDisplayTask] = useState()
     const [displayComplete, setDisplayComplete] = useState()
-    const todos = [
-        {
-            name:'Appoinment with Dr.Kim',
-            description: 'Hello',
-            isComplete: false 
-        },
-        {
-            name:'Blood test',
-            description: 'Hello',
-            isComplete: false  
-        },
-        {
-            name:'Appoinment with Dr.Hu',
-            description: 'Hello',
-            isComplete: true  
-        }
-    ]
+    const [list, setList] = useState([])
 
-    // Handle onChange of each task (doesnt do anything for now)
-    const createTracker = (list) => {
-        let tempObj = {}
-        list.map(ele => tempObj[ele.name] = ele.isComplete)
-        return tempObj
+    // Display list when page first loaded
+    useEffect(() =>{
+        fetchList()       
+    },[])
+
+    // fetch todo lists from db
+    const fetchList = () => {
+        createAPIEndpoint(ENDPOINTS.todo)
+            .fetchById(context.sin)
+            .then(res => {
+                console.log("fetched");
+                setList(res.data)
+                filterList(res.data)
+            })  
+            .catch(err => {
+            console.log(err);
+        })
     }
-    const getFreshModel = () => {createTracker(todos)}
-    const {
-        values,
-        handleInputChange
-      }= useForm(getFreshModel)
+
+    // update todolist in db
+    const putList = (task) =>{
+        createAPIEndpoint(ENDPOINTS.todo)
+            .put(context.sin, task)
+            .then(res => {
+                fetchList()
+            })  
+            .catch(err => {
+            console.log(err);
+        })
+    }
 
     // Filter list into complete and incomplete then display
-    const filterList = (list) =>{
-        const temp = list.filter(x => !x.isComplete)
-        const temp2 = list.filter(x => x.isComplete)
+    const filterList = (todos) =>{
+        const temp = todos.filter(x => !x.isComplete)
+        const temp2 = todos.filter(x => x.isComplete)
 
         setDisplayTask(
             temp.map((h,i) => renderAccordion(h,i,false))
@@ -52,28 +56,23 @@ export default function Todo() {
     // Called whenever a task is checked or unchecked
     const clickHandler = (task) =>{
         task.isComplete = !task.isComplete
-        filterList(todos)
+        putList(task)
     }
-
-    // Display list when page first loaded
-    useEffect(() =>{
-        filterList(todos)
-    },[])
-
+    
     // Render tasks based on each list
     const renderAccordion = (task, index, check) => {
         return (
             <Accordion.Item key={index} eventKey={task}>
                 <Accordion.Header>
-                    <Form.Check size="xx-large" label={task.name} type="checkbox" onChange={handleInputChange} onClick={e => clickHandler(task)} checked={check}/>
+                    <Form.Check size="xx-large" label={task.name} type="checkbox" onClick={e => clickHandler(task)} checked={check} onChange={() => {}}/>
                 </Accordion.Header>
                 <Accordion.Body>
                     <p>{task.description}</p>
                 </Accordion.Body>
             </Accordion.Item>
         );
-      };
-
+    };
+    
   return (
     <Accordion defaultActiveKey="0" alwaysOpen>
       <Accordion.Item eventKey="0">
