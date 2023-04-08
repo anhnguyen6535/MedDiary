@@ -21,8 +21,14 @@ namespace Backend.Controllers
             _context = context;
         }
 
+        // GET: api/TodoLists
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<TodoList>>> GetTodoLists()
+        {
+            return await _context.TodoLists.ToListAsync();
+        }
 
-        // GET: api/TodoLists/id
+        // GET: api/TodoLists/5
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<TodoDTO>>> GetPatientTodoLists(int id)
         {
@@ -38,13 +44,37 @@ namespace Backend.Controllers
             return dto;
         }
 
+        // PUT: api/TodoLists/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{sin}")]
+        public async Task<IActionResult> PutTodoList(int sin, TodoDTO dto)
+        {
+            var todoList = ConvertToTodoList(dto, sin);
+            _context.Entry(todoList).State = EntityState.Modified;
 
-        //FIX ERROR RESPONSE 500
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TodoListExists(dto.TodoId, sin))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         // POST: api/TodoLists
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<TodoList>> PostTodoList(TodoList todoList)
-
         {
             var temp = _context.Users.Where(x => x.Sin == todoList.Sin).FirstOrDefault();
             if (temp == null)
@@ -58,37 +88,50 @@ namespace Backend.Controllers
             return CreatedAtAction("GetDiagnoses", new { id = todoList.Sin }, todoList);
         }
 
-        // DELETE: api/TodoLists/id
+        // DELETE: api/TodoLists/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTodoList(int id, string name)
+        public async Task<IActionResult> DeleteTodoList(int id)
         {
-            var diagnosis = await _context.TodoLists.Where(x => x.Sin == id && x.Name == name).ToListAsync();
-            if (diagnosis == null)
+            var todoList = await _context.TodoLists.FindAsync(id);
+            if (todoList == null)
             {
                 return NotFound();
             }
 
-            _context.TodoLists.Remove(diagnosis[0]);
+            _context.TodoLists.Remove(todoList);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool DiagnosisExists(int id, string name)
+        private bool TodoListExists(int id, int sin)
         {
-            return _context.TodoLists.Any(e => e.Sin == id) && _context.TodoLists.Any(e => e.Name == name);
+            return _context.TodoLists.Any(e => e.TodoId == id && e.Sin == sin);
         }
 
         private TodoDTO ConvertToDTO(TodoList todoList)
         {
             TodoDTO dto = new()
             {
+                TodoId = todoList.TodoId,
                 Name = todoList.Name,
                 IsComplete = todoList.IsComplete,
                 Description = todoList.Description
             };
             return dto;
         }
-    }
-
+    
+        private TodoList ConvertToTodoList(TodoDTO dto, int sin)
+        {
+            TodoList todoList = new()
+            {
+                Sin = sin,
+                TodoId = dto.TodoId,
+                Name = dto.Name,
+                Description = dto.Description,
+                IsComplete = dto.IsComplete,
+            };
+            return todoList;
+        }
+}
 }
