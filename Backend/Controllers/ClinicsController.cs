@@ -28,7 +28,7 @@ namespace Backend.Controllers
 
         // GET: api/Clinics1/5
         [HttpGet("Phone")]
-        public async Task<ActionResult<Clinic>> GetClinic(string phone)
+        public async Task<ActionResult<string>> GetClinic(string phone)
         {
             var clinic = await _context.Clinics.FindAsync(phone);
 
@@ -37,7 +37,7 @@ namespace Backend.Controllers
                 return NotFound();
             }
 
-            return clinic;
+            return clinic.Name;
         }
         // POST: api/Clinics
         [HttpPost]
