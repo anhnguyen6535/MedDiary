@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function MedicationRow({ medication, onChange, onRemove }) {
     return (
@@ -71,12 +72,21 @@ function TodoRow({ todo, onChange, onRemove }) {
         <div className="d-flex mb-2">
             <Form.Control
                 type="text"
-             
                 value={todo}
                 onChange={onChange}
-                placeholder="Todo"
+                placeholder="Title"
                 className="ms-1"
             />
+                
+            <Form.Control
+                type="text"
+                value={todo}
+                onChange={onChange}
+                placeholder="Description"
+                className="ms-1"
+            />
+
+
             <Button variant="danger" className="ms-2" onClick={onRemove}>
                 Remove
             </Button>
@@ -84,11 +94,15 @@ function TodoRow({ todo, onChange, onRemove }) {
     );
 }
 
+
+  
+
 export default function AppointmentForm() {
     const [medications, setMedications] = useState([{ name: '', datePrescribed: '', duration: '', dosage: '' }]);
     const [diagnoses, setDiagnoses] = useState(['']);
     const [todos, setTodos] = useState(['']);
 
+    const navigate = useNavigate();
 
     function handleAddMedication() {
         setMedications([...medications, { name: '', datePrescribed: '', duration: '', dosage: '' }]);
@@ -112,8 +126,6 @@ export default function AppointmentForm() {
         setTodos(todos.filter((_, i) => i !== 1));
     }
 
-
-
     function handleAddDiagnosis() {
         setDiagnoses([...diagnoses, '']);
     }
@@ -133,33 +145,20 @@ export default function AppointmentForm() {
         // Handle form submission here
     }
 
-    function handleCancel(event) {
-        event.preventDefault();
-        // Handle form submission here
-    }
+    //for date 
+    const currentDate = new Date();
+    const options = { month: '2-digit', day: '2-digit', year: 'numeric' };
+    const formattedDate = currentDate.toLocaleDateString('en-US', options);
 
     return (
         <Container fluid style={{ marginBottom: '10%', backgroundColor: 'whitesmoke' }}>
             <Form style={{ paddingBottom: '5%', paddingTop: '5%' }}>
-                <Form.Group className="mb-3" controlId="formDate">
-                    <Form.Label>Date:</Form.Label>
-                    <Form.Control type="date" />
-                </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formClinic">
-                    <Form.Label>Clinic:</Form.Label>
-                    <Form.Control as="select">
-                        <option>Select a clinic</option>
-                        <option>Clinic 1</option>
-                        <option>Clinic 2</option>
-                        <option>Clinic 3</option>
-                    </Form.Control>
-                </Form.Group>
+            <Form.Label className="d-flex mb-2"> Date: {formattedDate}</Form.Label>
+                
+            {/* get clininc name and display it  */}
 
-                <Form.Group className="mb-3" controlId="formPhysician">
-                    <Form.Label>Physician:</Form.Label>
-                    <Form.Control type="text" />
-                </Form.Group>
+            {/* get physician name and display it */}
 
                 <Form.Label>Diagnosis/Notes:</Form.Label>
                 {diagnoses.map((diagnosis, index) => (
@@ -176,9 +175,6 @@ export default function AppointmentForm() {
                         />
                     </Form.Group>
                 ))}
-
-
-
 
                 <Form.Group className="mb-3">
                     <Form.Label>Medications:</Form.Label>
@@ -222,7 +218,7 @@ export default function AppointmentForm() {
                 <Button type="submit" className="ms-2">
                     Submit
                 </Button>
-                <Button type="submit" className="ms-2">
+                <Button type="submit" className="ms-2" onClick={() => navigate("/clinic-log")} >
                     Cancel
                 </Button>
             </Form>
