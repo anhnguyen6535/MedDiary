@@ -54,7 +54,7 @@ namespace Backend.Controllers
                 return BadRequest();
             }
             // Check for Valid Clinic Name
-            var temp = _context.Clinics.Where(x => x.Name == work_For.Phone).FirstOrDefault();
+            var temp = _context.Clinics.Where(x => x.Phone == work_For.Phone).FirstOrDefault();
             if (temp == null)
             {
                 return BadRequest();
@@ -87,7 +87,7 @@ namespace Backend.Controllers
         public async Task<ActionResult<Work_For>> PostWork_For(Work_For work_For)
         {
             // Check for Valid Clinic Name
-            var temp = _context.Clinics.Where(x => x.Name == work_For.Phone).FirstOrDefault();
+            var temp = _context.Clinics.Where(x => x.Phone == work_For.Phone).FirstOrDefault();
             if (temp == null)
             {
                 return BadRequest();

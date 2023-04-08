@@ -26,6 +26,19 @@ namespace Backend.Controllers
             return await _context.Clinics.ToListAsync();
         }
 
+        // GET: api/Clinics1/5
+        [HttpGet("Phone")]
+        public async Task<ActionResult<Clinic>> GetClinic(string phone)
+        {
+            var clinic = await _context.Clinics.FindAsync(phone);
+
+            if (clinic == null)
+            {
+                return NotFound();
+            }
+
+            return clinic;
+        }
         // POST: api/Clinics
         [HttpPost]
         public async Task<ActionResult<Clinic>> PostClinic(Clinic clinic)
@@ -40,7 +53,7 @@ namespace Backend.Controllers
             _context.Clinics.Add(clinic);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetClinic", new {phone = clinic.Phone }, clinic);
+            return CreatedAtAction("GetClinic", new {Phone = clinic.Phone }, clinic);
         }
         // DELETE: api/Clinics
         [HttpDelete]
