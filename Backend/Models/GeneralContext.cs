@@ -26,7 +26,7 @@ namespace Learning.Models
         public DbSet<TodoList> TodoLists { get; set; } = null!;
         public DbSet<Backend.Models.Labtest> Labtest { get; set; }
         public DbSet<Backend.Models.ClinicVisit> ClinicVisits { get; set; }
-        public DbSet<Backend.Models.Work_For> Work_Fors { get; set; }
+        
         // // THESE MODELS FOR TESTING WILL BE REMOVED
 
         // public DbSet<Person> Persons { get; set; } = null!;
