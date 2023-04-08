@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function MedicationRow({ medication, onChange, onRemove }) {
     return (
@@ -150,15 +150,20 @@ export default function AppointmentForm() {
     const options = { month: '2-digit', day: '2-digit', year: 'numeric' };
     const formattedDate = currentDate.toLocaleDateString('en-US', options);
 
+
     return (
         <Container fluid style={{ marginBottom: '10%', backgroundColor: 'whitesmoke' }}>
             <Form style={{ paddingBottom: '5%', paddingTop: '5%' }}>
 
-            <Form.Label className="d-flex mb-2"> Date: {formattedDate}</Form.Label>
+            <Form.Label className="d-flex mb-2"> 
+                Date: {formattedDate}
+            </Form.Label>
                 
             {/* get clininc name and display it  */}
 
+
             {/* get physician name and display it */}
+            
 
                 <Form.Label>Diagnosis/Notes:</Form.Label>
                 {diagnoses.map((diagnosis, index) => (
