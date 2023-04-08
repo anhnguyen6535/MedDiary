@@ -22,23 +22,3 @@ medicaionDTO = (medList) => {
     const {headers, values} = filterObjList(medList)
     return {headers, values}
 }
-
-export const ClinicVisitDTO = (ClinicList) => {
-    for(let i = 0; i < ClinicList.length; i++){
-        delete ClinicList[i].VisitId
-        delete ClinicList[i].Sin
-    }
-    const {headers, values} = filterObjList(ClinicList)
-    return {headers, values}
-}
-
-export const DiagnosisDTO = (diagnosisList) => {
-    for(let i = 0; i < diagnosisList.length; i++){
-        delete diagnosisList[i].Diagnosis_Id
-        delete diagnosisList[i].Date
-        delete diagnosisList[i].Docotor_Id
-        delete diagnosisList[i].Patient_Id
-    }
-    const {headers, values} = filterObjList(diagnosisList)
-    return {headers, values}
-}
