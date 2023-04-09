@@ -1,50 +1,59 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { createAPIEndpoint, ENDPOINTS } from '../../api';
 import useForm from '../../hooks/useForm';
-import { doctorInfoReg } from '../data/RegisterLists';
+import { doctorInfoReg } from '../helperModules/RegisterList';
 import Forms from '../Forms';
 
+
 export default function DoctorRegister() {
-  const preValue = useLocation().state.value;
+  const user = useLocation().state.user;
+  const navigate = useNavigate()
   const list = doctorInfoReg
-
+  const [err, setErr] = useState('')
+  
+  // Create useForm
   let temp = []
-  let tempObj = {...preValue}
-  tempObj.isDoctor = true
+  let tempObj = {}
+  tempObj.sin = user.sin
 
-  // Add all values into a list and use map to create tempObj
   list.value.map(obj => {
     obj.map(ele => temp.push(ele.controlId))})
   temp.map(e => tempObj[e] = '')
   
-  // Create useForm
   const getFreshModel = () =>{return tempObj}
+  
   const {
     values,
+    errors,
     handleInputChange
   }= useForm(getFreshModel)
 
   // Register clicked 
-  const clickHandler = () =>{
-    console.log(values)
+  const clickHandler = (e) =>{
+    e.preventDefault();
+    createAPIEndpoint(ENDPOINTS.user)
+                .customizePost({User: user, Doctor: values},'Doctor')
+                .then(res => {
+                    console.log("success");
+                    navigate('/success-register')
+                })
+                .catch(err => {
+                    console.log("fail");
+                    setErr(err.response.data)
+                })
   }
 
   return (
-    <Container fluid style={{marginBottom: '10%', backgroundColor: 'whitesmoke'}}>
-      <Form style={{paddingBottom: '5%', paddingTop: '5%'}}>
-        <Forms fields={list.value} header={list.header} values={values} handler={handleInputChange}/> 
+    <Container fluid style={{marginBottom: '10%', backgroundColor: 'whitesmoke', width:'60%'}}>
+      <Form onSubmit={clickHandler} style={{paddingBottom: '5%', paddingTop: '5%'}}>
 
-        <Container>
-          <Form.Group className="mb-3" controlId="pracId" style={{width: "50%", paddingRight: "1%"}}>
-            <Form.Label>PracId</Form.Label>
-            <Form.Control type="text" />
-          </Form.Group>
-        </Container>
+        <Forms fields = {list.value} header ={list.header} values={values} handler={handleInputChange} errors={errors}/>
+        <p style={{color: 'red'}}>{err}</p>
+        <Button variant="primary" type="submit">Create new account</Button>
 
-        <Button variant="outline-success" style={{marginLeft: '80%'}} onClick={clickHandler}>Create New Account</Button>
       </Form>
-
     </Container>
   )
 }

@@ -97,6 +97,9 @@ namespace Backend.Controllers
         {
             if(UserExists(register.User.Sin) || DoctorExists(register.Doctor.PracId)){
                 return BadRequest("User exists");
+            }else if (!ClinicExists(register.Doctor.ClinicPhone))
+            {
+                return BadRequest("Clinic doesn't exits");
             }
  
             _context.Users.Add(register.User);
@@ -256,6 +259,10 @@ namespace Backend.Controllers
         private bool PatientExists(int id)
         {
             return _context.Patients.Any(e => e.Sin == id);
+        }
+        private bool ClinicExists(string phone)
+        {
+            return _context.Clinics.Any(e => e.Phone == phone);
         }
     }
 }

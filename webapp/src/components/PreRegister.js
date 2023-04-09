@@ -5,9 +5,8 @@ import { createAPIEndpoint, ENDPOINTS } from '../api';
 import useForm from '../hooks/useForm'
 import useStateContext from '../hooks/useStateContext';
 import { createObjFromList } from './helperModules/helper';
-import { userRegList } from './data/RegisterLists';
+import { userRegList } from './helperModules/RegisterList';
 import { validatePw } from './helperModules/validation';
-import { register } from './doctors/doctorAPI';
 import Forms from './Forms';
 
 export default function PreRegister() {
@@ -45,19 +44,12 @@ export default function PreRegister() {
     const next = e => {
         e.preventDefault();
         if (validate()){
+            console.log(values);
             if(context.isDoctor){ 
-              createAPIEndpoint(ENDPOINTS.user)
-                .customizePost({User: values, Doctor: {sin: values.sin, pracId: id}},'Doctor')
-                .then(res => {
-                    console.log("success");
-                    // setContext({ userId: res.data.participantId })
-                    navigate('/success-register')
-                })
-                .catch(err => {
-                    console.log("fail");
-                })
+              navigate('/register',{state: {
+                user: values,
+              }})
             }else{
-              console.log(values);
               navigate('/register',{state: {
                 user: values,
                 patient: {sin: values.sin, healthId: id, isMinor}
@@ -88,11 +80,7 @@ export default function PreRegister() {
             {checkUpdate}
           </Form.Group>
 
-          {context.isDoctor ?
-              <Form.Group className="mb-3" controlId="pracId" >
-                <Form.Label>PracId</Form.Label>
-                <Form.Control type="text" value={id} onChange={e => setId(e.currentTarget.value)} required/>
-              </Form.Group>
+          {context.isDoctor ?''
           :
               <>
                   <Form.Group className="mb-3" controlId="healthId" >
@@ -107,11 +95,10 @@ export default function PreRegister() {
         </Container>
         
         <div>
-          <Button variant="primary" type="submit">
-            {context.isDoctor ?"Create new account" :"Next"}
-          </Button>
+          <Button variant="primary" type="submit">Next</Button>
           <Button variant='link' onClick={() => navigate('/login')} >Login</Button>
         </div>
+
       </Form>
     </>
   )

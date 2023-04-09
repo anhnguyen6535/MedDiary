@@ -18,6 +18,7 @@ import ClinicVisitForm from './components/ClinicVisitForm'
 import SearchPatient from './components/doctors/SearchPatient';
 import ClinicLog from './components/ClinicLog';
 import Todo from './components/patients/Todo';
+import DoctorRegister from './components/doctors/DoctorRegister';
 
 function App() {
   const { context } = useStateContext();
@@ -29,7 +30,7 @@ function App() {
           <Route element={<IdentityCheck cond={undefined} />}>
             <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/pre-register" element={<PreRegister />}></Route>
-            <Route path="/register" element={<PatientRegister />}></Route>
+            <Route path="/register" element={context.isDoctor ?<DoctorRegister/> :<PatientRegister/>}></Route>
             <Route path="/success-register" element={<SuccessRegister />}></Route>
           </Route>
         </Route>

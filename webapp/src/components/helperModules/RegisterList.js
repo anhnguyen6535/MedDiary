@@ -203,76 +203,27 @@ export const patientMaritualReg = {
 }
 
 // ----------------------------------------------- DOCTOR --------------------------------------------//
-    export const doctorInfoReg =  {
-      header: 'Personal Info',
-      value: 
-      [
-        [
-          {
-            sort: 'control',
-            controlId: 'Fname',
-          label: 'First name',
-          type: 'text',
-          placeholder: ''
-        },
-        {
+export const doctorInfoReg =  {
+  header: 'Work Info',
+  value: 
+  [
+    [
+      {
           sort: 'control',
-          controlId: 'Lname',
-          label: 'Last name',
+          controlId: 'PracId',
+          label: 'PracId',
           type: 'text',
-          placeholder: ''
-        }
-      ],
-      [
-        {
+          placeholder: 'PracId'
+      }
+    ],
+    [
+      {
           sort: 'control',
-          controlId: 'Address',
-          label: 'Address',
+          controlId: 'ClinicPhone',
+          label: 'ClinicPhone',
           type: 'text',
-          placeholder: ''
-        }
-      ],
-      [
-        {
-          sort: 'control',
-          controlId: 'DOB',
-          label: 'Date of Birth',
-          type: 'text',
-          placeholder: ''
-        },
-        {
-          sort: 'select',
-          controlId: 'Sex',
-          label: 'Sex',
-          options: [
-            "Female",
-            "Male",
-          ]
-        },
-      ],
-      [
-        {
-          sort: 'control',
-          controlId: 'Phone',
-          label: 'Phone',
-          type: 'text',
-          placeholder: ''
-        },
-        {
-          sort: 'control',
-          controlId: 'SIN',
-          label: 'SIN',
-          type: 'text',
-          placeholder: "",
-        },
-      ],
-      // [
-        //   {
-          //     sort: 'control',
-          //     controlId: 'PracId',
-          //     label: 'PracId',
-          //     type: 'text',
-          //     placeholder: 'PracId'
-          //   }
-          // ],
-        ]}
+          placeholder: 'ClinicPhone'
+      }
+    ],
+  ]
+}

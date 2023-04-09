@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap';
 import useForm from '../../hooks/useForm';
-import { patientGuardianReg, patientMaritualReg, patientRegLists } from '../data/RegisterLists';
+import { patientGuardianReg, patientMaritualReg, patientRegLists } from '../helperModules/RegisterList';
 import Forms from '../Forms';
 import { useLocation, useNavigate } from 'react-router-dom'
 import { register } from './patientAPI';
-import useStateContext from '../../hooks/useStateContext';
 import { createAPIEndpoint, ENDPOINTS } from '../../api';
 
 export default function PatientRegister() {
   const navigate = useNavigate()
-  const {setContext} = useStateContext();
+  const [err, setErr] = useState('')
+
   // Get objects from pre-register
   const user = useLocation().state.user;
   const patient = useLocation().state.patient;
@@ -47,6 +47,7 @@ export default function PatientRegister() {
                   })
                   .catch(err => {
                       console.log("fail");
+                      setErr(err.request.response)
                   })
     }
     else{
@@ -58,6 +59,7 @@ export default function PatientRegister() {
                     })
                     .catch(err => {
                         console.log("fail");
+                        setErr(err.request.response)
                     })
     }
   }
@@ -77,6 +79,7 @@ export default function PatientRegister() {
 
         </div>
         
+        <p style={{color: 'red'}}>{err}</p>
         <Button variant="outline-success" style={{marginLeft: '80%'}} onClick={clickHandler}>Create New Account</Button>
         
       </Form>
