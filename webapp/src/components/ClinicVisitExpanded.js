@@ -6,6 +6,10 @@ import Medication from './Medication';
 import LabResults from './LabResults';
 import MedByDate from './MedByDate';
 import { useLocation } from 'react-router-dom';
+import ClinicVisit from './ClinicVisit';
+import { ArrayObjAPIProcessorH } from './ArrayObjAPIProcessor';
+import { clinicVisitDTOH } from './patients/PatientDTO'
+import { createAPIEndpoint, ENDPOINTS } from '../api'
 
 
 export default function ClinicVisitExpanded() {
@@ -13,18 +17,11 @@ export default function ClinicVisitExpanded() {
     const sin = useLocation().state.sin
 
     console.log(date, sin);
-    // FIXME FAKE DATA 
-    const clinicdata = [
-        {
-            Date: "23/03/2023",
-            ClinicName: "asd",
-            Pysician: "Dr.bob",
-            Diagnosis: "flu"
-          },
-    ]
 
     return(
         <Container>
+            
+
             <MedByDate date = {date} sin={sin}></MedByDate>
            
         </Container>
