@@ -1,17 +1,10 @@
 import { useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function MedicationRow({ medication, onChange, onRemove }) {
     return (
         <div className="d-flex mb-2" >
-            <Form.Control
-                type="date"
-                value={medication.datePrescribed}
-                onChange={(e) => onChange({ ...medication, datePrescribed: e.target.value })}
-                placeholder="Date Prescribed"
-                className="ms-1"
-
-            />
 
             <Form.Control
                 type="text"
@@ -36,27 +29,35 @@ function MedicationRow({ medication, onChange, onRemove }) {
                 onChange={(e) => onChange({ ...medication, dosage: e.target.value })}
                 placeholder="Dosage (e.g. 1 tablet)"
                 className="ms-1"
-
             />
+
             <Button variant="danger" className="ms-2" onClick={onRemove}>
                 Remove
-                
             </Button>
         </div>
 
     );
 }
 
-function DiagnosisRow({ value, onChange, onRemove }) {
+function TodoRow({todo, onChange, onRemove }) {
     return (
-        <div className="d-flex">
+        <div className="d-flex mb-2">
             <Form.Control
-                as="textarea"
-                rows={3}
-                value={value}
-                onChange={onChange}
-                placeholder="Diagnosis"
+                type="text"
+                value={todo.title}
+                onChange= {(e) => onChange({...todo, title: e.target.value})}
+                placeholder="Title"
+                className="ms-1"
             />
+
+            <Form.Control
+                type="text"
+                value={todo.description}
+                onChange= {(e) => onChange({...todo, description: e.target.value})}
+                placeholder="Description"
+                className="ms-1"
+            />
+
             <Button variant="danger" className="ms-2" onClick={onRemove}>
                 Remove
             </Button>
@@ -65,15 +66,17 @@ function DiagnosisRow({ value, onChange, onRemove }) {
 }
 
 export default function AppointmentForm() {
-    const [medications, setMedications] = useState([{ name: '', datePrescribed: '', duration: '', dosage: '' }]);
-    const [diagnoses, setDiagnoses] = useState(['']);
+    const [medications, setMedications] = useState([{ name: '', duration: '', dosage: '' }]);
+    const [todos, setTodos] = useState([{title:'', description: ''}]);
+
+    const navigate = useNavigate();
 
     function handleAddMedication() {
-        setMedications([...medications, { name: '', datePrescribed: '', duration: '', dosage: '' }]);
+        setMedications([...medications, { name: '', duration: '', dosage: '' }]);
     }
 
     function handleRemoveMedication(index) {
-        setMedications(medications.filter((_, i) => i !== index));
+        setMedications(medications.filter((_, i) => i !== 1));
     }
 
     function handleMedicationChange(index, medication) {
@@ -82,68 +85,55 @@ export default function AppointmentForm() {
         setMedications(newMedications);
     }
 
-    function handleAddDiagnosis() {
-        setDiagnoses([...diagnoses, '']);
+    function handleAddTodo() {
+        setTodos([...todos, { title: '', description:'' }]);
     }
 
-    function handleRemoveDiagnosis(index) {
-        setDiagnoses(diagnoses.filter((_, i) => i !== index));
+    function handleRemoveTodo(index) {
+        setTodos(todos.filter((_, i) => i !== 1));
     }
 
-    function handleDiagnosisChange(index, value) {
-        const newDiagnoses = [...diagnoses];
-        newDiagnoses[index] = value;
-        setDiagnoses(newDiagnoses);
+    function handleTodoChange(index, todo) {
+        const newTodos = [...todos];
+        newTodos[index] = todo;
+        setTodos(newTodos);
     }
+
 
     function handleSubmit(event) {
         event.preventDefault();
         // Handle form submission here
     }
 
-    function handleCancel(event) {
-        event.preventDefault();
-        // Handle form submission here
-    }
+    //for date 
+    const currentDate = new Date();
+    const options = { month: '2-digit', day: '2-digit', year: 'numeric' };
+    const formattedDate = currentDate.toLocaleDateString('en-US', options);
+
 
     return (
         <Container fluid style={{ marginBottom: '10%', backgroundColor: 'whitesmoke' }}>
             <Form style={{ paddingBottom: '5%', paddingTop: '5%' }}>
-                <Form.Group className="mb-3" controlId="formDate">
-                    <Form.Label>Date:</Form.Label>
-                    <Form.Control type="date" />
-                </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formClinic">
-                    <Form.Label>Clinic:</Form.Label>
-                    <Form.Control as="select">
-                        <option>Select a clinic</option>
-                        <option>Clinic 1</option>
-                        <option>Clinic 2</option>
-                        <option>Clinic 3</option>
-                    </Form.Control>
-                </Form.Group>
+                <Form.Label className="d-flex mb-2">
+                    Date: {formattedDate}
+                </Form.Label>
 
-                <Form.Group className="mb-3" controlId="formPhysician">
-                    <Form.Label>Physician:</Form.Label>
-                    <Form.Control type="text" />
-                </Form.Group>
+                {/* get clininc name and display it  */}
 
-                <Form.Label>Diagnosis/Notes:</Form.Label>
-                {diagnoses.map((diagnosis, index) => (
-                    
-                    <Form.Group
-                        key={index}
-                        className="mb-3"
-                        controlId={`formDiagnosis${index}`}
-                    >
-                        <DiagnosisRow
-                            value={diagnosis}
-                            onChange={(e) => handleDiagnosisChange(index, e.target.value)}
-                            onRemove={() => handleRemoveDiagnosis(index)}
-                        />
-                    </Form.Group>
-                ))}
+
+                {/* get physician name and display it */}
+
+
+                <Form.Group className="mb-3">
+                    <Form.Label>Daiagnosis/Note:</Form.Label>
+                    <Form.Control
+                        as="textarea"
+                        placeholder = "Diagnosis/Notes"
+                    />
+
+                </Form.Group> 
+
 
                 <Form.Group className="mb-3">
                     <Form.Label>Medications:</Form.Label>
@@ -156,19 +146,31 @@ export default function AppointmentForm() {
                             />
                         </Form.Group>
                     ))}
-
                 </Form.Group>
 
-                <Button variant="primary" className="ms-2" onClick={handleAddDiagnosis}>
-                    Add Diagnosis
+                <Form.Group className='mb-3'>
+                    <Form.Label>Todo:</Form.Label>
+                    {todos.map((todo, index) => (
+                        <Form.Group key={index} controlId={`formTodo${index}`}>
+                        <TodoRow
+                            todo = {todo}
+                            onChange = {(updatedTodo) => handleTodoChange(index, updatedTodo)}
+                            onRemove = {() => handleRemoveTodo(index)}
+                        />
+                        </Form.Group>
+                    ))}
+                </Form.Group>            
+
+                <Button variant="success" className="ms-2" onClick={handleAddTodo}>
+                    Add Todo
                 </Button>
-                <Button variant="primary" className="ms-2" onClick={handleAddMedication}>
+                <Button variant="success" className="ms-2" onClick={handleAddMedication}>
                     Add Medication
                 </Button>
                 <Button type="submit" className="ms-2">
                     Submit
                 </Button>
-                <Button type="submit" className="ms-2">
+                <Button type="submit" className="ms-2" onClick={() => navigate("/clinic-log")} >
                     Cancel
                 </Button>
             </Form>
