@@ -5,7 +5,7 @@ import { HorizontalTable, VerticalTable } from './TableComponent';
 import { VerticalTableLink } from './TableComponent';
 
 
-export default function ArrayObjAPIProcessor({dtoFilter, action}) {
+export default function ArrayObjAPIProcessor({dtoFilter, action, title}) {
     const { context } = useStateContext();
     const user = context.isDoctor ?context.patientSin :context.sin 
     const [display, setDisplay] = useState()
@@ -15,7 +15,7 @@ export default function ArrayObjAPIProcessor({dtoFilter, action}) {
       action(user)
         .then(res => {
           const {headers, values} = dtoFilter(res.data);
-          setDisplay(<VerticalTable header={headers} val={values} />)
+          setDisplay(<VerticalTable header={headers} val={values} title={title}/>)
         })  
         .catch(err => {
           console.log(err);
@@ -32,7 +32,7 @@ export default function ArrayObjAPIProcessor({dtoFilter, action}) {
     )
 }
 
-export function ArrayObjAPIProcessorH({dtoFilter, action}) {
+export function ArrayObjAPIProcessorH({dtoFilter, action, title}) {
   const { context } = useStateContext();
   const user = context.isDoctor ?context.patientSin :context.sin 
   const [display, setDisplay] = useState()
@@ -42,7 +42,7 @@ export function ArrayObjAPIProcessorH({dtoFilter, action}) {
     action(user)
       .then(res => {
         const {headers, values} = dtoFilter(res.data);
-        setDisplay(<HorizontalTable header={headers} val={values} />)
+        setDisplay(<HorizontalTable header={headers} val={values} title={title}/>)
       })  
       .catch(err => {
         console.log(err);
