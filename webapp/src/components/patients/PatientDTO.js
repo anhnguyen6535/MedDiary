@@ -27,6 +27,7 @@ export const
 clinicVisitDTO = (clinicVisitList) => {
     for(let i = 0; i < clinicVisitList.length; i++){
         delete clinicVisitList[i].sin
+        delete clinicVisitList[i].diagnosis
     }
     const {headers, values} = filterObjList(clinicVisitList)
     return {headers, values}
