@@ -1,4 +1,4 @@
-import { filterObjList, getHeadersValues} from "./helper"
+import {getHeadersValues} from "./helper"
 
 export const userDTO = (user) => {
     delete user.isDoctor;

@@ -20,7 +20,12 @@ export default function ArrayObjAPIProcessor({dtoFilter, action, title}) {
         .catch(err => {
           console.log(err);
           setDisplay(
-            <p>No results found!</p>
+            <Container className='d-flex justify-content-md-center' style={{marginTop: "10%"}}>
+              <Container>
+                {title != null ?<h4 style={{fontSize: '20px', fontWeight: "bold"}}>{title}</h4> :''}  
+                <p>No results found!</p>
+              </Container>
+            </Container>
           )
         })
     }, [])

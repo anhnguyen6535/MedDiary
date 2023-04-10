@@ -1,73 +1,23 @@
 import { useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-
-function MedicationRow({ medication, onChange, onRemove }) {
-    return (
-        <div className="d-flex mb-2" >
-
-            <Form.Control
-                type="text"
-                value={medication.name}
-                onChange={(e) => onChange({ ...medication, name: e.target.value })}
-                placeholder="Medication Name"
-                className="ms-1"
-
-            />
-
-            <Form.Control
-                type="text"
-                value={medication.duration}
-                onChange={(e) => onChange({ ...medication, duration: e.target.value })}
-                placeholder="Duration (e.g. 7 days)"
-                className="ms-1"
-
-            />
-            <Form.Control
-                type="text"
-                value={medication.dosage}
-                onChange={(e) => onChange({ ...medication, dosage: e.target.value })}
-                placeholder="Dosage (e.g. 1 tablet)"
-                className="ms-1"
-            />
-
-            <Button variant="danger" className="ms-2" onClick={onRemove}>
-                Remove
-            </Button>
-        </div>
-
-    );
-}
-
-function TodoRow({todo, onChange, onRemove }) {
-    return (
-        <div className="d-flex mb-2">
-            <Form.Control
-                type="text"
-                value={todo.title}
-                onChange= {(e) => onChange({...todo, title: e.target.value})}
-                placeholder="Title"
-                className="ms-1"
-            />
-
-            <Form.Control
-                type="text"
-                value={todo.description}
-                onChange= {(e) => onChange({...todo, description: e.target.value})}
-                placeholder="Description"
-                className="ms-1"
-            />
-
-            <Button variant="danger" className="ms-2" onClick={onRemove}>
-                Remove
-            </Button>
-        </div>
-    );
-}
+import { createAPIEndpoint, ENDPOINTS } from '../api';
+import useStateContext from '../hooks/useStateContext';
+import { GeneralRow } from './FormRow';
+import DateComponent from './helperModules/DateComponent';
+import ModalComponent from './ModalComponent';
 
 export default function AppointmentForm() {
+    const {context} = useStateContext()
     const [medications, setMedications] = useState([{ name: '', duration: '', dosage: '' }]);
-    const [todos, setTodos] = useState([{title:'', description: ''}]);
+    const [todos, setTodos] = useState([{name:'', description: ''}]);
+    const [diagnosis, setDiagnosis] = useState('')
+    const [show, setShow] = useState(false)
+    const clinicVisit = {
+        patientSin: context.patientSin,
+        doctorSin: context.sin,
+        diagnosis
+    }
 
     const navigate = useNavigate();
 
@@ -86,7 +36,7 @@ export default function AppointmentForm() {
     }
 
     function handleAddTodo() {
-        setTodos([...todos, { title: '', description:'' }]);
+        setTodos([...todos, { name: '', description:'' }]);
     }
 
     function handleRemoveTodo(index) {
@@ -102,64 +52,44 @@ export default function AppointmentForm() {
 
     function handleSubmit(event) {
         event.preventDefault();
+
+        const val = {
+            clinicVisit,
+            medications: medications[0].name == '' ?null :medications,
+            todoList: todos[0].name == '' ?null :todos
+        }
+
         // Handle form submission here
+        createAPIEndpoint(ENDPOINTS.clinicVisit)
+            .customizePost(val, 'Form')
+            .then(res =>{
+                console.log('success');
+                setShow(true)
+            })
+            .catch(err =>{
+                console.log('fail');
+            })
     }
 
-    //for date 
-    const currentDate = new Date();
-    const options = { month: '2-digit', day: '2-digit', year: 'numeric' };
-    const formattedDate = currentDate.toLocaleDateString('en-US', options);
-
-
     return (
-        <Container fluid style={{ marginBottom: '10%', backgroundColor: 'whitesmoke' }}>
-            <Form style={{ paddingBottom: '5%', paddingTop: '5%' }}>
+        <Container>
+            <ModalComponent show={show}/>
+            <Form style={{ paddingBottom: '5%', paddingTop: '5%' }} onSubmit={handleSubmit}>
 
-                <Form.Label className="d-flex mb-2">
-                    Date: {formattedDate}
-                </Form.Label>
-
-                {/* get clininc name and display it  */}
-
-
-                {/* get physician name and display it */}
-
+                <DateComponent/>
 
                 <Form.Group className="mb-3">
                     <Form.Label>Daiagnosis/Note:</Form.Label>
                     <Form.Control
                         as="textarea"
                         placeholder = "Diagnosis/Notes"
+                        value={diagnosis}
+                        onChange={e => setDiagnosis(e.currentTarget.value)}
                     />
-
                 </Form.Group> 
-
-
-                <Form.Group className="mb-3">
-                    <Form.Label>Medications:</Form.Label>
-                    {medications.map((medication, index) => (
-                        <Form.Group key={index} controlId={`formMedication${index}`}>
-                            <MedicationRow
-                                medication={medication}
-                                onChange={(updatedMedication) => handleMedicationChange(index, updatedMedication)}
-                                onRemove={() => handleRemoveMedication(index)}
-                            />
-                        </Form.Group>
-                    ))}
-                </Form.Group>
-
-                <Form.Group className='mb-3'>
-                    <Form.Label>Todo:</Form.Label>
-                    {todos.map((todo, index) => (
-                        <Form.Group key={index} controlId={`formTodo${index}`}>
-                        <TodoRow
-                            todo = {todo}
-                            onChange = {(updatedTodo) => handleTodoChange(index, updatedTodo)}
-                            onRemove = {() => handleRemoveTodo(index)}
-                        />
-                        </Form.Group>
-                    ))}
-                </Form.Group>            
+                
+                <GeneralRow header='Medications:' lists={medications} type='med' handleChange={handleMedicationChange} handleRemove={handleRemoveMedication} />
+                <GeneralRow header='Todo:' lists={todos} type='todo' handleChange={handleTodoChange} handleRemove={handleRemoveTodo} />           
 
                 <Button variant="success" className="ms-2" onClick={handleAddTodo}>
                     Add Todo
@@ -170,7 +100,7 @@ export default function AppointmentForm() {
                 <Button type="submit" className="ms-2">
                     Submit
                 </Button>
-                <Button type="submit" className="ms-2" onClick={() => navigate("/clinic-log")} >
+                <Button className="ms-2" onClick={() => navigate("/clinic-log")} >
                     Cancel
                 </Button>
             </Form>

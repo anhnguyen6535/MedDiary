@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Card, Container } from "react-bootstrap";
-//import { filterObjList } from "./data/ListFilter";
-import { HorizontalTable, VerticalTable } from './TableComponent';
-import Medication from './Medication';
-import LabResults from './LabResults';
-import MedByDate from './MedByDate';
-import { useLocation } from 'react-router-dom';
-import ClinicVisit from './ClinicVisit';
+import React from 'react';
+import { Button, Container } from "react-bootstrap";
+import { useLocation, useNavigate } from 'react-router-dom';
 import ArrayObjAPIProcessor, { ArrayObjAPIProcessorH } from './ArrayObjAPIProcessor';
 import { clinicVisitDTOH, medicaionDTO } from './patients/PatientDTO'
 import { createAPIEndpoint, ENDPOINTS } from '../api'
-import useStateContext from '../hooks/useStateContext';
 
 export default function ClinicVisitExpanded() {
-    const {context} = useStateContext()
+    const navigate = useNavigate()
     const date = useLocation().state.date
     const sin = useLocation().state.sin
     const visitId = useLocation().state.visitId
@@ -30,6 +23,8 @@ export default function ClinicVisitExpanded() {
 
             <ArrayObjAPIProcessor title={'Medication'} dtoFilter={(e) => medicaionDTO(e)} action={(a) => createAPIEndpoint(ENDPOINTS.medicaion)
                     .customizePost(medByDateDTO, 'Date')}/>
+
+            <Button variant='outline-primary' onClick={() => navigate("/clinic-log")} style={{marginTop: "2%"}}>Back</Button>
            
         </Container>
     )

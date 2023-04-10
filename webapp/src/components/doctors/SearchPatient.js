@@ -5,7 +5,7 @@ import { createAPIEndpoint, ENDPOINTS } from '../../api'
 import useStateContext from '../../hooks/useStateContext'
 
 export default function SearchPatient() {
-    const { context, setContext, partiallyResetContext } = useStateContext();
+    const {setContext} = useStateContext();
     const [id, SetId] = useState('')
     const [placeholder, SetPlaceholder] = useState('Search Patient Id')
     const navigate = useNavigate()

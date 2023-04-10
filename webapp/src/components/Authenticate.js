@@ -6,7 +6,6 @@ export default function Authenticate() {
     const { context } = useStateContext()
 
     return (
-      //  console.log(context.userId)
         context.sin == 0
             ? <Navigate to="/" />
             : <Outlet />

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend.Models;
 using Learning.Models;
@@ -86,22 +81,6 @@ namespace Backend.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetDiagnoses", new { id = todoList.Sin }, todoList);
-        }
-
-        // DELETE: api/TodoLists/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTodoList(int id)
-        {
-            var todoList = await _context.TodoLists.FindAsync(id);
-            if (todoList == null)
-            {
-                return NotFound();
-            }
-
-            _context.TodoLists.Remove(todoList);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
 
         private bool TodoListExists(int id, int sin)

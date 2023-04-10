@@ -57,7 +57,7 @@ export function VerticalTableLink({val, header, handler}) {
 
   return (
     <Container className='d-flex justify-content-md-center' >
-      <Table size="sm" style={{marginTop: "10%", width:"60%"}}>
+      <Table size="lg" style={{marginTop: "10%", width:"60%"}}>
         <thead>
           <tr>
             {header.map((hd, index) => (

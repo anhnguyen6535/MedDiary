@@ -2,6 +2,7 @@
 using Learning.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(GeneralContext))]
-    partial class GeneralContextModelSnapshot : ModelSnapshot
+    [Migration("20230410052713_ModifyClinic")]
+    partial class ModifyClinic
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
@@ -28,6 +31,40 @@ namespace Backend.Migrations
                     b.HasKey("Sin");
 
                     b.ToTable("Adults");
+                });
+
+            modelBuilder.Entity("Backend.Models.Appointment", b =>
+                {
+                    b.Property<int>("AppointmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsAttended")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsCancel")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PatientPhone")
+                        .HasColumnType("varchar(15)");
+
+                    b.Property<string>("Time")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
+                    b.HasKey("AppointmentId");
+
+                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("Backend.Models.Clinic", b =>

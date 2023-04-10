@@ -219,10 +219,10 @@ export const doctorInfoReg =  {
     [
       {
           sort: 'control',
-          controlId: 'ClinicPhone',
-          label: 'ClinicPhone',
+          controlId: 'ClinicName',
+          label: 'Clinic Name',
           type: 'text',
-          placeholder: 'ClinicPhone'
+          placeholder: 'Clinic Name'
       }
     ],
   ]
