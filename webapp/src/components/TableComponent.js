@@ -5,15 +5,17 @@ import { useNavigate } from 'react-router-dom'
 
 // The header is the first column
 export function HorizontalTable({val, header}) {
+  console.log(val)
   return (
     <Container className='d-flex justify-content-md-center' >
 
             <Table bordered size="sm" style={{marginTop: "10%", width:"60%"}}>
                 <tbody >
                     {header.map((hd, index) => 
-                        <tr key={index}>
+                        <tr key={index}>                   
                             <th>{hd}</th>
                             <td>{val[index]}</td>
+                            {console.log(val[index])}
                         </tr>
                     )}
                 </tbody>
@@ -50,7 +52,7 @@ export function VerticalTable({val, header}) {
 }
 
 export function VerticalTableLink({val, header, handler}) {
-
+  console.log(val[0])
   return (
     <Container className='d-flex justify-content-md-center' >
       <Table bordered size="sm" style={{marginTop: "10%", width:"60%", border: "2px solid #36424A"}}>

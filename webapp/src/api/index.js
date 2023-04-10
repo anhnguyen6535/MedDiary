@@ -11,6 +11,7 @@ export const ENDPOINTS = {
     lab: 'Labtests',
     patient: 'Patients',
     todo: 'TodoLists',
+    clinicVisit:'ClinicVisits'
 }
 
 export const createAPIEndpoint = (endpoint) => {
