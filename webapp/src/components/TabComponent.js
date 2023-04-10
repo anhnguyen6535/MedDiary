@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Col, Nav, Row, Tab, Tabs } from 'react-bootstrap';
+import React from 'react'
+import { Col, Nav, Row, Tab } from 'react-bootstrap';
 import ClinicVisit from './ClinicVisit';
 import LabResults from './LabResults';
 import Medication from './Medication';

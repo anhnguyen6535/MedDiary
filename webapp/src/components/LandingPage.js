@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import { Button, Card, Col, Container, Row } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import CardComponent from './CardComponent'
 import useStateContext from '../hooks/useStateContext'
 
 export default function LandingPage() {
-  const { context, setContext, resetContext, partiallyResetContext } = useStateContext();
+  const {resetContext} = useStateContext();
 
   useEffect(() => {
     resetContext()

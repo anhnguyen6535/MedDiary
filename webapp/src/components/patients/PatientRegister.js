@@ -80,7 +80,7 @@ export default function PatientRegister() {
         </div>
         
         <p style={{color: 'red'}}>{err}</p>
-        <Button variant="outline-success" style={{marginLeft: '80%'}} onClick={clickHandler}>Create New Account</Button>
+        <Button variant="success" style={{marginLeft: '70%'}} onClick={clickHandler}>Create New Account</Button>
         
       </Form>
 

@@ -3,7 +3,7 @@ import { Form, Button, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { createAPIEndpoint, ENDPOINTS } from '../api';
 import useStateContext from '../hooks/useStateContext';
-import { GeneralRow, MedicationRow, TodoRow } from './FormRow';
+import { GeneralRow } from './FormRow';
 import DateComponent from './helperModules/DateComponent';
 import ModalComponent from './ModalComponent';
 
@@ -77,10 +77,6 @@ export default function AppointmentForm() {
             <Form style={{ paddingBottom: '5%', paddingTop: '5%' }} onSubmit={handleSubmit}>
 
                 <DateComponent/>
-
-                {/* get clininc name and display it  */}
-                {/* get physician name and display it */}
-
 
                 <Form.Group className="mb-3">
                     <Form.Label>Daiagnosis/Note:</Form.Label>

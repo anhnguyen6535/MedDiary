@@ -1,16 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import useWindowDimensions from '../hooks/useWindowDimensions';
 
 export default function Center(prop) {
   const {width, height} = useWindowDimensions()
-
-  // const color = prop.color? prop.color :'white'
   
   const divStyle = {
     maxWidth: width,
     minHeight: height,
-    // border: '10px solid red',
-    // backgroundColor: color
   }
 
   return (

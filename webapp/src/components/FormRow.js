@@ -29,7 +29,6 @@ export function GeneralRow({header,lists,type, handleChange, handleRemove}){
 
 export function MedicationRow({ medication, onChange, onRemove }) {
     return (
-        // <FormRow list={medication} onChange={onChange} onRemove={onRemove}/>
         <div className="d-flex mb-2" >
 
             <Form.Control
