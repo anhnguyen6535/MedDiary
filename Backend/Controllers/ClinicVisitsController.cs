@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Backend.Models;
 using Learning.Models;
 using Microsoft.Win32;
+using Backend.Models.DTO;
 
 namespace Backend.Controllers
 {
@@ -95,22 +96,28 @@ namespace Backend.Controllers
         [HttpPost("Form")]
         public async Task<ActionResult<ClinicVisit>> PostClinicVisitForm(ClinicVisitFormDTO visitForm)
         {
-            if (!UserExists(visitForm.clinicVisit.Sin) && !PatientExists(visitForm.clinicVisit.Sin) && !DoctorExists(visitForm.clinicVisit.Physician))
+            var clinicVisitDTO = visitForm.clinicVisit;
+            if (!UserExists(clinicVisitDTO.PatientSin) && !PatientExists(clinicVisitDTO.PatientSin) && !DoctorExists(clinicVisitDTO.DoctorSin))
             {
-                return BadRequest("User exists");
+                return BadRequest("User does not exist");
             }
-            var temp2 = _context.Clinics.Where(x => x.Name == visitForm.clinicVisit.ClinicName).FirstOrDefault();
-            if (temp2 == null)
+            var clinicVisit = await DTOToClinicVisit(clinicVisitDTO);
+
+            _context.ClinicVisits.Add(clinicVisit);
+
+            if(visitForm.medications != null)
             {
-                return BadRequest();
+                AddMedList(visitForm.medications, clinicVisitDTO.PatientSin);
             }
 
-            _context.ClinicVisits.Add(visitForm.clinicVisit);
-            _context.Medications.Add(visitForm.medication);
-            _context.TodoLists.Add(visitForm.todoList);
+            if(visitForm.todoList != null)
+            {
+                AddTodoList(visitForm.todoList, clinicVisitDTO.PatientSin);
+            }
+
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetClinicVisit", new { id = visitForm.clinicVisit }, visitForm);
+            return CreatedAtAction("GetClinicVisit", new { id = clinicVisit.VisitId }, visitForm);
         }
 
         // POST: api/ClinicVisits
@@ -139,6 +146,107 @@ namespace Backend.Controllers
 
             return NoContent();
         }
+        
+        private async Task<ClinicVisit> DTOToClinicVisit(ClinicVisitDTO dto)
+        {
+            var clinicName = await GetClinicName(dto.DoctorSin);
+            var drName = await GetDrName(dto.DoctorSin);
+
+            ClinicVisit clinicVisit = new()
+            {
+                Diagnosis = dto.Diagnosis,
+                Sin = dto.PatientSin,
+                Date = getCurDate(),
+                ClinicName = clinicName.ToString(),
+                Physician = drName.ToString(),
+                VisitId = generateClinicId(),
+            };
+            return clinicVisit;
+        }
+
+        private int generateClinicId()
+        {
+            Random rnd = new();
+            int randInt = 0;
+            while(randInt <= 0 || ClinicVisitExists(randInt))
+            {
+                randInt = rnd.Next();
+            }
+            return randInt;
+        }
+
+        private async Task<string> GetClinicName(int id)
+        {
+            Doctor doctor = await _context.Doctors.FindAsync(id);
+
+            return doctor.ClinicName;
+        }
+
+        private async Task<string> GetDrName(int id)
+        {
+            User user = await _context.Users.FindAsync(id);
+
+            return user.Fname;
+        }
+
+        private void AddMedList(MedicationDTO[] list, int patientSin)
+        {
+            for (int i = 0; i < list.Length; i++)
+            {
+                Medication med = DTOToMedication(list[i], patientSin);
+                _context.Medications.Add(med);
+            }
+        }
+
+        private Medication DTOToMedication(MedicationDTO dto, int patientSin)
+        {
+            Random rnd = new();
+            int randInt = 0;
+            while (randInt <= 0 || MedicationExists(randInt))
+            {
+                randInt = rnd.Next();
+            }
+
+            Medication medication = new()
+            {
+                Date = getCurDate(),
+                MedId = randInt,
+                Name = dto.Name,
+                Dosage = dto.Dosage,
+                Duration = dto.Duration,
+                PatientId = patientSin,
+            };
+            return medication;
+        }
+
+        private void AddTodoList(TodoDTOCreate[] list, int patientSin)
+        {
+            for (int i = 0; i < list.Length; i++)
+            {
+                TodoList todo = DTOToTodoList(list[i], patientSin);
+                _context.TodoLists.Add(todo);
+            }
+        }
+
+        private TodoList DTOToTodoList(TodoDTOCreate dto, int patientSin)
+        {
+            Random rnd = new();
+            int randInt = 0;
+            while (randInt <= 0 || TodoListExists(randInt))
+            {
+                randInt = rnd.Next();
+            }
+
+            TodoList todo = new()
+            {
+                TodoId = randInt,
+                Sin = patientSin,
+                IsComplete = false,
+                Name = dto.Name,
+                Description = dto.Description,
+            };
+            return todo;
+        }
 
         private bool ClinicVisitExists(int id)
         {
@@ -150,16 +258,34 @@ namespace Backend.Controllers
             return _context.Users.Any(e => e.Sin == id);
         }
 
-        private bool DoctorExists(string physician)
+        private bool DoctorExists(int sin)
 
         {
- 
-            return _context.Users.Any(x => "Dr." + x.Lname == physician && x.IsDoctor == true);
+            return _context.Doctors.Any(x => x.Sin == sin);
         }
 
         private bool PatientExists(int id)
         {
             return _context.Patients.Any(e => e.Sin == id);
+        }
+
+        private bool ClinicExists(string name)
+        {
+            return _context.Clinics.Any(e => e.Name == name);
+        }
+
+        private bool MedicationExists(int id)
+        {
+            return _context.Medications.Any(e => e.MedId == id);
+        }
+        private string getCurDate()
+        {
+            return DateTime.Now.ToString("dd/MM/yyyy");
+        }
+
+        private bool TodoListExists(int id)
+        {
+            return _context.TodoLists.Any(e => e.TodoId == id);
         }
     }
 }
