@@ -9,7 +9,7 @@ export default function MedByDate({date, sin}) {
         Date: date,
         PatientSin: sin
     }
-    console.log(medByDateDTO);
+
   return (
     <ArrayObjAPIProcessor dtoFilter={(e) => medicaionDTO(e)} action={(a) => createAPIEndpoint(ENDPOINTS.medicaion)
         .customizePost(medByDateDTO, 'Date')}/>
