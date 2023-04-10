@@ -35,9 +35,20 @@ namespace Backend.Controllers
 
             return diagnoses;
         }
+        // GET: api/Diagnoses/
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Diagnosis>>> GetPatientDateDiagnoses(int id, string date)
+        {
+            var diagnoses = await _context.Diagnoses.Where(x => x.Date == date && x.Patient_Id == id).ToListAsync();
 
+            if (diagnoses == null)
+            {
+                return NotFound();
+            }
 
-        //FIX ERROR RESPONSE 500
+            return diagnoses;
+        }
+
         // POST: api/Diagnoses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
