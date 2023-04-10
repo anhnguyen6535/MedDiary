@@ -1,12 +1,23 @@
 import { useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { createAPIEndpoint, ENDPOINTS } from '../api';
+import useStateContext from '../hooks/useStateContext';
 import { GeneralRow, MedicationRow, TodoRow } from './FormRow';
 import DateComponent from './helperModules/DateComponent';
+import ModalComponent from './ModalComponent';
 
 export default function AppointmentForm() {
+    const {context} = useStateContext()
     const [medications, setMedications] = useState([{ name: '', duration: '', dosage: '' }]);
-    const [todos, setTodos] = useState([{title:'', description: ''}]);
+    const [todos, setTodos] = useState([{name:'', description: ''}]);
+    const [diagnosis, setDiagnosis] = useState('')
+    const [show, setShow] = useState(false)
+    const clinicVisit = {
+        patientSin: context.patientSin,
+        doctorSin: context.sin,
+        diagnosis
+    }
 
     const navigate = useNavigate();
 
@@ -25,7 +36,7 @@ export default function AppointmentForm() {
     }
 
     function handleAddTodo() {
-        setTodos([...todos, { title: '', description:'' }]);
+        setTodos([...todos, { name: '', description:'' }]);
     }
 
     function handleRemoveTodo(index) {
@@ -41,13 +52,28 @@ export default function AppointmentForm() {
 
     function handleSubmit(event) {
         event.preventDefault();
+
+        const val = {
+            clinicVisit,
+            medications: medications[0].name == '' ?null :medications,
+            todoList: todos[0].name == '' ?null :todos
+        }
+
         // Handle form submission here
-        console.log(medications);
-        console.log(todos);
+        createAPIEndpoint(ENDPOINTS.clinicVisit)
+            .customizePost(val, 'Form')
+            .then(res =>{
+                console.log('success');
+                setShow(true)
+            })
+            .catch(err =>{
+                console.log('fail');
+            })
     }
 
     return (
-        <Container fluid>
+        <Container>
+            <ModalComponent show={show}/>
             <Form style={{ paddingBottom: '5%', paddingTop: '5%' }} onSubmit={handleSubmit}>
 
                 <DateComponent/>
@@ -61,6 +87,8 @@ export default function AppointmentForm() {
                     <Form.Control
                         as="textarea"
                         placeholder = "Diagnosis/Notes"
+                        value={diagnosis}
+                        onChange={e => setDiagnosis(e.currentTarget.value)}
                     />
                 </Form.Group> 
                 

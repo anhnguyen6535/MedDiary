@@ -1,7 +1,5 @@
 import React from 'react'
 import { Button, Form } from 'react-bootstrap';
-import useForm from '../hooks/useForm'
-import Forms from './Forms';
 
 export function GeneralRow({header,lists,type, handleChange, handleRemove}){
     return(
@@ -72,8 +70,8 @@ export function TodoRow({todo, onChange, onRemove }) {
         <div className="d-flex mb-2">
             <Form.Control
                 type="text"
-                value={todo.title}
-                onChange= {(e) => onChange({...todo, title: e.target.value})}
+                value={todo.name}
+                onChange= {(e) => onChange({...todo, name: e.target.value})}
                 placeholder="Title"
                 className="ms-1"
             />
