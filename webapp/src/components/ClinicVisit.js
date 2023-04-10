@@ -10,10 +10,11 @@ import { createAPIEndpoint, ENDPOINTS } from '../api'
 export default function ClinicVisit() {
     const {context} = useStateContext()
     const navigate = useNavigate()
+    const sin = context.isDoctor ?context.patientSin :context.sin
 
     function handler(date,visitId) {
       navigate('/Clinic-Visit-Expanded',{state: {
-        sin: context.isDoctor ?context.patientSin :context.sin,
+        sin,
         date,
         visitId
       }})
@@ -21,5 +22,5 @@ export default function ClinicVisit() {
 
     return(
       <ArrayObjAPIProcessorLink  handler = {handler} dtoFilter={(e) => clinicVisitDTO(e)} action={(a) => createAPIEndpoint(ENDPOINTS.clinicVisit)
-        .fetchById( "patient?patientid=" + context.sin)}/>)
+        .fetchById( "patient?patientid=" + sin)}/>)
 }

@@ -12,7 +12,6 @@ export default function SearchPatient() {
 
     useEffect(() => {
         setContext({patientSin: 0})
-        console.log(context)
       }, [])
 
     const searchHandler = () =>{
@@ -26,7 +25,6 @@ export default function SearchPatient() {
                     SetId('')
                     SetPlaceholder('Patient Not Found')
                 })
-        console.log(id)
     }
 
   return (
