@@ -17,8 +17,7 @@ export default function Profile() {
           GetUser(res.data)
         })
         .catch(err => {
-          // setSub(true)
-          // setValues({email: '', password: '', isDoctor: context.isDoctor})
+          console.log("fail");
         })
   },[])
       
