@@ -14,5 +14,6 @@ namespace Backend.Models
         public string Date { get; set; }
         public string ClinicName { get; set; }
         public string Physician { get; set; }
+        public string Diagnosis { get; set; }
     }
 }

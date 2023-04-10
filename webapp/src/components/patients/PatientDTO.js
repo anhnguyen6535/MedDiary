@@ -1,4 +1,4 @@
-import { filterObjList } from "../helperModules/helper"
+import { filterObjList, getHeadersValues } from "../helperModules/helper"
 
 export const profile = ['First name', 'Last name', 'Email', 'AHS Number']
 
@@ -20,5 +20,26 @@ medicaionDTO = (medList) => {
     }
 
     const {headers, values} = filterObjList(medList)
+    return {headers, values}
+}
+
+export const 
+clinicVisitDTO = (clinicVisitList) => {
+    for(let i = 0; i < clinicVisitList.length; i++){
+        delete clinicVisitList[i].sin
+        delete clinicVisitList[i].diagnosis
+    }
+    const {headers, values} = filterObjList(clinicVisitList)
+    return {headers, values}
+}
+
+export const 
+clinicVisitDTOH = (clinicVisit) => {
+        delete clinicVisit.visitId
+        delete clinicVisit.sin
+    const {headers, values} = getHeadersValues(clinicVisit)
+    const cn = headers.findIndex(ele => ele == "ClinicName")
+    headers[cn] = "Clinic Name"
+
     return {headers, values}
 }
