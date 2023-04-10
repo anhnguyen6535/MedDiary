@@ -11,11 +11,11 @@ export default function ClinicVisit() {
     const {context} = useStateContext()
     const navigate = useNavigate()
 
-    function handler(date,clinicId) {
+    function handler(date,visitId) {
       navigate('/Clinic-Visit-Expanded',{state: {
         sin: context.isDoctor ?context.patientSin :context.sin,
         date,
-        clinicId
+        visitId
       }})
     }
 
