@@ -19,9 +19,7 @@ export default function ClinicVisit() {
       }})
     }
 
-
     return(
       <ArrayObjAPIProcessorLink  handler = {handler} dtoFilter={(e) => clinicVisitDTO(e)} action={(a) => createAPIEndpoint(ENDPOINTS.clinicVisit)
         .fetchById( "patient?patientid=" + context.sin)}/>)
-
 }
