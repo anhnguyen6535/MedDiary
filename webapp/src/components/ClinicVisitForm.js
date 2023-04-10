@@ -8,9 +8,9 @@ import DateComponent from './helperModules/DateComponent';
 import ModalComponent from './ModalComponent';
 
 export default function AppointmentForm() {
-    const {context} = useStateContext()
+    const { context } = useStateContext()
     const [medications, setMedications] = useState([{ name: '', duration: '', dosage: '' }]);
-    const [todos, setTodos] = useState([{name:'', description: ''}]);
+    const [todos, setTodos] = useState([{ name: '', description: '' }]);
     const [diagnosis, setDiagnosis] = useState('')
     const [show, setShow] = useState(false)
     const clinicVisit = {
@@ -26,7 +26,9 @@ export default function AppointmentForm() {
     }
 
     function handleRemoveMedication(index) {
-        setMedications(medications.filter((_, i) => i !== 1));
+        if (medications.length > 1) {
+            setMedications(medications.filter((_, i) => i !== index));
+        }
     }
 
     function handleMedicationChange(index, medication) {
@@ -36,11 +38,14 @@ export default function AppointmentForm() {
     }
 
     function handleAddTodo() {
-        setTodos([...todos, { name: '', description:'' }]);
+        setTodos([...todos, { name: '', description: '' }]);
     }
 
     function handleRemoveTodo(index) {
-        setTodos(todos.filter((_, i) => i !== 1));
+        if (todos.length > 1) {
+            setTodos(todos.filter((_, i) => i !== index));
+
+        }
     }
 
     function handleTodoChange(index, todo) {
@@ -55,41 +60,41 @@ export default function AppointmentForm() {
 
         const val = {
             clinicVisit,
-            medications: medications[0].name == '' ?null :medications,
-            todoList: todos[0].name == '' ?null :todos
+            medications: medications[0].name == '' ? null : medications,
+            todoList: todos[0].name == '' ? null : todos
         }
 
         // Handle form submission here
         createAPIEndpoint(ENDPOINTS.clinicVisit)
             .customizePost(val, 'Form')
-            .then(res =>{
+            .then(res => {
                 console.log('success');
                 setShow(true)
             })
-            .catch(err =>{
+            .catch(err => {
                 console.log('fail');
             })
     }
 
     return (
         <Container>
-            <ModalComponent show={show}/>
+            <ModalComponent show={show} />
             <Form style={{ paddingBottom: '5%', paddingTop: '5%' }} onSubmit={handleSubmit}>
 
-                <DateComponent/>
+                <DateComponent />
 
                 <Form.Group className="mb-3">
                     <Form.Label>Daiagnosis/Note:</Form.Label>
                     <Form.Control
                         as="textarea"
-                        placeholder = "Diagnosis/Notes"
+                        placeholder="Diagnosis/Notes"
                         value={diagnosis}
                         onChange={e => setDiagnosis(e.currentTarget.value)}
                     />
-                </Form.Group> 
-                
+                </Form.Group>
+
                 <GeneralRow header='Medications:' lists={medications} type='med' handleChange={handleMedicationChange} handleRemove={handleRemoveMedication} />
-                <GeneralRow header='Todo:' lists={todos} type='todo' handleChange={handleTodoChange} handleRemove={handleRemoveTodo} />           
+                <GeneralRow header='Todo:' lists={todos} type='todo' handleChange={handleTodoChange} handleRemove={handleRemoveTodo} />
 
                 <Button variant="success" className="ms-2" onClick={handleAddTodo}>
                     Add Todo
