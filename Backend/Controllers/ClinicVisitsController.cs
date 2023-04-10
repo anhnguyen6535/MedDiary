@@ -106,7 +106,6 @@ namespace Backend.Controllers
             }
 
             _context.ClinicVisits.Add(visitForm.clinicVisit);
-            _context.Diagnoses.Add(visitForm.diagnosis);
             _context.Medications.Add(visitForm.medication);
             _context.TodoLists.Add(visitForm.todoList);
             await _context.SaveChangesAsync();

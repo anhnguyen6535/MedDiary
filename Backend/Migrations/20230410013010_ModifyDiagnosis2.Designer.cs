@@ -2,6 +2,7 @@
 using Learning.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(GeneralContext))]
-    partial class GeneralContextModelSnapshot : ModelSnapshot
+    [Migration("20230410013010_ModifyDiagnosis2")]
+    partial class ModifyDiagnosis2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
@@ -93,9 +96,6 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(10)");
 
-                    b.Property<string>("Diagnosis")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Physician")
                         .HasColumnType("TEXT");
 
@@ -105,6 +105,20 @@ namespace Backend.Migrations
                     b.HasKey("VisitId");
 
                     b.ToTable("ClinicVisits");
+                });
+
+            modelBuilder.Entity("Backend.Models.Diagnosis", b =>
+                {
+                    b.Property<int>("VisitId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("VisitId");
+
+                    b.ToTable("Diagnoses");
                 });
 
             modelBuilder.Entity("Backend.Models.Doctor", b =>
