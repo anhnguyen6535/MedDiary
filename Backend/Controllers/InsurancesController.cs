@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend.Models;
 using Learning.Models;
@@ -37,47 +32,6 @@ namespace Backend.Controllers
                 }
 
                 return insurances;
-            }
-
-
-        //FIX ERROR RESPONSE 500
-        // POST: api/Insurances
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-            public async Task<ActionResult<Insurance>> PostInsurance(Insurance insurance)
-
-            {
-                var temp = _context.Users.Where(x => x.Sin == insurance.Sin).FirstOrDefault();
-                if (temp == null)
-                {
-                    return BadRequest();
-                }
-
-                _context.Insurances.Add(insurance);
-                await _context.SaveChangesAsync();
-
-                return CreatedAtAction("GetEmergencyContacts", new { id = insurance.Sin }, insurance);
-            }
-
-        // DELETE: api/Insurances/id
-        [HttpDelete("{id}")]
-            public async Task<IActionResult> DeleteInsurance(int id)
-            {
-                var insurance = await _context.Insurances.Where(x => x.Sin == id).ToListAsync();
-                if (insurance == null)
-                {
-                    return NotFound();
-                }
-
-            _context.Insurances.Remove(insurance[0]);
-                await _context.SaveChangesAsync();
-
-                return NoContent();
-            }
-
-            private bool InsuranceExists(int id)
-            {
-                return _context.EmergencyContacts.Any(e => e.Sin == id);
             }
         }
 

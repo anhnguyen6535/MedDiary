@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend.Models;
 using Learning.Models;
@@ -16,7 +11,6 @@ namespace Backend.Controllers
     public class UsersController : ControllerBase
     {
         private readonly GeneralContext _context;
-        private readonly DoctorsController _doctorsController;
 
         public UsersController(GeneralContext context)
         {

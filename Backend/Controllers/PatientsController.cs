@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend.Models;
 using Learning.Models;
@@ -69,33 +64,6 @@ namespace Backend.Controllers
                     throw;
                 }
             }
-
-            return NoContent();
-        }
-
-        // POST: api/Patients
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Patient>> PostPatient(Patient patient)
-        {
-            _context.Patients.Add(patient);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPatient", new { id = patient.Sin }, patient);
-        }
-
-        // DELETE: api/Patients/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePatient(int id)
-        {
-            var patient = await _context.Patients.FindAsync(id);
-            if (patient == null)
-            {
-                return NotFound();
-            }
-
-            _context.Patients.Remove(patient);
-            await _context.SaveChangesAsync();
 
             return NoContent();
         }

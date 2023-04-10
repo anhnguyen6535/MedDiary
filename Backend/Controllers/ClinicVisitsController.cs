@@ -51,6 +51,7 @@ namespace Backend.Controllers
         {
             return await _context.ClinicVisits.Where(x => x.Sin == patientid).ToListAsync();
         }
+
         // Gets Doctor ClinicVisit Log
         // GET: api/ClinicVisits
         [HttpGet("doctor")]
