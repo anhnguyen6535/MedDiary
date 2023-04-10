@@ -12,6 +12,6 @@ namespace Backend.Models
         public int PracId { get; set; }
 
         [Column(TypeName = "varchar(15)")]
-        public string ClinicPhone { get; set; }
+        public string ClinicName { get; set; }
     }
 }

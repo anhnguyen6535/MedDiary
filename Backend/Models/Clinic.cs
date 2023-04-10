@@ -5,10 +5,10 @@ namespace Backend.Models
 {
     public class Clinic
     {
-        [Key]
         [Column(TypeName = "varchar(15)")]
         public string Phone { get; set; }
         public string Location { get; set; }
+        [Key]
         public string Name { get; set; }
     }
 }

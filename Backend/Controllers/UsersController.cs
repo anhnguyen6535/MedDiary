@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend.Models;
 using Learning.Models;
+using Backend.Models.DTO;
 
 namespace Backend.Controllers
 {
@@ -97,7 +98,7 @@ namespace Backend.Controllers
         {
             if(UserExists(register.User.Sin) || DoctorExists(register.Doctor.PracId)){
                 return BadRequest("User exists");
-            }else if (!ClinicExists(register.Doctor.ClinicPhone))
+            }else if (!ClinicExists(register.Doctor.ClinicName))
             {
                 return BadRequest("Clinic doesn't exits");
             }
@@ -260,9 +261,9 @@ namespace Backend.Controllers
         {
             return _context.Patients.Any(e => e.Sin == id);
         }
-        private bool ClinicExists(string phone)
+        private bool ClinicExists(string name)
         {
-            return _context.Clinics.Any(e => e.Phone == phone);
+            return _context.Clinics.Any(e => e.Name == name);
         }
     }
 }
