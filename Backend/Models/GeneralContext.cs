@@ -22,14 +22,7 @@ namespace Learning.Models
         public DbSet<EmergencyContact> EmergencyContacts { get; set; } = null!;
         public DbSet<Insurance> Insurances { get; set; } = null!;
         public DbSet<TodoList> TodoLists { get; set; } = null!;
-        public DbSet<Backend.Models.Labtest> Labtest { get; set; }
-        public DbSet<Backend.Models.ClinicVisit> ClinicVisits { get; set; }
-        
-        // // THESE MODELS FOR TESTING WILL BE REMOVED
-
-        // public DbSet<Person> Persons { get; set; } = null!;
-        // public DbSet<Question> Questions { get; set; } = null!;
-        // public DbSet<Participant> Participants { get; set; } = null!;
-
+        public DbSet<Labtest> Labtest { get; set; }
+        public DbSet<ClinicVisit> ClinicVisits { get; set; }        
     }
 }
