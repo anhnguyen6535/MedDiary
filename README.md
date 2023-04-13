@@ -25,12 +25,12 @@
 
 ### Installation
 
-1. Open webapp folder in VSCode
+1. Open /webapp folder in VSCode
 2. Install NPM packages
    ```sh
    npm install
    ```
-3. Open Backend.Backend.sln in Visual Studio
+3. Open /Backend.Backend.sln in Visual Studio
 4. Install Nuget Packages
    ```sh
    nuget install packages.config;
