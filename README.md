@@ -48,9 +48,8 @@ Note: always run debug in Visual Studio while using the app.
 
 <!-- NUGET PACKAGES -->
 ## Nuget Packages
-Microsoft.EntityFrameworkCore.Sqlite
-
-Microsoft.EntityFrameworkCore.Tools 
+Microsoft.EntityFrameworkCore.Sqlite <br>
+Microsoft.EntityFrameworkCore.Tools <br>
 Microsoft.EntityFrameworkCore.Design  
 install-package microsoft.aspnetcore.cors 
 Microsoft.Data.Sqlite
