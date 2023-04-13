@@ -42,7 +42,7 @@
     ```
 7. All go to go!
 
-Always run debug in Visual Studio while using the app. 
+Note: always run debug in Visual Studio while using the app. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
