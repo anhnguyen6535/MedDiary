@@ -50,13 +50,13 @@ Note: always run debug in Visual Studio while using the app.
 ## Nuget Packages
 Microsoft.EntityFrameworkCore.Sqlite <br>
 Microsoft.EntityFrameworkCore.Tools <br>
-Microsoft.EntityFrameworkCore.Design  
-install-package microsoft.aspnetcore.cors 
-Microsoft.Data.Sqlite
-Microsoft.AspNetCore.JsonPatch   
-Microsoft.AspNetCore.Mvc.NewtonsoftJson
-Microsoft.EntityFrameworkCore.SqlServer
-Swashbuckle.AspNetCore
+Microsoft.EntityFrameworkCore.Design  <br>
+install-package microsoft.aspnetcore.cors <br>
+Microsoft.Data.Sqlite <br>
+Microsoft.AspNetCore.JsonPatch   <br>
+Microsoft.AspNetCore.Mvc.NewtonsoftJson <br>
+Microsoft.EntityFrameworkCore.SqlServer <br>
+Swashbuckle.AspNetCore <br>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
