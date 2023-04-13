@@ -10,8 +10,6 @@
 ## Getting Started
 
 ### Prerequisites
-
-NPM
 * npm
   ```sh
   npm install npm@latest -g
