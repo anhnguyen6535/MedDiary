@@ -14,7 +14,7 @@
   ```sh
   npm install npm@latest -g
   ```
-* DOTNET 6
+* dotnet 6
   ```sh
   https://dotnet.microsoft.com/en-us/download/dotnet/6.0
   ```
