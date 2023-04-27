@@ -1,12 +1,18 @@
 <!-- ABOUT THE PROJECT -->
-## Doctor account
-[![Watch the video]](https://youtu.be/vt5fpE0bzSY)
+## About The Project
+### Doctor Account
+https://user-images.githubusercontent.com/63438267/235012303-2a81d990-226d-495b-a65f-8ba97d644682.mp4
+
+### Patient Account
+https://user-images.githubusercontent.com/63438267/235012546-30dbec26-6bb3-4e3c-95e3-fc7736e7a560.mp4
 
 ### Built With
 * Asp.net
 * Reactjs
 * BootstrapJs
 * SQLite
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
 ## Getting Started
