@@ -1,5 +1,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+* Note: more details of how to navigate through the website is in user guide section of the final report
 ### Doctor Account
 https://user-images.githubusercontent.com/63438267/235012303-2a81d990-226d-495b-a65f-8ba97d644682.mp4
 
