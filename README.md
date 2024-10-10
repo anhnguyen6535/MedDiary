@@ -49,7 +49,7 @@ https://user-images.githubusercontent.com/63438267/235012546-30dbec26-6bb3-4e3c-
     ```sh
     npm start
     ```
-7. All go to go!
+7. All good to go!
 
 Note: always run debug in Visual Studio while using the app. 
 
